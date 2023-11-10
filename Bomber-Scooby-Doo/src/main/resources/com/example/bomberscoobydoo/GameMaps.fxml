@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="678.0" prefWidth="1241.0" style="-fx-background-color: #93BBC6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bomberscoobydoo.control.GameMapsController">
+   <children>
+      <ImageView fx:id="banner" fitHeight="117.0" fitWidth="913.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox fx:id="hb1" alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="79.0" prefWidth="1242.0" style="-fx-background-color: #79939B;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="71.0" prefWidth="135.0">
+               <children>
+                  <ImageView fx:id="skin" fitHeight="66.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <VBox fx:id="vb1" alignment="CENTER" prefHeight="71.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="player" text="Player">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="name" text="Name">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children></VBox>
+            <VBox fx:id="vb2" alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="life" prefHeight="34.0" prefWidth="60.0" text="Life">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="hb2" alignment="CENTER" prefHeight="35.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="life1" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/life.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="life2" fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/life.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="life3" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/life.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vb3" alignment="CENTER" prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="bombs" prefHeight="34.0" prefWidth="60.0" text="Bombs">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="hb3" alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="bom1" fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/bombs.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="bom2" fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/bombs.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="bom3" fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/bombs.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="bom4" fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/bombs.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="bom5" fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Banner/bombs.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vb4" alignment="CENTER" prefHeight="73.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="power" text="Powers">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Canvas fx:id="canvas" height="600.0" layoutX="21.0" layoutY="78.0" nodeOrientation="INHERIT" width="1200.0" />
+      <VBox layoutX="1222.0" layoutY="78.0" prefHeight="600.0" prefWidth="20.0" style="-fx-background-color: #79939B;" />
+      <VBox layoutX="-10.0" layoutY="78.0" prefHeight="600.0" prefWidth="36.0" style="-fx-background-color: #79939B;" />
+   </children>
+</AnchorPane>
