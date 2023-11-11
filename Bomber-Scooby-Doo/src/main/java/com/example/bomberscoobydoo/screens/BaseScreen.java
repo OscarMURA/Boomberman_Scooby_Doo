@@ -9,8 +9,6 @@ public abstract class BaseScreen  {
 
     protected Canvas canvas;
     protected GraphicsContext graphicsContext;
-
-
     public BaseScreen(Canvas canvas) {
         this.canvas = canvas;
         this.graphicsContext = canvas.getGraphicsContext2D();

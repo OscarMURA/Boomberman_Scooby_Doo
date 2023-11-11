@@ -2,7 +2,6 @@ package com.example.bomberscoobydoo.model;
 
 import com.example.bomberscoobydoo.effects.ControlUser;
 import com.example.bomberscoobydoo.effects.MoveType;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,10 +34,11 @@ public class Player extends Entity {
     private ArrayList<Image> walkUp;
     private ArrayList<Image> walkDown;
     private MoveType moveType;
+    private int speed;
     int amountBombs;
     private int frame;
     public Player( String name, PlayerType type) {
-        super(null, new Vector(60,60));
+        super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
         runRightImages = new ArrayList<>();
         runLeftImages = new ArrayList<>();
         walkRight = new ArrayList<>();
@@ -48,9 +48,10 @@ public class Player extends Entity {
         this.name = name;
         this.type = type;
         this.control = ControlUser.getInstance();
-        life = 3;
+        life = 1;
         moveType = STOP;
-        amountBombs = 5;
+        amountBombs = 1;
+        speed = 10;
         initWalkRun();
         initUpDown();
     }
@@ -61,18 +62,17 @@ public class Player extends Entity {
     }
 
     public void initWalkRun(){
-
-        Image imageIdle = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/idle/idle-1.png"),60,60,false,false);
+        Image imageIdle = new Image(getClass().getResourceAsStream("/images/player/"+type+"/idle/idle-1.png"),60,60,false,false);
         idleImage = new ImageView(imageIdle);
         for(int i = 1; i <= 9; i++) {
             Rotate rotate = new Rotate(180,0,0);
             System.out.println("i: "+i);
-            Image image = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/walk/walk-0"+i+".png"),60,60,false,false);
+            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/walk-0"+i+".png"),60,60,false,false);
             walkRight.add(image);
-            image = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/walk/left-0"+i+".png"),60,60,false,false);
+            image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/left-0"+i+".png"),60,60,false,false);
             walkLeft.add(image);
 
-            Image imageRun = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/run/run-"+i+".png"),60,60,false,false);
+            Image imageRun = new Image(getClass().getResourceAsStream("/images/player/"+type+"/run/run-"+i+".png"),60,60,false,false);
             runRightImages.add(imageRun);
             imageRun = rotarImagen(imageRun,180);
             runLeftImages.add(imageRun);
@@ -81,10 +81,10 @@ public class Player extends Entity {
 
     private void initUpDown(){
         for(int i = 1; i <= 6; i++) {
-            Image image = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/up/up-"+i+".png"),55,55,false,false);
+            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/up/up-"+i+".png"),55,55,false,false);
             ImageView imageView = new ImageView(image);
             walkUp.add(image);
-            Image imageDown = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/down/down-"+i+".png"),55,55,false,false);
+            Image imageDown = new Image(getClass().getResourceAsStream("/images/player/"+type+"/down/down-"+i+".png"),55,55,false,false);
             ImageView imageViewDown = new ImageView(imageDown);
             walkDown.add(imageDown);
         }
@@ -93,6 +93,7 @@ public class Player extends Entity {
     public void paint(){
         onMove();
         if(!control.move){
+
             graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
         }
         if(control.moveType == UP){
@@ -115,20 +116,24 @@ public class Player extends Entity {
 
     public void onMove(){
         collisionWithCanva();
-        if(control.move){
-            if (control.up && !up){
-                position.setY(position.getY()-10);
+        int directionX = 0;
+        int directionY = 0;
+        if(control.move ){
+            if (control.up && !upCollision){
+                directionY = -speed;
             }
-            if (control.down && !down){
-                position.setY(position.getY()+10);
+            if (control.down && !downCollision){
+                directionY = speed;
             }
-            if (control.left && !left){
-                position.setX(position.getX()-10);
+            if (control.left && !leftCollision){
+                directionX = -speed;
             }
-            if (control.right && !right){
-                position.setX(position.getX()+10);
+            if (control.right && !rightCollision){
+                directionX = speed;
             }
+            moveDirection(directionX,directionY);
         }
+
     }
 
     public static Image rotarImagen(Image image, double grados) {

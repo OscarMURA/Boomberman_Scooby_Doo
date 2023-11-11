@@ -3,19 +3,24 @@ package com.example.bomberscoobydoo.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.ArrayList;
+
 public abstract class Entity {
 
+    private static final ArrayList<Entity> entities = new ArrayList<>();
     protected Vector position;
     protected Canvas canvas;
     protected GraphicsContext graphics;
-    protected boolean left;
-    protected boolean right;
-    protected boolean up;
-    protected boolean down;
+    protected Destructible destructible;
+    protected boolean leftCollision;
+    protected boolean rightCollision;
+    protected boolean upCollision;
+    protected boolean downCollision;
 
-    public Entity(Canvas canva, Vector position){
+    public Entity(Canvas canva, Vector position, Destructible destructible) {
         this.canvas = canva;
         this.position=position;
+        entities.add(this);
     }
 
     public Vector getPosition() {
@@ -44,27 +49,56 @@ public abstract class Entity {
     public abstract void paint();
 
     protected boolean collisionWithCanva(){
-
         if(position.getX() < 10 )
-             left=true;
+             leftCollision=true;
         else
-            left=false;
-
-        if(position.getX() > canvas.getWidth()-70)
-            right=true;
+            leftCollision=false;
+        if(position.getX() > canvas.getWidth()-65)
+            rightCollision =true;
         else
-            right=false;
+            rightCollision =false;
 
         if(position.getY() < 10)
-            up=true;
+            upCollision=true;
         else
-            up=false;
-
+            upCollision=false;
         if(position.getY() > canvas.getHeight()-70)
-            down=true;
+            downCollision=true;
         else
-            down=false;
-
+            downCollision=false;
         return false;
+    }
+
+    protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
+        boolean collision = false;
+        if (this != other) {
+            int epsilon = 40;
+            collision=!(x + epsilon < other.position.getX() ||
+                    x > other.position.getX() + epsilon ||
+                    y + epsilon < other.position.getY() ||
+                    y > other.position.getY() + epsilon);
+        }
+        return collision;
+    }
+
+    protected boolean checkCollisions(int x,int y) {
+        for (Entity entity : entities) {
+            if (this != entity && collidesWithOtherEntity(entity,x,y)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    protected void moveDirection(double directionX, double direction){
+        if(!(directionX==0 && direction==0)){
+            double x = position.getX() + directionX;
+            double y = position.getY() + direction;
+            if(checkCollisions((int)x,(int)y) ){
+                position.setX(x);
+                position.setY(y);
+            }
+        }
     }
 }

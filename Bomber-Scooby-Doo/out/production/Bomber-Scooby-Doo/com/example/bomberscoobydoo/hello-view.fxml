@@ -24,7 +24,7 @@
             </ImageView>
             <Label fx:id="title" layoutX="332.0" layoutY="115.0" text="NickName:" />
             <Button fx:id="start" layoutX="320.0" layoutY="222.0" mnemonicParsing="false" onAction="#onActionStart" prefHeight="25.0" prefWidth="76.0" text="Start" />
-            <TextField fx:id="name" layoutX="283.0" layoutY="132.0" />
+            <TextField fx:id="name" layoutX="283.0" layoutY="132.0" promptText="NickName" />
             <AnchorPane layoutX="301.0" layoutY="168.0" prefHeight="48.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF;">
                <children>
                   <RadioButton fx:id="radio1" layoutX="13.0" layoutY="6.0" mnemonicParsing="false" text="Scooby Doo" />
