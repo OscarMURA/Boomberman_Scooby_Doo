@@ -1,5 +1,6 @@
 package com.example.bomberscoobydoo.model;
 
+import com.example.bomberscoobydoo.control.GameMapsController;
 import com.example.bomberscoobydoo.effects.ControlUser;
 import com.example.bomberscoobydoo.effects.MoveType;
 import javafx.scene.canvas.Canvas;
@@ -37,6 +38,8 @@ public class Player extends Entity {
     private int speed;
     int amountBombs;
     private int frame;
+
+    private Bomb actualBomb;
     public Player( String name, PlayerType type) {
         super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
         runRightImages = new ArrayList<>();
@@ -183,6 +186,7 @@ public class Player extends Entity {
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
+
     public PlayerType getType() {
         return type;
     }

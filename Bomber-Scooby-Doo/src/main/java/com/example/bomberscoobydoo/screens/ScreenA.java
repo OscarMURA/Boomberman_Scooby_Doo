@@ -1,10 +1,8 @@
 package com.example.bomberscoobydoo.screens;
 
 import com.example.bomberscoobydoo.control.BomberGameControler;
-import com.example.bomberscoobydoo.model.Entity;
-import com.example.bomberscoobydoo.model.Bricks;
-import com.example.bomberscoobydoo.model.Vector;
-import com.example.bomberscoobydoo.model.Wall;
+import com.example.bomberscoobydoo.effects.ControlUser;
+import com.example.bomberscoobydoo.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -15,8 +13,6 @@ public class ScreenA extends BaseScreen{
 
     private Entity player;
     private ArrayList<Entity> entities;
-
-
 
     public ScreenA(Canvas canvas) {
         super(canvas);
@@ -32,6 +28,7 @@ public class ScreenA extends BaseScreen{
         entities.add(new Bricks(canvas,position));
         position = new Vector(360,360);
         entities.add(new Bricks(canvas,position));
+
     }
 
     @Override
@@ -39,6 +36,10 @@ public class ScreenA extends BaseScreen{
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
         player.paint();
+        if(ControlUser.bomb){
+            ((Player)(player)).setAmountBombs(((Player)(player)).getAmountBombs()-1);
+            entities.add(new Bomb(canvas, player.getPosition()));
+        }
         for (Entity entity: entities) {
             entity.paint();
         }

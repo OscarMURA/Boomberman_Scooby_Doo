@@ -19,7 +19,8 @@ public abstract class Entity {
 
     public Entity(Canvas canva, Vector position, Destructible destructible) {
         this.canvas = canva;
-        this.position=position;
+        this.position = position;
+        this.destructible = destructible;
         entities.add(this);
     }
 
