@@ -37,7 +37,7 @@ public class ControlUser {
                 case D, RIGHT ->{ right = true;
                     moveType = MoveType.RIGHT;}
 
-                case X, SPACE ->{ bomb = true;}
+                case X, SPACE ->{ bomb = false;}
             }
             if(up || down || left || right) {
                 move = true;
@@ -50,7 +50,7 @@ public class ControlUser {
                 case S, DOWN -> down = false;
                 case A, LEFT -> left = false;
                 case D, RIGHT -> right = false;
-                case X, SPACE -> bomb = false;
+                case X, SPACE -> bomb = true;
             }
             if(!up && !down && !left && !right) {
                 move = false;

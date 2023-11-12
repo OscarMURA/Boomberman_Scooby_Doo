@@ -36,9 +36,10 @@ public class ScreenA extends BaseScreen{
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
         player.paint();
-        if(ControlUser.bomb){
+        if(ControlUser.getInstance().bomb && ((Player)(player)).getAmountBombs()>0){
             ((Player)(player)).setAmountBombs(((Player)(player)).getAmountBombs()-1);
-            entities.add(new Bomb(canvas, player.getPosition()));
+            entities.add(new Bomb(canvas, player.getPosition().clone()));
+            ControlUser.getInstance().bomb = false;
         }
         for (Entity entity: entities) {
             entity.paint();

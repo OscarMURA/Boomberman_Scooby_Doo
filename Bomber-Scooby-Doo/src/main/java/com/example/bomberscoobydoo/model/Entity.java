@@ -72,9 +72,13 @@ public abstract class Entity {
 
     protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
         boolean collision = false;
-        if (this != other) {
+        if(other instanceof Bomb){
+            ((Bomb) other).checkIfPlayerOutSideBomb(x, y);
+        }
+        if (this != other && (!(other instanceof Bomb) || ((Bomb)(other)).isPlayerOutSideBomb())) {
+
             int epsilon = 40;
-            collision=!(x + epsilon < other.position.getX() ||
+            collision = !(x + epsilon < other.position.getX() ||
                     x > other.position.getX() + epsilon ||
                     y + epsilon < other.position.getY() ||
                     y > other.position.getY() + epsilon);
@@ -84,7 +88,7 @@ public abstract class Entity {
 
     protected boolean checkCollisions(int x,int y) {
         for (Entity entity : entities) {
-            if (this != entity && collidesWithOtherEntity(entity,x,y)) {
+            if (this != entity && (collidesWithOtherEntity(entity,x,y))){
                 return false;
             }
         }

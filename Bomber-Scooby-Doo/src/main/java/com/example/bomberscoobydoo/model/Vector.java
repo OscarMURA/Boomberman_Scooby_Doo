@@ -24,4 +24,10 @@ public class Vector {
     public void setY(double y) {
         this.y = y;
     }
+
+    public Vector clone(){
+        double m = this.getX();
+        double n = this.getY();
+        return new Vector(m, n);
+    }
 }
