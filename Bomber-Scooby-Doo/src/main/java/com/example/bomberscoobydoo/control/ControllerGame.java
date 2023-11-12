@@ -17,9 +17,7 @@ public class ControllerGame implements Initializable {
 
     @FXML
     private Label title;
-
-
-
+    
     @FXML
     private TextField name;
 
