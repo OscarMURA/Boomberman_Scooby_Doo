@@ -3,6 +3,7 @@ package com.example.bomberscoobydoo.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import javax.swing.text.Position;
 import java.util.ArrayList;
 
 public abstract class Entity {
@@ -106,4 +107,5 @@ public abstract class Entity {
             }
         }
     }
+
 }

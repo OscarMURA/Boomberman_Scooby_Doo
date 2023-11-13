@@ -30,4 +30,11 @@ public class Vector {
         double n = this.getY();
         return new Vector(m, n);
     }
+
+    @Override
+    public boolean equals(Object o){
+        return o instanceof Vector &&
+                ((Vector) o).getX() == x &&
+                ((Vector) o).getY() == y;
+    }
 }

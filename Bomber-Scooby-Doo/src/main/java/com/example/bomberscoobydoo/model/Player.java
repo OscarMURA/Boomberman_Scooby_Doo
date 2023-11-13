@@ -39,7 +39,8 @@ public class Player extends Entity {
     int amountBombs;
     private int frame;
 
-    private Bomb actualBomb;
+    private int intensityOfExplosions;
+
     public Player( String name, PlayerType type) {
         super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
         runRightImages = new ArrayList<>();
@@ -57,6 +58,7 @@ public class Player extends Entity {
         speed = 10;
         initWalkRun();
         initUpDown();
+        intensityOfExplosions = 1;
     }
 
     public void setCanva(Canvas canva){
@@ -166,7 +168,12 @@ public class Player extends Entity {
                 }
             }
         }
-        return writableImage;}
+        return writableImage;
+    }
+
+    public int getIntensityOfExplosions(){
+        return intensityOfExplosions;
+    }
 
     public String getName() {
         return name;

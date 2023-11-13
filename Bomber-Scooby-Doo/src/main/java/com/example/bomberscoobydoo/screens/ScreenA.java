@@ -36,13 +36,47 @@ public class ScreenA extends BaseScreen{
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
         player.paint();
-        if(ControlUser.getInstance().bomb && ((Player)(player)).getAmountBombs()>0){
-            ((Player)(player)).setAmountBombs(((Player)(player)).getAmountBombs()-1);
-            entities.add(new Bomb(canvas, player.getPosition().clone()));
+
+        //Poner y verificar bomba
+        if(ControlUser.getInstance().bomb && ((Player)(player)).getAmountBombs()>-10){
+            //for testing purposes you can put up to 10 bombs, then change the -10 to 0
             ControlUser.getInstance().bomb = false;
+            putBomb();
+
         }
         for (Entity entity: entities) {
             entity.paint();
         }
     }
+
+    public void putBomb(){
+        boolean somethingAlreadyThere = false;
+        Vector ubicationOfBomb = player.getPosition().clone();
+        ubicationOfBomb.setX(ubicationOfBomb.getX() + 30);
+        ubicationOfBomb.setY(ubicationOfBomb.getY() + 30);
+        ubicationOfBomb = getBlockByPosition(ubicationOfBomb);
+
+        //System.out.println("x: " + ubicationOfBomb.getX() + " y: " + ubicationOfBomb.getY());
+        for(Entity e : entities){
+
+            if(e.getPosition().equals(ubicationOfBomb)){
+                somethingAlreadyThere = true;
+            }
+
+        }
+        System.out.println("hay cosa" + somethingAlreadyThere);
+
+        if(!somethingAlreadyThere){
+            ((Player)(player)).setAmountBombs(((Player)(player)).getAmountBombs()-1);
+            entities.add(new Bomb(canvas, ubicationOfBomb, ((Player)(player)).getIntensityOfExplosions()));
+            System.out.println("bomba puesta " + ((Player)(player)).getAmountBombs());
+        }
+    }
+
+    protected Vector getBlockByPosition(Vector vector){
+        double x = vector.getX();
+        double y = vector.getY();
+        return new Vector((Math.floor(x/60))*60, (Math.floor(y/60)*60));
+    }
+
 }
