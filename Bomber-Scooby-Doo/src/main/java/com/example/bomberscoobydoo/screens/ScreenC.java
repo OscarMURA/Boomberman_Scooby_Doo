@@ -12,31 +12,35 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class ScreenA extends BaseScreen {
+public class ScreenC extends BaseScreen {
 
     private Entity player;
     private ArrayList<Entity> entities;
     private Image background;
 
-    // La matriz de obstáculos
     private Integer obstaclesInMap[][] = new Integer[][] {
-            { null, 1, null, null, 1, null, null, 1, 2, 2, 1, 2, null, 1, 2, 2, 1,
-                    2, 1, null },
-            { null, null, null, null, 2, 2, null, 2, 2, 2, 2, 2, null, null, null, null, null, 2, 2,
-                    2 },
-            { null, 1, null, 2, 1, null, 2, 1, null, null, 1, null, 2, 1, null, null, 1, 2, 1, null },
-            { 2, 2, 2, null, 2, 2, null, null, null, null, null, null, null, 2, null, 1, null, null, 2,
+            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1,
+                    null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 2,
+                    2,
                     null },
-            { 2, 1, 2, null, 1, null, 2, 1, 2, 2, 1, 2, null, 1, null, null, 1, 2, 1, null },
-            { 2, 2, 2, 2, 2, null, 1, 2, 1, null, null, 2, 2, 2, 2, 1, 2, 2, null, null },
-            { null, 1, 2, 2, 1, null, 2, 1, 2, null, 1, 2, null, 1, null, 2, 1, 2, 1, null },
-            { null, 2, null, null, 2, null, null, 2, null, null, 1, null, null, 2, null, null, 2, null, 2,
+            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                    null, null,
                     null },
-            { null, 1, null, null, 1, null, null, 1, 2, 2, 1, 2, null, 1, null, null, 1, 2, 1, null },
-            { null, 2, 2, 2, null, null, 2, null, 2, 2, null, 2, 2, 1, null, 2, 1, 2, 2,
+            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                    null, null, null },
+            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                    null, null,
+                    null },
+            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                    null, null,
                     null } };
 
-    public ScreenA(Canvas canvas) {
+    public ScreenC(Canvas canvas) {
         super(canvas);
         background = new Image("floorClare.png");
         player = BomberGameControler.getInstance().getPlayer();

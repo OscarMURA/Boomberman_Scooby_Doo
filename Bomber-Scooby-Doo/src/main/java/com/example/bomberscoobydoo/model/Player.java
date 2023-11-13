@@ -48,7 +48,7 @@ public class Player extends Entity {
         this.name = name;
         this.type = type;
         this.control = ControlUser.getInstance();
-        life = 1;
+        life = 3;
         moveType = STOP;
         amountBombs = 1;
         speed = 10;
