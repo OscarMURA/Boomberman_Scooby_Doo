@@ -10,6 +10,7 @@ public abstract class Entity {
 
     private static final ArrayList<Entity> entities = new ArrayList<>();
     protected Vector position;
+
     protected Canvas canvas;
     protected GraphicsContext graphics;
     protected Destructible destructible;
@@ -106,6 +107,18 @@ public abstract class Entity {
                 position.setY(y);
             }
         }
+    }
+
+    public void removeEntity(Entity entity){
+        //entities.remove(entity);
+        boolean found = false;
+        for(int i = 0; i < entities.size() && !found; i++){
+            if(entities.get(i).equals(entity)){
+                found = true;
+                entities.remove(i);
+            }
+        }
+
     }
 
 }

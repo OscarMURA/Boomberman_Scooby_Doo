@@ -11,16 +11,14 @@ public class Bomb extends Entity{
 
     private ImageView image;
 
-    private int intensity;
-
     private long startTime;
+
     public Bomb(Canvas canva, Vector position, int intensity){
         super(canva, position, Destructible.INDESTRUCTIBLE);
         Image tempImage = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"),60,60,false,false);
         image = new ImageView(tempImage);
         playerOutSideBomb = false;
         startTime = System.currentTimeMillis();
-        this.intensity = intensity;
     }
 
     public boolean isPlayerOutSideBomb() {
@@ -42,15 +40,20 @@ public class Bomb extends Entity{
 
     @Override
     public void paint(){
-        if(System.currentTimeMillis()-startTime>5000){
-            explode();
-        }
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.drawImage(image.getImage(), position.getX(),position.getY());
     }
 
-    public void explode(){
-        //todo
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setImage(Image image) {
+        this.image = new ImageView(image);
     }
 
 }

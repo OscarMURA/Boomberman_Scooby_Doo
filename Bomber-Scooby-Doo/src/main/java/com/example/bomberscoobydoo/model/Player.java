@@ -58,7 +58,7 @@ public class Player extends Entity {
         speed = 10;
         initWalkRun();
         initUpDown();
-        intensityOfExplosions = 1;
+        intensityOfExplosions = 5;
     }
 
     public void setCanva(Canvas canva){
@@ -100,6 +100,7 @@ public class Player extends Entity {
         if(!control.move){
 
             graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
+
         }
         if(control.moveType == UP){
             graphics.drawImage(walkUp.get(frame%6),position.getX(),position.getY());
@@ -193,6 +194,7 @@ public class Player extends Entity {
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
+
 
     public PlayerType getType() {
         return type;
