@@ -58,7 +58,7 @@ public class Player extends Entity {
         speed = 10;
         initWalkRun();
         initUpDown();
-        intensityOfExplosions = 5;
+        intensityOfExplosions = 1;
     }
 
     public void setCanva(Canvas canva){

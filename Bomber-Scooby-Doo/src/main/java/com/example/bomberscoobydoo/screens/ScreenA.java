@@ -79,7 +79,7 @@ public class ScreenA extends BaseScreen{
             if(e instanceof Bomb && System.currentTimeMillis() - ((Bomb)e).getStartTime() >= 2000){
                toRemove.add(e);
 
-            }else if(e instanceof Explosion && System.currentTimeMillis() - ((Explosion)e).getStartTime() >= 900){
+            }else if(e instanceof Explosion && System.currentTimeMillis() - ((Explosion)e).getStartTime() >= 600){
                 toRemove.add(e);
             }
         }
@@ -103,8 +103,6 @@ public class ScreenA extends BaseScreen{
             if(!checkIfEntityIsThere(position)) {
                 entities.add(new Explosion(canvas, position.clone(), intensity));
 
-                System.out.println("Explotando");
-
                 if(intensity > 0){
 
                     switch (direction) {
@@ -121,10 +119,27 @@ public class ScreenA extends BaseScreen{
                     }
 
                 }
-
+            }else{
+                boolean foundBox = false;
+                Entity e = null;
+                for(int i = 0; i < entities.size() && !foundBox; i++){
+                    e = entities.get(i);
+                    if(position.equals(e.getPosition())){
+                        foundBox = true;
+                    }
+                }
+                if(e != null && e instanceof Bricks){
+                    eliminateEntity(e);
+                }
             }
         }
 
+    }
+
+    public void eliminateEntity(Entity e){
+        entities.remove(e);
+        e.removeEntity(e);
+        e = null;
     }
 
     private boolean checkIfEntityIsThere(Vector position){

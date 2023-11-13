@@ -30,11 +30,11 @@ public class Explosion extends Entity {
 
     public void paint() {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        if (System.currentTimeMillis() - startTime < 250) {
+        if (System.currentTimeMillis() - startTime < 150) {
             graphics.drawImage(frames.get(0), position.getX(), position.getY());
-        } else if (System.currentTimeMillis() - startTime < 500) {
+        } else if (System.currentTimeMillis() - startTime < 300) {
             graphics.drawImage(frames.get(1), position.getX(), position.getY());
-        } else if (System.currentTimeMillis() - startTime < 750) {
+        } else if (System.currentTimeMillis() - startTime < 450) {
             graphics.drawImage(frames.get(2), position.getX(), position.getY());
         }
 
