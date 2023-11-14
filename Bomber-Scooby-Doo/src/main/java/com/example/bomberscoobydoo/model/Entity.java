@@ -112,7 +112,6 @@ public abstract class Entity {
     }
 
     public void removeEntity(Entity entity){
-        //entities.remove(entity);
         boolean found = false;
         for(int i = 0; i < entities.size() && !found; i++){
             if(entities.get(i).equals(entity)){
@@ -120,7 +119,10 @@ public abstract class Entity {
                 entities.remove(i);
             }
         }
+    }
 
+    public Destructible getDestructible(){
+        return destructible;
     }
 
 }

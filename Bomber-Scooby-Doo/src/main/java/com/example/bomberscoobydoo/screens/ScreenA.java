@@ -157,7 +157,8 @@ public class ScreenA extends BaseScreen {
                         foundBox = true;
                     }
                 }
-                if(e != null && e instanceof Bricks){
+                if(e != null && e.getDestructible() == Destructible.DESTRUCTIBLE){
+                    entities.add(new Explosion(canvas, e.getPosition(), intensity));
                     eliminateEntity(e);
                 }
             }
@@ -182,6 +183,23 @@ public class ScreenA extends BaseScreen {
             }
 
         }
+        return someThingAlreadyThere;
+    }
+
+    private Entity checkIfDestructableEntityIsThere(Vector position){
+        Entity someThingAlreadyThere = null;
+        for(int i = 0; i < entities.size() && someThingAlreadyThere != null; i++){
+
+            Entity e = entities.get(i);
+
+            if(e.getPosition().equals(position) &&
+                    e.getDestructible() == Destructible.DESTRUCTIBLE){
+
+                someThingAlreadyThere = e;
+            }
+
+        }
+        System.out.println("someThingAlreadyThere:" + someThingAlreadyThere);
         return someThingAlreadyThere;
     }
 
