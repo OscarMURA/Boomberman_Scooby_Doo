@@ -77,7 +77,9 @@ public abstract class Entity {
         if(other instanceof Bomb){
             ((Bomb) other).checkIfPlayerOutSideBomb(x, y);
         }
-        if (this != other && (!(other instanceof Bomb) || ((Bomb)(other)).isPlayerOutSideBomb())) {
+        if (this != other && !(other instanceof Explosion) &&
+                (!(other instanceof Bomb) || (other instanceof Bomb && ((Bomb)other).isPlayerOutSideBomb())
+                ) ) {
 
             int epsilon = 40;
             collision = !(x + epsilon < other.position.getX() ||

@@ -41,6 +41,8 @@ public class Player extends Entity {
 
     private int intensityOfExplosions;
 
+    private long invensibilityStartTime;
+
     public Player( String name, PlayerType type) {
         super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
         runRightImages = new ArrayList<>();
@@ -52,13 +54,14 @@ public class Player extends Entity {
         this.name = name;
         this.type = type;
         this.control = ControlUser.getInstance();
-        life = 1;
+        life = 3;
         moveType = STOP;
         amountBombs = 1;
         speed = 10;
         initWalkRun();
         initUpDown();
         intensityOfExplosions = 1;
+        invensibilityStartTime = System.currentTimeMillis();
     }
 
     public void setCanva(Canvas canva){
@@ -185,6 +188,18 @@ public class Player extends Entity {
     public static int getLife() {
         return life;
     }
+
+    public long getInvensibilityStartTime() {
+        return invensibilityStartTime;
+    }
+
+    public void setInvensibilityStartTime() {
+        this.invensibilityStartTime = System.currentTimeMillis();
+    }
+
+    public void lowerByOneLife(){
+        life = life - 1;
+    }
     public static void setLife(int life) {
         Player.life = life;
     }
@@ -194,7 +209,6 @@ public class Player extends Entity {
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
-
 
     public PlayerType getType() {
         return type;

@@ -20,8 +20,7 @@ public class Explosion extends Entity {
         this.intensity = intensity;
 
         for (int i = 1; i <= 3; i++) {
-            Image image = new Image(getClass().getResourceAsStream("/images/Banner/exp"+i+".png"),55,55,false,false);
-            //Image image = new Image(getClass().getResourceAsStream("/images/player/SCOOBYDOO/run/run-"+i+".png"),60,60,false,false);
+            Image image = new Image(getClass().getResourceAsStream("/images/Banner/exp"+i+".png"),60,60,false,false);
             frames.add(image);
         }
 

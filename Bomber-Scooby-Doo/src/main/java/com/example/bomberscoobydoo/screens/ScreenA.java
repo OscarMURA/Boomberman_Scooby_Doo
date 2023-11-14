@@ -46,6 +46,7 @@ public class ScreenA extends BaseScreen{
         }
 
         checkExplosions();
+        checkPlayerOverExplosion();
 
         for (Entity entity: entities) {
             entity.paint();
@@ -154,6 +155,37 @@ public class ScreenA extends BaseScreen{
 
         }
         return someThingAlreadyThere;
+    }
+
+    private void checkPlayerOverExplosion(){
+        boolean someThingAlreadyThere = false;
+
+        Vector edge1 = player.getPosition().clone();
+        Vector edge2 = player.getPosition().clone();
+        edge2.setX(edge2.getX() + 59); edge2.setY(edge2.getY() + 59);
+        Vector edge3 = player.getPosition().clone();
+        edge3.setX(edge3.getX() + 59);
+        Vector edge4 = player.getPosition().clone();
+        edge4.setY(edge4.getY() + 59);
+
+        for(int i = 0; i <entities.size() && ! someThingAlreadyThere; i++) {
+            Entity e = entities.get(i);
+            if (e instanceof Explosion &&
+                    System.currentTimeMillis() - ((Player)(player)).getInvensibilityStartTime() > 600 &&
+                    (e.getPosition().equals(getBlockByPosition(edge1)) ||
+                    e.getPosition().equals(getBlockByPosition(edge2)) ||
+                    e.getPosition().equals(getBlockByPosition(edge3)) ||
+                    e.getPosition().equals(getBlockByPosition(edge4)) ) ){
+
+                someThingAlreadyThere = true;
+
+                ((Player) (player)).lowerByOneLife();
+                ((Player) (player)).setInvensibilityStartTime();
+
+                entities.remove(e);
+                e.removeEntity(e);
+            }
+        }
     }
 
     private Vector getFollowingBlock(Vector position, MoveType direction){
