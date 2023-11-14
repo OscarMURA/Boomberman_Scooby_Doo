@@ -3,12 +3,14 @@ package com.example.bomberscoobydoo.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import javax.swing.text.Position;
 import java.util.ArrayList;
 
 public abstract class Entity {
 
     private static final ArrayList<Entity> entities = new ArrayList<>();
     protected Vector position;
+
     protected Canvas canvas;
     protected GraphicsContext graphics;
     protected Destructible destructible;
@@ -19,7 +21,8 @@ public abstract class Entity {
 
     public Entity(Canvas canva, Vector position, Destructible destructible) {
         this.canvas = canva;
-        this.position=position;
+        this.position = position;
+        this.destructible = destructible;
         entities.add(this);
     }
 
@@ -71,9 +74,15 @@ public abstract class Entity {
 
     protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
         boolean collision = false;
-        if (this != other) {
+        if(other instanceof Bomb){
+            ((Bomb) other).checkIfPlayerOutSideBomb(x, y);
+        }
+        if (this != other && !(other instanceof Explosion) &&
+                (!(other instanceof Bomb) || (other instanceof Bomb && ((Bomb)other).isPlayerOutSideBomb())
+                ) ) {
+
             int epsilon = 40;
-            collision=!(x + epsilon < other.position.getX() ||
+            collision = !(x + epsilon < other.position.getX() ||
                     x > other.position.getX() + epsilon ||
                     y + epsilon < other.position.getY() ||
                     y > other.position.getY() + epsilon);
@@ -83,7 +92,7 @@ public abstract class Entity {
 
     protected boolean checkCollisions(int x,int y) {
         for (Entity entity : entities) {
-            if (this != entity && collidesWithOtherEntity(entity,x,y)) {
+            if (this != entity && (collidesWithOtherEntity(entity,x,y))){
                 return false;
             }
         }
@@ -101,4 +110,17 @@ public abstract class Entity {
             }
         }
     }
+
+    public void removeEntity(Entity entity){
+        //entities.remove(entity);
+        boolean found = false;
+        for(int i = 0; i < entities.size() && !found; i++){
+            if(entities.get(i).equals(entity)){
+                found = true;
+                entities.remove(i);
+            }
+        }
+
+    }
+
 }

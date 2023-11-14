@@ -1,5 +1,6 @@
 package com.example.bomberscoobydoo.model;
 
+import com.example.bomberscoobydoo.control.GameMapsController;
 import com.example.bomberscoobydoo.effects.ControlUser;
 import com.example.bomberscoobydoo.effects.MoveType;
 import javafx.scene.canvas.Canvas;
@@ -37,6 +38,11 @@ public class Player extends Entity {
     private int speed;
     int amountBombs;
     private int frame;
+
+    private int intensityOfExplosions;
+
+    private long invensibilityStartTime;
+
     public Player( String name, PlayerType type) {
         super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
         runRightImages = new ArrayList<>();
@@ -54,6 +60,8 @@ public class Player extends Entity {
         speed = 10;
         initWalkRun();
         initUpDown();
+        intensityOfExplosions = 3;
+        invensibilityStartTime = System.currentTimeMillis();
     }
 
     public void setCanva(Canvas canva){
@@ -95,6 +103,7 @@ public class Player extends Entity {
 
         if(!control.move){
             graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
+
         }
         if(control.moveType == UP){
             graphics.drawImage(walkUp.get(frame%6),position.getX(),position.getY());
@@ -163,7 +172,12 @@ public class Player extends Entity {
                 }
             }
         }
-        return writableImage;}
+        return writableImage;
+    }
+
+    public int getIntensityOfExplosions(){
+        return intensityOfExplosions;
+    }
 
     public String getName() {
         return name;
@@ -174,6 +188,18 @@ public class Player extends Entity {
     public static int getLife() {
         return life;
     }
+
+    public long getInvensibilityStartTime() {
+        return invensibilityStartTime;
+    }
+
+    public void setInvensibilityStartTime() {
+        this.invensibilityStartTime = System.currentTimeMillis();
+    }
+
+    public void lowerByOneLife(){
+        life = life - 1;
+    }
     public static void setLife(int life) {
         Player.life = life;
     }
@@ -183,6 +209,7 @@ public class Player extends Entity {
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
+
     public PlayerType getType() {
         return type;
     }

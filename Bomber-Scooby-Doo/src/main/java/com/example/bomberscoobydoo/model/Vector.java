@@ -24,4 +24,17 @@ public class Vector {
     public void setY(double y) {
         this.y = y;
     }
+
+    public Vector clone(){
+        double m = this.getX();
+        double n = this.getY();
+        return new Vector(m, n);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return o instanceof Vector &&
+                ((Vector) o).getX() == x &&
+                ((Vector) o).getY() == y;
+    }
 }
