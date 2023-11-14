@@ -190,11 +190,11 @@ public class ScreenA extends BaseScreen {
 
         Vector edge1 = player.getPosition().clone();
         Vector edge2 = player.getPosition().clone();
-        edge2.setX(edge2.getX() + 59); edge2.setY(edge2.getY() + 59);
+        edge2.setX(edge2.getX() + 54); edge2.setY(edge2.getY() + 54);
         Vector edge3 = player.getPosition().clone();
-        edge3.setX(edge3.getX() + 59);
+        edge3.setX(edge3.getX() + 54);
         Vector edge4 = player.getPosition().clone();
-        edge4.setY(edge4.getY() + 59);
+        edge4.setY(edge4.getY() + 54);
 
         for(int i = 0; i <entities.size() && ! someThingAlreadyThere; i++) {
             Entity e = entities.get(i);
