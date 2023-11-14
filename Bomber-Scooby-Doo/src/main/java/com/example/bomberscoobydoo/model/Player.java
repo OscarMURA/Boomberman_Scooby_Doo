@@ -70,14 +70,16 @@ public class Player extends Entity {
     }
 
     public void initWalkRun(){
-        Image imageIdle = new Image(getClass().getResourceAsStream("/images/player/"+type+"/idle/idle-1.png"),60,60,false,false);
+        int weight = 60;
+        if(type==PlayerType.SHAGGY){
+            weight = 35;
+        }
+        Image imageIdle = new Image(getClass().getResourceAsStream("/images/player/"+type+"/idle/idle-1.png"),weight,60,false,false);
         idleImage = new ImageView(imageIdle);
         for(int i = 1; i <= 9; i++) {
-            Rotate rotate = new Rotate(180,0,0);
-            System.out.println("i: "+i);
-            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/walk-0"+i+".png"),60,60,false,false);
+            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/walk-0"+i+".png"),weight,60,false,false);
             walkRight.add(image);
-            image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/left-0"+i+".png"),60,60,false,false);
+            image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/left-0"+i+".png"),weight,60,false,false);
             walkLeft.add(image);
 
             Image imageRun = new Image(getClass().getResourceAsStream("/images/player/"+type+"/run/run-"+i+".png"),60,60,false,false);
@@ -88,11 +90,15 @@ public class Player extends Entity {
     }
 
     private void initUpDown(){
+        int weight = 60;
+        if(type==PlayerType.SHAGGY){
+            weight = 35;
+        }
         for(int i = 1; i <= 6; i++) {
-            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/up/up-"+i+".png"),55,55,false,false);
+            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/up/up-"+i+".png"),weight,55,false,false);
             ImageView imageView = new ImageView(image);
             walkUp.add(image);
-            Image imageDown = new Image(getClass().getResourceAsStream("/images/player/"+type+"/down/down-"+i+".png"),55,55,false,false);
+            Image imageDown = new Image(getClass().getResourceAsStream("/images/player/"+type+"/down/down-"+i+".png"),weight,55,false,false);
             ImageView imageViewDown = new ImageView(imageDown);
             walkDown.add(imageDown);
         }
