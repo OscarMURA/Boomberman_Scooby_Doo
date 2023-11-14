@@ -11,11 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +22,6 @@ public class GameMapsController implements Initializable {
 
     @FXML
     private Canvas canvas;
-    public static Canvas canvasStatic;
     private BomberGameControler bomber;
 
     @FXML
@@ -77,7 +73,7 @@ public class GameMapsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //canvas.setFocusTraversable(true);
-        canvasStatic = canvas;
+
         isRunning = true;
         bomber = BomberGameControler.getInstance();
         bomber.getPlayer().setCanva(canvas);
@@ -140,6 +136,7 @@ public class GameMapsController implements Initializable {
         Image bomb = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"));
         Image noLife = new Image(getClass().getResourceAsStream("/images/Banner/noLife.png"));
         Image noBomb = new Image(getClass().getResourceAsStream("/images/Banner/noBombs.png"));
+
         if(player.getLife()==3){
             life3.setImage(life);
             life2.setImage(life);

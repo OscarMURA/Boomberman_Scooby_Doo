@@ -38,9 +38,10 @@ public class ScreenA extends BaseScreen{
     public void paint() {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-        player.paint();
         for (Entity entity: entities) {
             entity.paint();
         }
+        player.paint();
+
     }
 }
