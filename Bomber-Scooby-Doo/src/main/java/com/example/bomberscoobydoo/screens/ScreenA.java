@@ -38,7 +38,7 @@ public class ScreenA extends BaseScreen{
         player.paint();
 
         //Poner y verificar bomba
-        if(ControlUser.getInstance().bomb && ((Player)(player)).getAmountBombs()>-10){
+        if(ControlUser.getInstance().bomb && ((Player)(player)).getAmountBombs()>-100){
             //for testing purposes you can put up to 10 bombs, then change the -10 to 0
             ControlUser.getInstance().bomb = false;
             putBomb();
@@ -46,6 +46,7 @@ public class ScreenA extends BaseScreen{
         }
 
         checkExplosions();
+
         checkPlayerOverExplosion();
 
         for (Entity entity: entities) {
