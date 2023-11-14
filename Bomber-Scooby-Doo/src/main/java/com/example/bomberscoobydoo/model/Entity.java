@@ -75,7 +75,7 @@ public abstract class Entity {
             int epsilon = 40;
             collision=!(x + epsilon < other.position.getX() ||
                     x > other.position.getX() + epsilon ||
-                    y + epsilon < other.position.getY() ||
+                    y + epsilon < other.position.getY() -10 ||
                     y > other.position.getY() + epsilon);
         }
         return collision;
