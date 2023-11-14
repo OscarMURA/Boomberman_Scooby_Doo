@@ -17,6 +17,7 @@ public class PlayGame extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         openWindow("hello-view.fxml");
+
     }
     public static void openWindow(String fxml) {
         FXMLLoader fxmlLoader = new FXMLLoader(PlayGame.class.getResource(fxml));
@@ -32,7 +33,7 @@ public class PlayGame extends Application {
             stage.show();
             controlUser.commands(scene);
         } catch (IOException e) {
-            System.out.println("No se pudo abrir la ventana");
+            throw new RuntimeException(e);
         }
         Stage stage = (Stage) scene.getWindow();
         stage.setOnCloseRequest(windowEvent -> {Platform.exit();System.exit(0);});
