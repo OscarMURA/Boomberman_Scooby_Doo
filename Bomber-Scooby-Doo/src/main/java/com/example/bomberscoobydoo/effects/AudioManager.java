@@ -16,6 +16,7 @@ public class AudioManager extends Thread{
     private File musicPath;
     private Clip clip;
 
+
     private AudioManager() {
     }
 
@@ -31,7 +32,6 @@ public class AudioManager extends Thread{
         File efectPath = new File("src/main/resources/music" + path);
         musicPath = efectPath;
     }
-
 
     public void playSound(long durationMillis) {
         if(musicPath.exists()) {

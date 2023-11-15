@@ -1,11 +1,9 @@
 package com.example.bomberscoobydoo.screens;
 
-import com.example.bomberscoobydoo.PlayGame;
+
 import com.example.bomberscoobydoo.control.BomberGameControler;
-import com.example.bomberscoobydoo.model.Entity;
-import com.example.bomberscoobydoo.model.Bricks;
-import com.example.bomberscoobydoo.model.Vector;
-import com.example.bomberscoobydoo.model.Wall;
+
+import com.example.bomberscoobydoo.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -58,18 +56,33 @@ public class ScreenC extends BaseScreen {
                 }
             }
         }
-
         entities.add(player);
+        player.setEntities(entities);
     }
 
     @Override
     public void paint() {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-
         graphics.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
-
+        //Poner y verificar bomba
+        if(((Player) player).putBomb() && ((Player)(player)).getAmountBombs()>-100){
+            //for testing purposes you can put up to 10 bombs, then change the -10 to 0
+            ((Player) player).setBomb(false);
+            putBomb();
+            //explodeBomb(5, new Vector(480, 480), MoveType.STOP);
+        }
+        checkExplosions();
+        checkPlayerOverExplosion();
         for (Entity entity : entities) {
             entity.paint();
+        }
+        player.paint();
+
+        if(level) {
+            graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
+            if(System.currentTimeMillis()-BomberGameControler.getInstance().getTime()>12000){
+                level=false;
+            }
         }
     }
 }

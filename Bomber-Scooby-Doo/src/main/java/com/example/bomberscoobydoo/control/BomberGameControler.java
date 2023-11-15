@@ -7,8 +7,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 public class BomberGameControler {
-    private Player player;
 
+    private Player player;
+    private int level = 0;
+    private long time = System.currentTimeMillis();
     private static BomberGameControler instance;
     public static BomberGameControler getInstance() {
         if(instance == null) {
@@ -28,7 +30,22 @@ public class BomberGameControler {
         return true;
     }
 
+
     public Player getPlayer() {
         return player;
     }
+    public int getLevel() {
+        return level;
+    }
+
+    public void nextLevel() {
+        level++;
+        time = System.currentTimeMillis();
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+
 }

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -20,6 +21,8 @@ public class ControllerGame implements Initializable {
 
     @FXML
     private TextField name;
+    @FXML
+    ImageView level1;
 
     @FXML
     private Button start;
@@ -68,6 +71,7 @@ public class ControllerGame implements Initializable {
             alert.showAndWait();
             allow=false;
         }
+
 
         if(allow){
             bomber.createPlayer(name,type);

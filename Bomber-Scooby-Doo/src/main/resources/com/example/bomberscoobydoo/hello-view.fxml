@@ -31,6 +31,11 @@
                   <RadioButton fx:id="radio2" layoutX="13.0" layoutY="26.0" mnemonicParsing="false" text="Shaggy" />
                </children>
             </AnchorPane>
+            <ImageView fx:id="level1" disable="true" fitHeight="265.0" fitWidth="456.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../images/Banner/level1.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

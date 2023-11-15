@@ -3,14 +3,13 @@ package com.example.bomberscoobydoo.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-import javax.swing.text.Position;
+
 import java.util.ArrayList;
 
 public abstract class Entity {
 
-    private static final ArrayList<Entity> entities = new ArrayList<>();
+    private static  ArrayList<Entity> entities = new ArrayList<>();
     protected Vector position;
-
     protected Canvas canvas;
     protected GraphicsContext graphics;
     protected Destructible destructible;
@@ -19,6 +18,9 @@ public abstract class Entity {
     protected boolean upCollision;
     protected boolean downCollision;
 
+    public Destructible getDestructible() {
+        return destructible;
+    }
     public Entity(Canvas canva, Vector position, Destructible destructible) {
         this.canvas = canva;
         this.position = position;
@@ -123,4 +125,7 @@ public abstract class Entity {
 
     }
 
+    public static void setEntities(ArrayList<Entity> entities1) {
+        Entity.entities = entities1;
+    }
 }

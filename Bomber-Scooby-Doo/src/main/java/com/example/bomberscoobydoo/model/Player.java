@@ -1,29 +1,22 @@
 package com.example.bomberscoobydoo.model;
 
-import com.example.bomberscoobydoo.control.GameMapsController;
-import com.example.bomberscoobydoo.effects.ControlUser;
-import com.example.bomberscoobydoo.effects.MoveType;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
-
 import java.util.ArrayList;
-
-
-import static com.example.bomberscoobydoo.effects.MoveType.STOP;
-import static com.example.bomberscoobydoo.effects.MoveType.UP;
-import static com.example.bomberscoobydoo.effects.MoveType.DOWN;
-import static com.example.bomberscoobydoo.effects.MoveType.LEFT;
-import static com.example.bomberscoobydoo.effects.MoveType.RIGHT;
+import static com.example.bomberscoobydoo.model.MoveType.STOP;
+import static com.example.bomberscoobydoo.model.MoveType.UP;
+import static com.example.bomberscoobydoo.model.MoveType.DOWN;
+import static com.example.bomberscoobydoo.model.MoveType.LEFT;
+import static com.example.bomberscoobydoo.model.MoveType.RIGHT;
 
 public class Player extends Entity {
 
-    private ControlUser control;
     private String name;
     private PlayerType type;
     private static int life;
@@ -38,10 +31,14 @@ public class Player extends Entity {
     private int speed;
     int amountBombs;
     private int frame;
-
     private int intensityOfExplosions;
-
     private long invensibilityStartTime;
+    private boolean upPressed;
+    private boolean downPressed;
+    private boolean leftPressed;
+    private boolean rightPressed;
+    private boolean moving;
+    private boolean bomb;
 
     public Player( String name, PlayerType type) {
         super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
@@ -53,7 +50,6 @@ public class Player extends Entity {
         walkDown = new ArrayList<>();
         this.name = name;
         this.type = type;
-        this.control = ControlUser.getInstance();
         life = 3;
         moveType = STOP;
         amountBombs = 1;
@@ -106,24 +102,22 @@ public class Player extends Entity {
 
     public void paint(){
         onMove();
-
-        if(!control.move){
+        if(!moving){
             graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
-
         }
-        if(control.moveType == UP){
+        if(moveType == UP){
             graphics.drawImage(walkUp.get(frame%6),position.getX(),position.getY());
             frame++;
         }
-        if(control.moveType == DOWN){
+        if(moveType == DOWN){
             graphics.drawImage(walkDown.get(frame%6),position.getX(),position.getY());
             frame++;
         }
-        if(control.moveType == LEFT){
+        if(moveType == LEFT){
             graphics.drawImage(walkLeft.get(frame%9),position.getX(),position.getY());
             frame++;
         }
-        if(control.moveType == RIGHT){
+        if(moveType == RIGHT){
             graphics.drawImage(walkRight.get(frame%9),position.getX(),position.getY());
             frame++;
         }
@@ -133,22 +127,19 @@ public class Player extends Entity {
         collisionWithCanva();
         int directionX = 0;
         int directionY = 0;
-        if(control.move ){
-            if (control.up && !upCollision){
+            if (upPressed && !upCollision){
                 directionY = -speed;
             }
-            if (control.down && !downCollision){
+            if (downPressed && !downCollision){
                 directionY = speed;
             }
-            if (control.left && !leftCollision){
+            if (leftPressed && !leftCollision){
                 directionX = -speed;
             }
-            if (control.right && !rightCollision){
+            if (rightPressed && !rightCollision){
                 directionX = speed;
             }
             moveDirection(directionX,directionY);
-        }
-
     }
 
     public static Image rotarImagen(Image image, double grados) {
@@ -194,15 +185,12 @@ public class Player extends Entity {
     public static int getLife() {
         return life;
     }
-
     public long getInvensibilityStartTime() {
         return invensibilityStartTime;
     }
-
     public void setInvensibilityStartTime() {
         this.invensibilityStartTime = System.currentTimeMillis();
     }
-
     public void lowerByOneLife(){
         life = life - 1;
     }
@@ -215,8 +203,54 @@ public class Player extends Entity {
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
-
     public PlayerType getType() {
         return type;
+    }
+
+
+    public void onKeyPressed(KeyEvent event){
+        System.out.println(event.getCode());
+        switch (event.getCode()){
+
+            case W, UP-> {
+                upPressed = true;
+                moveType = UP;
+            }
+            case S, DOWN-> {
+                downPressed = true;
+                moveType = DOWN;
+            }
+            case LEFT, A->{
+                leftPressed = true;
+                moveType = LEFT;}
+            case RIGHT, D->{
+                rightPressed = true;
+                moveType = RIGHT;}
+            case SPACE,X->{
+                bomb = true;}
+        }
+        if(upPressed || downPressed || leftPressed || rightPressed) {
+            moving = true;
+        }
+    }
+
+    public void onKeyReleased(KeyEvent event){
+        switch(event.getCode()) {
+            case W, UP -> upPressed = false;
+            case S, DOWN -> downPressed = false;
+            case LEFT, A -> leftPressed = false;
+            case RIGHT, D -> rightPressed = false;
+            case SPACE -> bomb = false;
+        }
+        if(!upPressed && !downPressed && !leftPressed && !rightPressed) {
+            moving = false;
+            moveType = STOP;
+        }
+    }
+    public boolean putBomb() {
+        return bomb;
+    }
+    public void setBomb(boolean bomb) {
+        this.bomb = bomb;
     }
 }

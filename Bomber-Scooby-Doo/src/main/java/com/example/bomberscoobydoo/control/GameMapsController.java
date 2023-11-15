@@ -1,10 +1,12 @@
 package com.example.bomberscoobydoo.control;
 
 import com.example.bomberscoobydoo.effects.AudioManager;
-import com.example.bomberscoobydoo.effects.ControlUser;
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.PlayerType;
+import com.example.bomberscoobydoo.screens.BaseScreen;
 import com.example.bomberscoobydoo.screens.ScreenA;
+import com.example.bomberscoobydoo.screens.ScreenB;
+import com.example.bomberscoobydoo.screens.ScreenC;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +24,7 @@ public class GameMapsController implements Initializable {
 
     @FXML
     private Canvas canvas;
+
     private BomberGameControler bomber;
 
     @FXML
@@ -65,36 +68,32 @@ public class GameMapsController implements Initializable {
     @FXML
     ImageView skin;
 
-    private ScreenA screenA;
+    private BaseScreen runScreens;
     private AudioManager audio = AudioManager.getInstance();
     private boolean isRunning;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //canvas.setFocusTraversable(true);
+        canvas.setFocusTraversable(true);
 
         isRunning = true;
         bomber = BomberGameControler.getInstance();
-        bomber.getPlayer().setCanva(canvas);
-        screenA = new ScreenA(canvas);
-        audio.setMusicPath("/singScoobydoo.wav");
-        audio.playMusic(1000);
-        audio.setMusicPath("/Scooby-Doo-Underscore.wav");
-        audio.playEffectInBackground("/scooby.wav");
-        audio.playMusic(1000);
+        bomber.getPlayer().setCanva(this.canvas);
+        runScreens=new ScreenA(this.canvas);
         initFonts();
         new Thread(() -> {
             while (isRunning) {
                 Platform.runLater(() -> {
                     showResource();
-                    screenA.paint();
+
+                    runScreens.paint();
                 });
-                // esta línea va acá ...
                 pause(50);
             }
-            // estaba acá ....
         }).start();
+        initEvents();
+
     }
 
 
@@ -118,8 +117,15 @@ public class GameMapsController implements Initializable {
 
     }
 
-    private void onClosed(){
+    public void initEvents(){
+        System.out.println(canvas);
+        canvas.setOnKeyPressed(event ->{
+            runScreens.onKeyPressed(event);
+        });
 
+        canvas.setOnKeyReleased(event ->{
+            runScreens.onKeyReleased(event);
+        });
     }
 
     private void pause(int time){
@@ -136,6 +142,7 @@ public class GameMapsController implements Initializable {
         Image bomb = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"));
         Image noLife = new Image(getClass().getResourceAsStream("/images/Banner/noLife.png"));
         Image noBomb = new Image(getClass().getResourceAsStream("/images/Banner/noBombs.png"));
+
 
         if(player.getLife()==3){
             life3.setImage(life);
@@ -190,6 +197,8 @@ public class GameMapsController implements Initializable {
         }
 
     }
+
+
 
 
 }
