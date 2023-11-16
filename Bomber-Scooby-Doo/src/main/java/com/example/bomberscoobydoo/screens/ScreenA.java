@@ -51,9 +51,10 @@ public class ScreenA extends BaseScreen {
                 }
             }
         }
-        entities.add(new Enemy(canvas, new Vector(330, 0), player,"SLENDY"));
         entities.add(player);
+        entities.add(new Enemy(canvas, new Vector(330, 0), player,"SLENDY"));
         player.setEntities(entities);
+
     }
 
     @Override

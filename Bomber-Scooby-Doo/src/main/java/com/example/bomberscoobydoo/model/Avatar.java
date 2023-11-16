@@ -9,7 +9,6 @@ public abstract class Avatar  extends Entity{
     protected boolean goLeft;
     protected boolean goRight;
     protected double steps;
-    protected final double MAXSTEPS=3;
     protected boolean isMoving;
     protected int frame;
     protected int speed;
@@ -18,6 +17,7 @@ public abstract class Avatar  extends Entity{
     public Avatar(Canvas canva, Vector position, Destructible destructible) {
         super(canva, position, destructible);
     }
+
     public void onMove(){
         collisionWithCanva();
         int directionX = 0;

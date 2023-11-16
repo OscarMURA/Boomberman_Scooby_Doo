@@ -38,8 +38,9 @@ public class Vector {
                 ((Vector) o).getY() == y;
     }
 
-    public void normalize(){
+    public double normalize(){
         double magnitude = Math.sqrt(x * x + y * y);
+        return magnitude;
     }
 
     public int getTileX(){

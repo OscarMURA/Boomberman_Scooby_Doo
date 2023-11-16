@@ -153,10 +153,8 @@ public abstract class BaseScreen  {
                             e.getPosition().equals(getBlockByPosition(edge4)) ) ){
 
                 someThingAlreadyThere = true;
-
                 ((Player) (player)).lowerByOneLife();
                 ((Player) (player)).setInvensibilityStartTime();
-
                 entities.remove(e);
                 e.removeEntity(e);
             }

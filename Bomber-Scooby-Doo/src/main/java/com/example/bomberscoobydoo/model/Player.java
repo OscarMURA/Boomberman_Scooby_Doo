@@ -34,7 +34,8 @@ public class Player extends Avatar {
 
 
     public Player( String name, PlayerType type) {
-        super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
+
+        super(null, new Vector(60,60), Destructible.INDESTRUCTIBLE);
         runRightImages = new ArrayList<>();
         runLeftImages = new ArrayList<>();
         walkRight = new ArrayList<>();

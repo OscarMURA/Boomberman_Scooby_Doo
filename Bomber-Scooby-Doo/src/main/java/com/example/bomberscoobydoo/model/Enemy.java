@@ -12,6 +12,7 @@ public class Enemy extends Avatar{
     private ArrayList<Image> images;
     private Entity player;
     private EnemyType type;
+    private final double MAXSTEPS;
 
     public Enemy(Canvas canva, Vector position, Entity player, String type){
 
@@ -19,13 +20,13 @@ public class Enemy extends Avatar{
         type = type.toUpperCase();
         images = new ArrayList<>();
         this.player = player;
+        MAXSTEPS = 2;
         if(type=="BLINDY")
             this.type = EnemyType.BLINDY;
         else if(type=="PINKY")
             this.type= EnemyType.PINKY;
         else if(type=="SLENDY")
             this.type= EnemyType.SLENDY;
-
 
         for (int i = 1; i <= 8; i++) {
             images.add(new Image(getClass().getResourceAsStream("/images/enemies/"+this.type+"/walk/walk-0"+i+".png"),40,40,false,false));
@@ -81,7 +82,15 @@ public class Enemy extends Avatar{
 
 
     private void updateEnemy(){
-        MoveType direction = calculate();
+        Vector vector = new Vector(player.getPosition().getX() - getPosition().getX(),player.getPosition().getY()-getPosition().getX());
+        MoveType direction=null;
+
+        if(vector.normalize()<333.0){
+            direction = calculate();
+        }else{
+            direction = calculateLow();
+        }
+
         if (direction == MoveType.STOP || collision) {
             isMoving = false;
         }
@@ -101,7 +110,6 @@ public class Enemy extends Avatar{
     private MoveType calculateCol() {
         int playerX = player.getPosition().getTileX();
         int enemyX = getPosition().getTileX();
-
         MoveType result= MoveType.STOP;
         if(playerX < enemyX) {
             result= MoveType.LEFT;
@@ -121,6 +129,20 @@ public class Enemy extends Avatar{
         }
         if(playerY > enemyY) {
             result= MoveType.DOWN;
+        }
+        return result;
+    }
+
+
+    public MoveType calculateLow() {
+        Random random = new Random();
+        MoveType[] directions = MoveType.values();
+        MoveType result=null;
+        if(steps++ >= 10) {
+            steps = 0;
+            result= MoveType.STOP;
+        }else{
+            result= directions[random.nextInt(4)];
         }
         return result;
     }
