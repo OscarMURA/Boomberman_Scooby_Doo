@@ -53,26 +53,6 @@ public abstract class Entity {
     }
     public abstract void paint();
 
-    protected boolean collisionWithCanva(){
-        if(position.getX() < 10 )
-             leftCollision=true;
-        else
-            leftCollision=false;
-        if(position.getX() > canvas.getWidth()-65)
-            rightCollision =true;
-        else
-            rightCollision =false;
-
-        if(position.getY() < 10)
-            upCollision=true;
-        else
-            upCollision=false;
-        if(position.getY() > canvas.getHeight()-70)
-            downCollision=true;
-        else
-            downCollision=false;
-        return false;
-    }
 
     protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
         collision = false;
@@ -107,7 +87,6 @@ public abstract class Entity {
         }
         return true;
     }
-
 
     protected void moveDirection(double directionX, double direction){
         if(!(directionX==0 && direction==0)){

@@ -15,7 +15,7 @@ import static com.example.bomberscoobydoo.model.MoveType.DOWN;
 import static com.example.bomberscoobydoo.model.MoveType.LEFT;
 import static com.example.bomberscoobydoo.model.MoveType.RIGHT;
 
-public class Player extends Entity {
+public class Player extends Avatar {
 
     private String name;
     private PlayerType type;
@@ -27,18 +27,11 @@ public class Player extends Entity {
     private ArrayList<Image> walkLeft;
     private ArrayList<Image> walkUp;
     private ArrayList<Image> walkDown;
-    private MoveType moveType;
-    private int speed;
     int amountBombs;
-    private int frame;
     private int intensityOfExplosions;
     private long invensibilityStartTime;
-    private boolean upPressed;
-    private boolean downPressed;
-    private boolean leftPressed;
-    private boolean rightPressed;
-    private boolean moving;
     private boolean bomb;
+
 
     public Player( String name, PlayerType type) {
         super(null, new Vector(60,60), Destructible.DESTRUCTIBLE);
@@ -60,10 +53,12 @@ public class Player extends Entity {
         invensibilityStartTime = System.currentTimeMillis();
     }
 
+
     public void setCanva(Canvas canva){
         this.canvas = canva;
         this.graphics = canvas.getGraphicsContext2D();
     }
+
 
     public void initWalkRun(){
         int weight = 60;
@@ -102,7 +97,7 @@ public class Player extends Entity {
 
     public void paint(){
         onMove();
-        if(!moving){
+        if(!isMoving){
             graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
         }
         if(moveType == UP){
@@ -123,24 +118,6 @@ public class Player extends Entity {
         }
     }
 
-    public void onMove(){
-        collisionWithCanva();
-        int directionX = 0;
-        int directionY = 0;
-            if (upPressed && !upCollision){
-                directionY = -speed;
-            }
-            if (downPressed && !downCollision){
-                directionY = speed;
-            }
-            if (leftPressed && !leftCollision){
-                directionX = -speed;
-            }
-            if (rightPressed && !rightCollision){
-                directionX = speed;
-            }
-            moveDirection(directionX,directionY);
-    }
 
     public static Image rotarImagen(Image image, double grados) {
         ImageView imageView = new ImageView(image);
@@ -213,37 +190,37 @@ public class Player extends Entity {
         switch (event.getCode()){
 
             case W, UP-> {
-                upPressed = true;
+                goUp = true;
                 moveType = UP;
             }
             case S, DOWN-> {
-                downPressed = true;
+                goDown = true;
                 moveType = DOWN;
             }
             case LEFT, A->{
-                leftPressed = true;
+                goLeft = true;
                 moveType = LEFT;}
             case RIGHT, D->{
-                rightPressed = true;
+                goRight = true;
                 moveType = RIGHT;}
             case SPACE,X->{
                 bomb = true;}
         }
-        if(upPressed || downPressed || leftPressed || rightPressed) {
-            moving = true;
+        if(goUp || goDown || goLeft || goRight) {
+            isMoving = true;
         }
     }
 
     public void onKeyReleased(KeyEvent event){
         switch(event.getCode()) {
-            case W, UP -> upPressed = false;
-            case S, DOWN -> downPressed = false;
-            case LEFT, A -> leftPressed = false;
-            case RIGHT, D -> rightPressed = false;
+            case W, UP -> goUp = false;
+            case S, DOWN -> goDown = false;
+            case LEFT, A -> goLeft = false;
+            case RIGHT, D -> goRight = false;
             case SPACE -> bomb = false;
         }
-        if(!upPressed && !downPressed && !leftPressed && !rightPressed) {
-            moving = false;
+        if(!goUp && !goDown && !goLeft && !goRight) {
+            isMoving = false;
             moveType = STOP;
         }
     }
