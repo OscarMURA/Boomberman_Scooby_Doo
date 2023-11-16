@@ -37,4 +37,21 @@ public class Vector {
                 ((Vector) o).getX() == x &&
                 ((Vector) o).getY() == y;
     }
+
+    public void normalize(){
+        double magnitude = Math.sqrt(x * x + y * y);
+    }
+
+    public int getTileX(){
+        return (int) Math.floor(x/40.0);
+    }
+    public int getTileY(){
+        return (int) Math.floor(y/40.0);
+    }
+
+    public void setSpeed(int speed){
+        x*=speed;
+        y*=speed;
+    }
+
 }

@@ -10,34 +10,21 @@ import java.util.ArrayList;
 public class Bomb extends Entity{
 
     private boolean playerOutSideBomb;
-
-    private ImageView image;
     private ArrayList<ImageView> images;
-
-
     private long startTime;
 
     public Bomb(Canvas canva, Vector position, int intensity){
         super(canva, position, Destructible.INDESTRUCTIBLE);
         //initImages();
-        images = new ArrayList<>();
-        Image tempImage = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"),50,50,false,false);
-        image = new ImageView(tempImage);
         playerOutSideBomb = false;
         startTime = System.currentTimeMillis();
-        for(int i = 1; i <= 4; i++){
-            System.out.println(i);
-            images.add(new ImageView(new Image(getClass().getResourceAsStream("/images/Banner/Boom-"+i+".png"),50,50,false,false)));
-        }
+        initImages();
     }
 
     public boolean isPlayerOutSideBomb() {
         return playerOutSideBomb;
     }
 
-    public ImageView getImage() {
-        return image;
-    }
 
     public void checkIfPlayerOutSideBomb(int x, int y) {
         int epsilon = 50;
@@ -71,12 +58,12 @@ public class Bomb extends Entity{
         this.startTime = startTime;
     }
 
-    public void setImage(Image image) {
-        this.image = new ImageView(image);
-    }
-
     public void initImages(){
-
+        images = new ArrayList<>();
+        for(int i = 1; i <= 4; i++){
+            System.out.println(i);
+            images.add(new ImageView(new Image(getClass().getResourceAsStream("/images/Banner/Boom-"+i+".png"),50,50,false,false)));
+        }
     }
 
 

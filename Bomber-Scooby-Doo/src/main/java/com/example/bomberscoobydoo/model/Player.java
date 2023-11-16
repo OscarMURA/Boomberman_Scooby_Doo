@@ -209,7 +209,7 @@ public class Player extends Entity {
 
 
     public void onKeyPressed(KeyEvent event){
-        System.out.println(event.getCode());
+
         switch (event.getCode()){
 
             case W, UP-> {

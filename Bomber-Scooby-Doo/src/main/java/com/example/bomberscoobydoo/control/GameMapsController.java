@@ -76,7 +76,6 @@ public class GameMapsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         canvas.setFocusTraversable(true);
-
         isRunning = true;
         bomber = BomberGameControler.getInstance();
         bomber.getPlayer().setCanva(this.canvas);
@@ -122,7 +121,6 @@ public class GameMapsController implements Initializable {
         canvas.setOnKeyPressed(event ->{
             runScreens.onKeyPressed(event);
         });
-
         canvas.setOnKeyReleased(event ->{
             runScreens.onKeyReleased(event);
         });
@@ -142,8 +140,6 @@ public class GameMapsController implements Initializable {
         Image bomb = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"));
         Image noLife = new Image(getClass().getResourceAsStream("/images/Banner/noLife.png"));
         Image noBomb = new Image(getClass().getResourceAsStream("/images/Banner/noBombs.png"));
-
-
         if(player.getLife()==3){
             life3.setImage(life);
             life2.setImage(life);

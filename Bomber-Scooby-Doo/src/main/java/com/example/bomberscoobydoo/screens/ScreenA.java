@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class ScreenA extends BaseScreen {
 
+    private Enemy enemy;
     // La matriz de obstáculos
     private Integer obstaclesInMap[][] = new Integer[][] {
             { null, 1, null, null, 1, null, null, 1, 2, 2, 1, 2, null, 1, 2, 2, 1,
@@ -50,6 +51,8 @@ public class ScreenA extends BaseScreen {
                 }
             }
         }
+
+        entities.add(new Enemy(canvas, new Vector(330, 0), player));
         entities.add(player);
         player.setEntities(entities);
     }
@@ -61,7 +64,7 @@ public class ScreenA extends BaseScreen {
         graphics.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
         //Poner y verificar bomba
 
-        if(((Player) player).putBomb() && ((Player)(player)).getAmountBombs()>-100){
+        if(((Player) player).putBomb() && ((Player)(player)).getAmountBombs()> -100){
             //for testing purposes you can put up to 10 bombs, then change the -10 to 0
             ((Player) player).setBomb(false);
             putBomb();
@@ -73,15 +76,15 @@ public class ScreenA extends BaseScreen {
         for (Entity entity: entities) {
             entity.paint();
         }
-        //Show level for 6 seconds
+        //Show level for 5 seconds
         if(level) {
             graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
-            if(System.currentTimeMillis()-BomberGameControler.getInstance().getTime()>12000){
+            if(System.currentTimeMillis()-BomberGameControler.getInstance().getTime()>5000){
                 level=false;
             }
         }
-
     }
+
 
 
 }

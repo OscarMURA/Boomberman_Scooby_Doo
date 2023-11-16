@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class Entity {
 
-    private static  ArrayList<Entity> entities = new ArrayList<>();
+    protected static  ArrayList<Entity> entities = new ArrayList<>();
     protected Vector position;
     protected Canvas canvas;
     protected GraphicsContext graphics;
@@ -17,16 +17,16 @@ public abstract class Entity {
     protected boolean rightCollision;
     protected boolean upCollision;
     protected boolean downCollision;
+    protected boolean collision;
 
-    public Destructible getDestructible() {
-        return destructible;
-    }
+
     public Entity(Canvas canva, Vector position, Destructible destructible) {
         this.canvas = canva;
         this.position = position;
         this.destructible = destructible;
         entities.add(this);
     }
+
 
     public Vector getPosition() {
         return position;
@@ -75,19 +75,26 @@ public abstract class Entity {
     }
 
     protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
-        boolean collision = false;
+        collision = false;
         if(other instanceof Bomb){
             ((Bomb) other).checkIfPlayerOutSideBomb(x, y);
         }
         if (this != other && !(other instanceof Explosion) &&
                 (!(other instanceof Bomb) || (other instanceof Bomb && ((Bomb)other).isPlayerOutSideBomb())
                 ) ) {
-
-            int epsilon = 40;
+            int epsilon = 45;
+            if(this instanceof Enemy){
+                epsilon = 40;
+            }
             collision = !(x + epsilon < other.position.getX() ||
                     x > other.position.getX() + epsilon ||
                     y + epsilon < other.position.getY() -10 ||
                     y > other.position.getY() + epsilon);
+            if(this instanceof Player && other instanceof Enemy && collision){
+                ((Player)this).setLife(((Player)this).getLife()-1);
+                Vector vector = new Vector(0,0);
+                ((Player)this).setPosition(vector);
+            }
         }
         return collision;
     }
@@ -114,7 +121,6 @@ public abstract class Entity {
     }
 
     public void removeEntity(Entity entity){
-        //entities.remove(entity);
         boolean found = false;
         for(int i = 0; i < entities.size() && !found; i++){
             if(entities.get(i).equals(entity)){
@@ -122,7 +128,11 @@ public abstract class Entity {
                 entities.remove(i);
             }
         }
+    }
 
+
+    public Destructible getDestructible(){
+        return destructible;
     }
 
     public static void setEntities(ArrayList<Entity> entities1) {
