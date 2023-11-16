@@ -56,7 +56,7 @@ public abstract class Entity {
 
     protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
         collision = false;
-        if(other instanceof Bomb){
+        if(other instanceof Bomb && this instanceof Player){
             ((Bomb) other).checkIfPlayerOutSideBomb(x, y);
         }
         if (this != other && !(other instanceof Explosion) &&

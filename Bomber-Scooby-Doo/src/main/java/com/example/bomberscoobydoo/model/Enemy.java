@@ -84,8 +84,7 @@ public class Enemy extends Avatar{
     private void updateEnemy(){
         Vector vector = new Vector(player.getPosition().getX() - getPosition().getX(),player.getPosition().getY()-getPosition().getX());
         MoveType direction=null;
-
-        if(vector.normalize()<333.0){
+        if(vector.normalize()<300.0){
             direction = calculate();
         }else{
             direction = calculateLow();
@@ -138,7 +137,7 @@ public class Enemy extends Avatar{
         Random random = new Random();
         MoveType[] directions = MoveType.values();
         MoveType result=null;
-        if(steps++ >= 10) {
+        if(steps++ >= 4) {
             steps = 0;
             result= MoveType.STOP;
         }else{
