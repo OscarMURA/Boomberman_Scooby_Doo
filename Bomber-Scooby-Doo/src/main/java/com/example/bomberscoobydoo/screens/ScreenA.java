@@ -27,7 +27,7 @@ public class ScreenA extends BaseScreen {
                     null },
             { null, 1, null, null, 1, null, null, 1, 2, 2, 1, 2, null, 1, null, null, 1, 2, 1, null },
             { null, 2, 2, 2, null, null, 2, null, 2, 2, null, 2, 2, 1, null, 2, 1, 2, 2,
-                    null } };
+                    3 } };
 
 
     public ScreenA(Canvas canvas) {
@@ -47,6 +47,8 @@ public class ScreenA extends BaseScreen {
                         entities.add(new Wall(canvas, position));
                     } else if (obstaclesInMap[i][j] == 2) {
                         entities.add(new Bricks(canvas, position));
+                    }else if (obstaclesInMap[i][j] == 3) {
+                        entities.add(new Door(canvas, position));
                     }
                 }
             }
