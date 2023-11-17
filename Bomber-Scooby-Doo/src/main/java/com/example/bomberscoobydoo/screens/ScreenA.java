@@ -53,6 +53,10 @@ public class ScreenA extends BaseScreen {
                 }
             }
         }
+        Vector pos=new Vector(60,60);
+        Vector pos1=new Vector (60,60);
+        entities.add(new Bricks(canvas,pos));
+        entities.add(new Power(canvas,pos1,"FIRE_FRIEND"));
         entities.add(player);
         entities.add(new Enemy(canvas, new Vector(330, 0), player,"SLENDY"));
         player.setEntities(entities);
@@ -61,11 +65,9 @@ public class ScreenA extends BaseScreen {
 
     @Override
     public void paint() {
-
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
         //Poner y verificar bomba
-
         if(((Player) player).putBomb() && ((Player)(player)).getAmountBombs()> -100){
             //for testing purposes you can put up to 10 bombs, then change the -10 to 0
             ((Player) player).setBomb(false);
@@ -75,9 +77,15 @@ public class ScreenA extends BaseScreen {
         checkExplosions();
         checkEnemyOverExplosion();
         checkPlayerOverExplosion();
-
+        for(Entity entity: entities){
+            if(entity instanceof Power){
+                entity.paint();
+            }
+        }
         for (Entity entity: entities) {
-            entity.paint();
+            if(!(entity instanceof Power)){
+                entity.paint();
+            }
         }
         //Show level for 5 seconds
         if(level) {

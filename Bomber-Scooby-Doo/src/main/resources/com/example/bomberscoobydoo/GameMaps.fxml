@@ -107,10 +107,10 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="power1" fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="power2" fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="power3" fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="power4" fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                </children>

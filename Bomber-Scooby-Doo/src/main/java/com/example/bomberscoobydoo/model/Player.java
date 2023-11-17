@@ -239,10 +239,10 @@ public class Player extends Avatar {
     }
 
 
-    public boolean isPowerBomb() {
+    public boolean isPowerBombPlus() {
         return powerBomb;
     }
-    public void setPowerBomb(boolean powerBomb) {
+    public void setPowerBombPlus(boolean powerBomb) {
         this.powerBomb = powerBomb;
     }
     public boolean isPowerSpeed() {
@@ -263,4 +263,40 @@ public class Player extends Avatar {
     public void setPowerFireFriends(boolean powerFireFriends) {
         this.powerFireFriends = powerFireFriends;
     }
+
+    protected boolean checkCollisions(int x,int y) {
+        Entity entityToDestroy = null;
+        boolean collision = true;
+        for (Entity entity : entities) {
+            if (this != entity && (collidesWithOtherEntity(entity,x,y))){
+                collision= false;
+                if(entity instanceof Power){
+                    entityToDestroy = entity;
+                }
+            }
+        }
+        if(entityToDestroy != null){
+            PowersType type = ((Power) entityToDestroy).getType();
+            if(type == PowersType.BOMB_PLUS) {
+                setPowerBombPlus(true);
+                setAmountBombs(((Player) this).getAmountBombs() + 1);
+            }
+            if(type == PowersType.FIRE_FRIEND){
+               setPowerFireFriends(true);
+            }
+            if(type == PowersType.FIRE_PLUS){
+                setPowerFirePlus(true);
+            }
+            if(type == PowersType.SPEED){
+               setPowerSpeed(true);
+               setSpeed(((Player)this).getSpeed()+1);
+            }
+            collision = !collision;
+            entities.remove(entityToDestroy);
+            entityToDestroy = null;
+        }
+        return collision;
+    }
+
+
 }

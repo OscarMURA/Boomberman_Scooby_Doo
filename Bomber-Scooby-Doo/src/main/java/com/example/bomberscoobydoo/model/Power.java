@@ -4,11 +4,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Powers extends Entity{
+public class Power extends Entity{
 
     PowersType type;
     Image image;
-    public Powers(Canvas canvas, Vector position,String type) {
+    public Power(Canvas canvas, Vector position, String type) {
         super(canvas, position, Destructible.DESTRUCTIBLE);
         type = type.toUpperCase();
         if(type.equals("FIRE_PLUS")){
@@ -20,7 +20,7 @@ public class Powers extends Entity{
         }else if(type.equals("FIRE_FRIEND")){
             this.type = PowersType.FIRE_FRIEND;
         }
-        image = new Image(getClass().getResourceAsStream("/images/Banner/"+this.type+".png"), 50, 50, false, false);
+        image = new Image(getClass().getResourceAsStream("/images/Banner/"+this.type+".png"), 60, 60, false, false);
     }
 
     @Override
