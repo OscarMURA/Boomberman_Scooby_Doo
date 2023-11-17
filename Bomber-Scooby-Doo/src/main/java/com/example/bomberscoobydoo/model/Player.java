@@ -27,15 +27,14 @@ public class Player extends Avatar {
     private ArrayList<Image> walkLeft;
     private ArrayList<Image> walkUp;
     private ArrayList<Image> walkDown;
-    int amountBombs;
+    private int amountBombs;
     private int intensityOfExplosions;
     private long invensibilityStartTime;
     private boolean bomb;
 
 
     public Player( String name, PlayerType type) {
-
-        super(null, new Vector(60,60), Destructible.INDESTRUCTIBLE);
+        super(null, new Vector(0,0), Destructible.INDESTRUCTIBLE);
         runRightImages = new ArrayList<>();
         runLeftImages = new ArrayList<>();
         walkRight = new ArrayList<>();
@@ -46,12 +45,13 @@ public class Player extends Avatar {
         this.type = type;
         life = 3;
         moveType = STOP;
-        amountBombs = 1;
+        amountBombs = 5;
         speed = 10;
         initWalkRun();
         initUpDown();
         intensityOfExplosions = 3;
         invensibilityStartTime = System.currentTimeMillis();
+
     }
 
 
@@ -153,7 +153,6 @@ public class Player extends Avatar {
     public int getIntensityOfExplosions(){
         return intensityOfExplosions;
     }
-
     public String getName() {
         return name;
     }
@@ -181,15 +180,11 @@ public class Player extends Avatar {
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
-    public PlayerType getType() {
-        return type;
-    }
+
 
 
     public void onKeyPressed(KeyEvent event){
-
         switch (event.getCode()){
-
             case W, UP-> {
                 goUp = true;
                 moveType = UP;
@@ -218,7 +213,7 @@ public class Player extends Avatar {
             case S, DOWN -> goDown = false;
             case LEFT, A -> goLeft = false;
             case RIGHT, D -> goRight = false;
-            case SPACE -> bomb = false;
+            case SPACE,X -> bomb = false;
         }
         if(!goUp && !goDown && !goLeft && !goRight) {
             isMoving = false;
@@ -230,5 +225,8 @@ public class Player extends Avatar {
     }
     public void setBomb(boolean bomb) {
         this.bomb = bomb;
+    }
+    public PlayerType getType() {
+        return type;
     }
 }

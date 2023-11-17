@@ -6,8 +6,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-import com.example.bomberscoobydoo.PlayGame;
 
 public class AudioManager extends Thread{
 
@@ -26,7 +24,6 @@ public class AudioManager extends Thread{
         }
         return instance;
     }
-
 
     public void setMusicPath(String path) {
         File efectPath = new File("src/main/resources/music" + path);
@@ -88,4 +85,5 @@ public class AudioManager extends Thread{
     public boolean isPlaying() {
         return clip != null && clip.isRunning();
     }
+
 }

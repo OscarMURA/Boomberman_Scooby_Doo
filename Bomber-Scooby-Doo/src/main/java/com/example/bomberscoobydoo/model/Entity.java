@@ -13,12 +13,7 @@ public abstract class Entity {
     protected Canvas canvas;
     protected GraphicsContext graphics;
     protected Destructible destructible;
-    protected boolean leftCollision;
-    protected boolean rightCollision;
-    protected boolean upCollision;
-    protected boolean downCollision;
     protected boolean collision;
-
 
     public Entity(Canvas canva, Vector position, Destructible destructible) {
         this.canvas = canva;
@@ -53,7 +48,6 @@ public abstract class Entity {
     }
     public abstract void paint();
 
-
     protected boolean collidesWithOtherEntity(Entity other, int x, int y) {
         collision = false;
         if(other instanceof Bomb && this instanceof Player){
@@ -64,16 +58,17 @@ public abstract class Entity {
                 ) ) {
             int epsilon = 45;
             if(this instanceof Enemy){
-                epsilon = 40;
+                epsilon = 38;
             }
             collision = !(x + epsilon < other.position.getX() ||
                     x > other.position.getX() + epsilon ||
                     y + epsilon < other.position.getY() -10 ||
                     y > other.position.getY() + epsilon);
+
             if(this instanceof Player && other instanceof Enemy && collision){
                 ((Player)this).setLife(((Player)this).getLife()-1);
                 Vector vector = new Vector(0,0);
-                ((Player)this).setPosition(vector);
+                this.setPosition(vector);
             }
         }
         return collision;
@@ -98,6 +93,7 @@ public abstract class Entity {
             }
         }
     }
+
 
     public void removeEntity(Entity entity){
         boolean found = false;

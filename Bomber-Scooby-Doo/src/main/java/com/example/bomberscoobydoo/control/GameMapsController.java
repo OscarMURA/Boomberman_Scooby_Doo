@@ -24,9 +24,7 @@ public class GameMapsController implements Initializable {
 
     @FXML
     private Canvas canvas;
-
     private BomberGameControler bomber;
-
     @FXML
     ImageView banner;
     @FXML
@@ -79,20 +77,18 @@ public class GameMapsController implements Initializable {
         isRunning = true;
         bomber = BomberGameControler.getInstance();
         bomber.getPlayer().setCanva(this.canvas);
-        runScreens=new ScreenA(this.canvas);
+        runScreens=new ScreenB(this.canvas);
         initFonts();
         new Thread(() -> {
             while (isRunning) {
                 Platform.runLater(() -> {
                     showResource();
-
                     runScreens.paint();
                 });
                 pause(50);
             }
         }).start();
         initEvents();
-
     }
 
 
@@ -117,7 +113,7 @@ public class GameMapsController implements Initializable {
     }
 
     public void initEvents(){
-        System.out.println(canvas);
+
         canvas.setOnKeyPressed(event ->{
             runScreens.onKeyPressed(event);
         });

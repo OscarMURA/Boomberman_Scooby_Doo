@@ -22,4 +22,5 @@ public class Bricks extends Entity {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.drawImage(box, position.getX(), position.getY());
     }
+
 }

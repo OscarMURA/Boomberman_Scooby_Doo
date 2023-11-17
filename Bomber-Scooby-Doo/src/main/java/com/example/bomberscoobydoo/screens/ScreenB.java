@@ -16,21 +16,16 @@ public class ScreenB extends BaseScreen {
     private Image background;
 
     private Integer obstaclesInMap[][] = new Integer[][] {
-            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1,
-                    null, 1, null },
-            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 2, 2,
-                    null },
-            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
-            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                    null },
-            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 2, 2, null },
+            { null, 1, null, 1,null ,1, null, 1, null,1, null, 1, null, 1, null, 1, null, null, 1, null },
             { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
-            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                    null },
-            { null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, null, 1, null, 1, null },
-            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                    null } };
+            { null, 1, null, 1,null ,1, null, 1, null,1, null, 1, null, 1, null, 1, null, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+            { null, 1, null, 1,null ,1, null, 1, null,1, null, 1, null, 1, null, 1, null, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+            { null, 1, null, 1,null ,1, null, 1, null,1, null, 1, null, 1, null, 1, null, null, 1, null },
+            { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+            { null, 1, null, 1,null ,1, null, 1, null,1, null, 1, null, 1, null, 1, null, null, 1, null }};
 
     public ScreenB(Canvas canvas) {
         super(canvas);
@@ -71,7 +66,6 @@ public class ScreenB extends BaseScreen {
         for (Entity entity : entities) {
             entity.paint();
         }
-        player.paint();
         if(level) {
             graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
             if(System.currentTimeMillis()-BomberGameControler.getInstance().getTime()>6000){

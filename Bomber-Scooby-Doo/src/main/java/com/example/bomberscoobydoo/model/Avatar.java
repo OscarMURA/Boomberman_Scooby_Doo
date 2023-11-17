@@ -13,11 +13,14 @@ public abstract class Avatar  extends Entity{
     protected int frame;
     protected int speed;
     protected MoveType moveType;
+    protected boolean leftCollision;
+    protected boolean rightCollision;
+    protected boolean upCollision;
+    protected boolean downCollision;
 
     public Avatar(Canvas canva, Vector position, Destructible destructible) {
         super(canva, position, destructible);
     }
-
     public void onMove(){
         collisionWithCanva();
         int directionX = 0;
@@ -46,7 +49,6 @@ public abstract class Avatar  extends Entity{
             rightCollision =true;
         else
             rightCollision =false;
-
         if(position.getY() < 10)
             upCollision=true;
         else
@@ -59,4 +61,10 @@ public abstract class Avatar  extends Entity{
     }
 
     public abstract void paint();
+    public int getSpeed() {
+        return speed;
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.bomberscoobydoo.model;
 
-public enum Destructible {
 
+public enum Destructible {
     INDESTRUCTIBLE,
     DESTRUCTIBLE,
 }

@@ -15,23 +15,26 @@ public class Enemy extends Avatar{
     private final double MAXSTEPS;
 
     public Enemy(Canvas canva, Vector position, Entity player, String type){
-
         super(canva,position,Destructible.DESTRUCTIBLE);
         type = type.toUpperCase();
         images = new ArrayList<>();
         this.player = player;
-        MAXSTEPS = 2;
-        if(type=="BLINDY")
+        MAXSTEPS = 4;
+        if(type=="BLINDY"){
             this.type = EnemyType.BLINDY;
-        else if(type=="PINKY")
+            speed=5;
+        }
+        else if(type=="PINKY"){
+            speed=8;
             this.type= EnemyType.PINKY;
-        else if(type=="SLENDY")
+        }
+        else if(type=="SLENDY"){
+            speed=10;
             this.type= EnemyType.SLENDY;
-
+        }
         for (int i = 1; i <= 8; i++) {
             images.add(new Image(getClass().getResourceAsStream("/images/enemies/"+this.type+"/walk/walk-0"+i+".png"),40,40,false,false));
         }
-        speed = 5;
     }
 
     public boolean collidesWithOtherEntity(Entity other, int x, int y){
