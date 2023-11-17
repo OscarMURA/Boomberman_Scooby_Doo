@@ -20,7 +20,8 @@ public class Power extends Entity{
         }else if(type.equals("FIRE_FRIEND")){
             this.type = PowersType.FIRE_FRIEND;
         }
-        image = new Image(getClass().getResourceAsStream("/images/Banner/"+this.type+".png"), 60, 60, false, false);
+
+        image = new Image(getClass().getResourceAsStream("/images/Banner/"+this.type+".png"), 40, 40, false, false);
     }
 
     @Override

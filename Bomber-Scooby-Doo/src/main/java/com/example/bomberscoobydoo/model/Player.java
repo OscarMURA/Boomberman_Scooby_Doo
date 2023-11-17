@@ -270,8 +270,9 @@ public class Player extends Avatar {
         for (Entity entity : entities) {
             if (this != entity && (collidesWithOtherEntity(entity,x,y))){
                 collision= false;
-                if(entity instanceof Power){
+                if(entity instanceof Power ){
                     entityToDestroy = entity;
+                    //collision = true;
                 }
             }
         }
@@ -279,21 +280,22 @@ public class Player extends Avatar {
             PowersType type = ((Power) entityToDestroy).getType();
             if(type == PowersType.BOMB_PLUS) {
                 setPowerBombPlus(true);
-                setAmountBombs(((Player) this).getAmountBombs() + 1);
+
             }
             if(type == PowersType.FIRE_FRIEND){
                setPowerFireFriends(true);
+
             }
             if(type == PowersType.FIRE_PLUS){
                 setPowerFirePlus(true);
+
             }
             if(type == PowersType.SPEED){
                setPowerSpeed(true);
                setSpeed(((Player)this).getSpeed()+1);
             }
-            collision = !collision;
+            collision=!collision;
             entities.remove(entityToDestroy);
-            entityToDestroy = null;
         }
         return collision;
     }

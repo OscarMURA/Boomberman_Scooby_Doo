@@ -130,6 +130,7 @@ public class GameMapsController implements Initializable {
     }
 
     public void showResource() {
+
         Player player = bomber.getPlayer();
         Image life = new Image(getClass().getResourceAsStream("/images/Banner/life.png"));
         Image bomb = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"));
@@ -197,7 +198,6 @@ public class GameMapsController implements Initializable {
             this.power3.setImage(power3);
         if (player.isPowerFireFriends())
             this.power4.setImage(power4);
-
 
     }
 

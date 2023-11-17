@@ -40,7 +40,6 @@ public abstract class Avatar  extends Entity{
         moveDirection(directionX,directionY);
     }
 
-
     protected boolean collisionWithCanva(){
         if(position.getX() < 10 )
             leftCollision=true;

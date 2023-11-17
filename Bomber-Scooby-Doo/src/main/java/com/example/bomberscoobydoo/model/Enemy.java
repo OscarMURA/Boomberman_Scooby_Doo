@@ -83,11 +83,13 @@ public class Enemy extends Avatar{
         return direction;
     }
 
-
+    
     private void updateEnemy(){
-        Vector vector = new Vector(player.getPosition().getX() - getPosition().getX(),player.getPosition().getY()-getPosition().getX());
+        Vector vector = new Vector(player.getPosition().getX() + getPosition().getX(),player.getPosition().getY()+ getPosition().getX());
         MoveType direction=null;
-        if(vector.normalize()<300.0){
+        System.out.println(vector.normalize());
+        if( vector.normalize()<1200.0){
+            System.out.println("entro");
             direction = calculate();
         }else{
             direction = calculateLow();
