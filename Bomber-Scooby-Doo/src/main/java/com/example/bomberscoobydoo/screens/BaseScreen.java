@@ -37,7 +37,7 @@ public abstract class BaseScreen  {
         Vector ubicationOfBomb = player.getPosition().clone();
         ubicationOfBomb.setX(ubicationOfBomb.getX() + 30);
         ubicationOfBomb.setY(ubicationOfBomb.getY() + 30);
-        ubicationOfBomb = getBlockByPosition(ubicationOfBomb);
+        ubicationOfBomb = ubicationOfBomb.getTilePosition();
         somethingAlreadyThere = checkIfEntityIsThere(ubicationOfBomb);
         if(!somethingAlreadyThere){
             ((Player)(player)).setAmountBombs(((Player)(player)).getAmountBombs()-1);
@@ -45,11 +45,6 @@ public abstract class BaseScreen  {
         }
     }
 
-    protected Vector getBlockByPosition(Vector vector){
-        double x = vector.getX();
-        double y = vector.getY();
-        return new Vector((Math.floor(x/60))*60, (Math.floor(y/60)*60));
-    }
 
     protected void checkExplosions(){
         ArrayList<Entity> toRemove = new ArrayList<>();
@@ -67,13 +62,13 @@ public abstract class BaseScreen  {
             if(e instanceof Bomb){
                 Vector position = e.getPosition().clone();
                 int intensity = ((Player)(player)).getIntensityOfExplosions();
-
                 explodeBomb(intensity, position, MoveType.STOP);
             }
             e = null;
         }
 
     }
+
 
     private void explodeBomb(int intensity, Vector position, MoveType direction){
         if(intensity >= 0){
@@ -109,7 +104,6 @@ public abstract class BaseScreen  {
                 }
             }
         }
-
     }
 
     public void eliminateEntity(Entity e){
@@ -121,13 +115,10 @@ public abstract class BaseScreen  {
     private boolean checkIfEntityIsThere(Vector position){
         boolean someThingAlreadyThere = false;
         for(int i = 0; i < entities.size() && !someThingAlreadyThere; i++){
-
             Entity e = entities.get(i);
-
             if(e.getPosition().equals(position)){
                 someThingAlreadyThere = true;
             }
-
         }
         return someThingAlreadyThere;
     }
@@ -140,7 +131,7 @@ public abstract class BaseScreen  {
                     Vector position = e.getPosition().clone();
                     position.setX(position.getX() + 20);
                     position.setY(position.getY() + 20);
-                    if(e2 instanceof Explosion && e2.getPosition().equals(getBlockByPosition(position))){
+                    if(e2 instanceof Explosion && e2.getPosition().equals(position.getTilePosition())){
                         toRemove.add(e);
                     }
                 }
@@ -167,10 +158,10 @@ public abstract class BaseScreen  {
             Entity e = entities.get(i);
             if (e instanceof Explosion &&
                     System.currentTimeMillis() - ((Player)(player)).getInvensibilityStartTime() > 600 &&
-                    (e.getPosition().equals(getBlockByPosition(edge1)) ||
-                            e.getPosition().equals(getBlockByPosition(edge2)) ||
-                            e.getPosition().equals(getBlockByPosition(edge3)) ||
-                            e.getPosition().equals(getBlockByPosition(edge4)) ) ){
+                    (e.getPosition().equals(edge1.getTilePosition()) ||
+                            e.getPosition().equals(edge2.getTilePosition()) ||
+                            e.getPosition().equals(edge3.getTilePosition()) ||
+                            e.getPosition().equals(edge4.getTilePosition()) ) ){
 
                 someThingAlreadyThere = true;
                 ((Player) (player)).lowerByOneLife();

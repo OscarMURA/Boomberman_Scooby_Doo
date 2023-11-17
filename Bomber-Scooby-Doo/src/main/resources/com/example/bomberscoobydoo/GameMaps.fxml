@@ -105,6 +105,14 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

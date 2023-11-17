@@ -113,7 +113,6 @@ public class GameMapsController implements Initializable {
     }
 
     public void initEvents(){
-
         canvas.setOnKeyPressed(event ->{
             runScreens.onKeyPressed(event);
         });

@@ -44,12 +44,15 @@ public class Vector {
     }
 
     public int getTileX(){
-        return (int) Math.floor(x/38.0);
+        return (int) Math.floor(x/60.0);
     }
     public int getTileY(){
-        return (int) Math.floor(y/38.0);
+        return (int) Math.floor(y/60.0);
     }
 
+    public Vector getTilePosition(){
+        return new Vector(getTileX()*60, getTileY()*60);
+    }
     public void setSpeed(int speed){
         x*=speed;
         y*=speed;

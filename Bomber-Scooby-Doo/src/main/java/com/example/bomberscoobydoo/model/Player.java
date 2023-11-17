@@ -31,6 +31,11 @@ public class Player extends Avatar {
     private int intensityOfExplosions;
     private long invensibilityStartTime;
     private boolean bomb;
+    private boolean powerBomb;
+    private boolean powerSpeed;
+    private boolean powerFirePlus;
+    private boolean powerFireFriends;
+
 
 
     public Player( String name, PlayerType type) {
@@ -51,7 +56,10 @@ public class Player extends Avatar {
         initUpDown();
         intensityOfExplosions = 3;
         invensibilityStartTime = System.currentTimeMillis();
-
+        powerBomb = false;
+        powerSpeed = false;
+        powerFirePlus = false;
+        powerFireFriends = false;
     }
 
 
@@ -228,5 +236,31 @@ public class Player extends Avatar {
     }
     public PlayerType getType() {
         return type;
+    }
+
+
+    public boolean isPowerBomb() {
+        return powerBomb;
+    }
+    public void setPowerBomb(boolean powerBomb) {
+        this.powerBomb = powerBomb;
+    }
+    public boolean isPowerSpeed() {
+        return powerSpeed;
+    }
+    public void setPowerSpeed(boolean powerSpeed) {
+        this.powerSpeed = powerSpeed;
+    }
+    public boolean isPowerFirePlus() {
+        return powerFirePlus;
+    }
+    public void setPowerFirePlus(boolean powerFirePlus) {
+        this.powerFirePlus = powerFirePlus;
+    }
+    public boolean isPowerFireFriends() {
+        return powerFireFriends;
+    }
+    public void setPowerFireFriends(boolean powerFireFriends) {
+        this.powerFireFriends = powerFireFriends;
     }
 }
