@@ -73,7 +73,7 @@ public class ScreenA extends BaseScreen {
             //explodeBomb(5, new Vector(480, 480), MoveType.STOP);
         }
         checkExplosions();
-
+        checkEnemyOverExplosion();
         checkPlayerOverExplosion();
 
         for (Entity entity: entities) {

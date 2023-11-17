@@ -132,6 +132,26 @@ public abstract class BaseScreen  {
         return someThingAlreadyThere;
     }
 
+    protected void checkEnemyOverExplosion(){
+        ArrayList<Entity> toRemove = new ArrayList<Entity>();
+        for(Entity e : entities){
+            if(e instanceof Enemy){
+                for(Entity e2 : entities){
+                    Vector position = e.getPosition().clone();
+                    position.setX(position.getX() + 20);
+                    position.setY(position.getY() + 20);
+                    if(e2 instanceof Explosion && e2.getPosition().equals(getBlockByPosition(position))){
+                        toRemove.add(e);
+                    }
+                }
+            }
+        }
+        for(Entity e : toRemove){
+            eliminateEntity(e);
+        }
+
+    }
+
     protected void checkPlayerOverExplosion(){
 
         boolean someThingAlreadyThere = false;
