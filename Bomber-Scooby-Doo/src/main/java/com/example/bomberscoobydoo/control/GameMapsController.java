@@ -77,7 +77,7 @@ public class GameMapsController implements Initializable {
         isRunning = true;
         bomber = BomberGameControler.getInstance();
         bomber.getPlayer().setCanva(this.canvas);
-        runScreens=new ScreenB(this.canvas);
+        runScreens=new ScreenA(this.canvas);
         initFonts();
         new Thread(() -> {
             while (isRunning) {
