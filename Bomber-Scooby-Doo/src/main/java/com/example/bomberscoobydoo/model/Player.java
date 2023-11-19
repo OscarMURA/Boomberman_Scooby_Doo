@@ -28,8 +28,9 @@ public class Player extends Avatar {
     private ArrayList<Image> walkUp;
     private ArrayList<Image> walkDown;
     private int amountBombs;
-    private int intensityOfExplosions;
     private long invensibilityStartTime;
+
+    private long reloadBombStartTime;
     private boolean bomb;
     private boolean powerBomb;
     private boolean powerSpeed;
@@ -39,7 +40,7 @@ public class Player extends Avatar {
 
 
     public Player( String name, PlayerType type) {
-        super(null, new Vector(0,0), Destructible.INDESTRUCTIBLE);
+        super(null, new Vector(1,1), Destructible.INDESTRUCTIBLE);
         runRightImages = new ArrayList<>();
         runLeftImages = new ArrayList<>();
         walkRight = new ArrayList<>();
@@ -50,16 +51,17 @@ public class Player extends Avatar {
         this.type = type;
         life = 3;
         moveType = STOP;
-        amountBombs = 5;
+        amountBombs = 1;
         speed = 10;
         initWalkRun();
         initUpDown();
-        intensityOfExplosions = 3;
         invensibilityStartTime = System.currentTimeMillis();
         powerBomb = false;
         powerSpeed = false;
         powerFirePlus = false;
         powerFireFriends = false;
+
+        reloadBombStartTime = System.currentTimeMillis();
     }
 
 
@@ -104,8 +106,22 @@ public class Player extends Avatar {
         }
     }
 
+    private void reloadBomb(){
+        int maxBombs = 1;
+        if(powerBomb){
+            maxBombs = 5;
+        }
+        if(System.currentTimeMillis() - reloadBombStartTime > 15000
+                && amountBombs < maxBombs){
+            amountBombs++;
+            reloadBombStartTime = System.currentTimeMillis();
+        }
+    }
+
     public void paint(){
         onMove();
+        reloadBomb();
+
         if(!isMoving){
             graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
         }
@@ -159,7 +175,11 @@ public class Player extends Avatar {
     }
 
     public int getIntensityOfExplosions(){
-        return intensityOfExplosions;
+        int intesity = 1;
+        if(powerFirePlus){
+            intesity = 4;
+        }
+        return intesity;
     }
     public String getName() {
         return name;
@@ -250,6 +270,11 @@ public class Player extends Avatar {
     }
     public void setPowerSpeed(boolean powerSpeed) {
         this.powerSpeed = powerSpeed;
+        if(speed>=16){
+            walkRight=runRightImages;
+            walkLeft=runLeftImages;
+        }
+
     }
     public boolean isPowerFirePlus() {
         return powerFirePlus;
@@ -280,31 +305,37 @@ public class Player extends Avatar {
             PowersType type = ((Power) entityToDestroy).getType();
             if(type == PowersType.BOMB_PLUS) {
                 setPowerBombPlus(true);
+                amountBombs = 5;
             }
             if(type == PowersType.FIRE_FRIEND){
                setPowerFireFriends(true);
+                increaseBombAmountByOne();
             }
             if(type == PowersType.FIRE_PLUS){
                 setPowerFirePlus(true);
-
+                increaseBombAmountByOne();
             }
             if(type == PowersType.SPEED){
-               setPowerSpeed(true);
-               setSpeed(((Player)this).getSpeed()+1);
+                setSpeed(speed+4);
+                increaseBombAmountByOne();
+                setPowerSpeed(true);
             }if(type == PowersType.LIFE_PLUS){
                 amountLifePlus();
+
             }
             collision=!collision;
             entities.remove(entityToDestroy);
         }
         return collision;
     }
-
     public void amountLifePlus(){
         if(life+1<=3){
             life++;
         }
     }
-
-
+    private void increaseBombAmountByOne(){
+        if(amountBombs+1<=5){
+            amountBombs++;
+        }
+    }
 }

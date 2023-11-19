@@ -72,7 +72,7 @@ public class ScreenC extends BaseScreen {
             //explodeBomb(5, new Vector(480, 480), MoveType.STOP);
         }
         checkExplosions();
-        checkPlayerOverExplosion();
+        if(!((Player)player).isPowerFireFriends()) checkPlayerOverExplosion();
         for (Entity entity : entities) {
             entity.paint();
         }
