@@ -83,7 +83,7 @@ public class Enemy extends Avatar{
         return direction;
     }
 
-    
+
     private void updateEnemy(){
         Vector vector = new Vector(player.getPosition().getX() + getPosition().getX(),player.getPosition().getY()+ getPosition().getX());
         MoveType direction=null;

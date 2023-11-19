@@ -72,7 +72,6 @@ public class ControllerGame implements Initializable {
             allow=false;
         }
 
-
         if(allow){
             bomber.createPlayer(name,type);
             PlayGame.openWindow("GameMaps.fxml");

@@ -53,6 +53,7 @@ public class Vector {
     public Vector getTilePosition(){
         return new Vector(getTileX()*60, getTileY()*60);
     }
+
     public void setSpeed(int speed){
         x*=speed;
         y*=speed;

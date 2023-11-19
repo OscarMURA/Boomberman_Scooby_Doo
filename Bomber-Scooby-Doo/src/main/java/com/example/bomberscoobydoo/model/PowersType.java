@@ -4,5 +4,6 @@ public enum PowersType {
         FIRE_PLUS,
         BOMB_PLUS,
         SPEED,
-        FIRE_FRIEND;
+        FIRE_FRIEND,
+        LIFE_PLUS;
 }

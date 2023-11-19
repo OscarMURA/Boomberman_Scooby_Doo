@@ -276,15 +276,13 @@ public class Player extends Avatar {
                 }
             }
         }
-        if(entityToDestroy != null){
+        if(entityToDestroy != null  ){
             PowersType type = ((Power) entityToDestroy).getType();
             if(type == PowersType.BOMB_PLUS) {
                 setPowerBombPlus(true);
-
             }
             if(type == PowersType.FIRE_FRIEND){
                setPowerFireFriends(true);
-
             }
             if(type == PowersType.FIRE_PLUS){
                 setPowerFirePlus(true);
@@ -293,11 +291,19 @@ public class Player extends Avatar {
             if(type == PowersType.SPEED){
                setPowerSpeed(true);
                setSpeed(((Player)this).getSpeed()+1);
+            }if(type == PowersType.LIFE_PLUS){
+                amountLifePlus();
             }
             collision=!collision;
             entities.remove(entityToDestroy);
         }
         return collision;
+    }
+
+    public void amountLifePlus(){
+        if(life+1<=3){
+            life++;
+        }
     }
 
 

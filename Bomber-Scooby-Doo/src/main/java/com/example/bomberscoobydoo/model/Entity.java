@@ -46,6 +46,7 @@ public abstract class Entity {
     public void setGraphics(GraphicsContext graphics) {
         this.graphics = graphics;
     }
+
     public abstract void paint();
 
     public void removeEntity(Entity entity){
@@ -65,6 +66,5 @@ public abstract class Entity {
     public static void setEntities(ArrayList<Entity> entities1) {
         Entity.entities = entities1;
     }
-
 
 }

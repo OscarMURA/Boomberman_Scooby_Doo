@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 
 public abstract class Avatar  extends Entity{
 
+
     protected boolean goUp;
     protected boolean goDown;
     protected boolean goLeft;
@@ -21,6 +22,7 @@ public abstract class Avatar  extends Entity{
     public Avatar(Canvas canva, Vector position, Destructible destructible) {
         super(canva, position, destructible);
     }
+
     public void onMove(){
         collisionWithCanva();
         int directionX = 0;
@@ -68,12 +70,10 @@ public abstract class Avatar  extends Entity{
         if (this != other && !(other instanceof Explosion) &&
                 (!(other instanceof Bomb) || (other instanceof Bomb && ((Bomb)other).isPlayerOutSideBomb())
                 ) ) {
-
             int epsilon = 45;
             if(this instanceof Enemy){
                 epsilon = 38;
             }
-
             collision = !(x + epsilon < other.position.getX() ||
                     x > other.position.getX() + epsilon ||
                     y + epsilon < other.position.getY() -10 ||

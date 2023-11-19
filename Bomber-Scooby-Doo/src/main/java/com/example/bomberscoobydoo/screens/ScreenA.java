@@ -56,7 +56,7 @@ public class ScreenA extends BaseScreen {
         Vector pos=new Vector(60,60);
         Vector pos1=new Vector (70,70);
         entities.add(new Bricks(canvas,pos));
-        entities.add(new Power(canvas,pos1,"FIRE_FRIEND"));
+        entities.add(new Power(canvas,pos1,"LIFE_PLUS"));
         entities.add(player);
         entities.add(new Enemy(canvas, new Vector(330, 0), player,"SLENDY"));
         player.setEntities(entities);

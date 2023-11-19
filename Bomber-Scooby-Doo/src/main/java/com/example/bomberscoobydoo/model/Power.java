@@ -19,9 +19,12 @@ public class Power extends Entity{
             this.type = PowersType.SPEED;
         }else if(type.equals("FIRE_FRIEND")){
             this.type = PowersType.FIRE_FRIEND;
+        }else if(type.equals("LIFE_PLUS")){
+            this.type = PowersType.LIFE_PLUS;
         }
 
         image = new Image(getClass().getResourceAsStream("/images/Banner/"+this.type+".png"), 40, 40, false, false);
+
     }
 
     @Override
