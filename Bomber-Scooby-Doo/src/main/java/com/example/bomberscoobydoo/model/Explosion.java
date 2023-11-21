@@ -6,7 +6,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
 
-
 public class Explosion extends Entity {
 
     private ArrayList<Image> frames;
@@ -22,9 +21,8 @@ public class Explosion extends Entity {
             Image image = new Image(getClass().getResourceAsStream("/images/Banner/exp"+i+".png"),60,60,false,false);
             frames.add(image);
         }
-        AudioManager.getInstance().playEffectInBackground("/explosion.wav");
+        AudioManager.getInstance().playEffect("/explosion.wav");
         startTime = System.currentTimeMillis();
-
     }
 
 

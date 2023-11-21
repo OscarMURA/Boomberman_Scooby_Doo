@@ -31,9 +31,6 @@ public class ControllerGame implements Initializable {
     @FXML
     private RadioButton radio2;
 
-    private AudioManager audio = AudioManager.getInstance();
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
@@ -44,9 +41,8 @@ public class ControllerGame implements Initializable {
         radio1.setFont(customFont);
         radio2.setFont(customFont);
         start.setFont(customFont);
-        audio.playEffectInBackground("/scooby.wav");
-        audio.setMusicPath("/singScoobydoo.wav");
-        audio.playMusic(1000);
+        AudioManager.getInstance().playEffect("/scooby.wav");
+        AudioManager.getInstance().playMusic("/singScoobydoo.wav");
 
     }
 

@@ -21,7 +21,8 @@ public abstract class BaseScreen  {
     protected Image background;
     protected Canvas canvas;
     protected GraphicsContext graphicsContext;
-    protected AudioManager audio = AudioManager.getInstance();
+
+
     public BaseScreen(Canvas canvas) {
         startTime = System.currentTimeMillis();
         level= true;
@@ -44,7 +45,6 @@ public abstract class BaseScreen  {
             entities.add(new Bomb(canvas, ubicationOfBomb, ((Player)(player)).getIntensityOfExplosions()));
         }
     }
-
 
     protected void checkExplosions(){
         ArrayList<Entity> toRemove = new ArrayList<>();
@@ -183,11 +183,9 @@ public abstract class BaseScreen  {
         return newPosition;
     }
 
-
     public void onKeyPressed(KeyEvent event){
         ((Player ) player).onKeyPressed(event);
     }
-
     public void onKeyReleased(KeyEvent event){
         ((Player ) player).onKeyReleased(event);
     }

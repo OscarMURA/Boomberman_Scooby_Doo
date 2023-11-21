@@ -2,6 +2,7 @@ package com.example.bomberscoobydoo.screens;
 
 import com.example.bomberscoobydoo.control.BomberGameControler;
 
+import com.example.bomberscoobydoo.effects.AudioManager;
 import com.example.bomberscoobydoo.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -32,9 +33,9 @@ public class ScreenA extends BaseScreen {
 
     public ScreenA(Canvas canvas) {
         super(canvas);
-        audio.setMusicPath("/Scooby-Doo-Underscore.wav");
-        audio.playEffectInBackground("/scooby.wav");
-        audio.playMusic(1000);
+        AudioManager audio= AudioManager.getInstance();
+        audio.playMusic("/Scooby-Doo-Underscore.wav");
+        audio.playEffect("/scooby.wav");
         background = new Image("floorClare.png");
         player = BomberGameControler.getInstance().getPlayer();
         entities = new ArrayList<>();

@@ -1,6 +1,6 @@
 package com.example.bomberscoobydoo.control;
 
-import com.example.bomberscoobydoo.effects.AudioManager;
+
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.PlayerType;
 import com.example.bomberscoobydoo.screens.BaseScreen;
@@ -67,9 +67,8 @@ public class GameMapsController implements Initializable {
     ImageView power4;
 
     private BaseScreen runScreens;
-    private AudioManager audio = AudioManager.getInstance();
-    private boolean isRunning;
 
+    private boolean isRunning;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -95,6 +94,7 @@ public class GameMapsController implements Initializable {
     public void initFonts() {
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
         Font customFont = Font.loadFont(is1, 14);
+
         player.setFont(customFont);
         name.setFont(customFont);
         name.setText(bomber.getPlayer().getName());

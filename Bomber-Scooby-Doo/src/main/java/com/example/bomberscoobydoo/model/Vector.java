@@ -38,6 +38,7 @@ public class Vector {
                 ((Vector) o).getY() == y;
     }
 
+
     public double normalize(){
         double magnitude = Math.sqrt(x * x + y * y);
         return magnitude;
