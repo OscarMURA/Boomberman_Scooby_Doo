@@ -55,7 +55,7 @@ public class ScreenB extends BaseScreen {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
         //Poner y verificar bomba
-        if(((Player) player).putBomb() && ((Player)(player)).getAmountBombs()>-100){
+        if(((Player) player).putBomb() && ((Player)(player)).getAmountBombs() > 0){
             //for testing purposes you can put up to 10 bombs, then change the -10 to 0
             ((Player) player).setBomb(false);
             putBomb();
