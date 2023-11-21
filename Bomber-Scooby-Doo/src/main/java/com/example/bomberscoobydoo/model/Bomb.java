@@ -4,7 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+import com.example.bomberscoobydoo.effects.AudioManager;
 import java.util.ArrayList;
 
 public class Bomb extends Entity{
@@ -14,10 +14,10 @@ public class Bomb extends Entity{
     private long startTime;
     public Bomb(Canvas canva, Vector position, int intensity){
         super(canva, position, Destructible.INDESTRUCTIBLE);
-        //initImages();
         playerOutSideBomb = false;
         startTime = System.currentTimeMillis();
         initImages();
+        AudioManager.getInstance().playEffect("/pop.waw");
     }
 
     public boolean isPlayerOutSideBomb() {

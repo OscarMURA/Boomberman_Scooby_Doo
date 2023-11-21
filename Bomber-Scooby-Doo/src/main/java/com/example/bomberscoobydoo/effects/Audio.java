@@ -58,7 +58,6 @@ public class Audio implements Runnable {
             clip.close();
         }
     }
-
     @Override
     public void run() {
         if(type==AudioType.MUSIC){

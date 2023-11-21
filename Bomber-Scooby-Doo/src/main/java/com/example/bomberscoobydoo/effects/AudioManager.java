@@ -20,8 +20,7 @@ public class AudioManager {
     }
 
     public void playEffect(String path) {
-        Thread effectThread = new Thread( new Audio(path,AudioType.EFFECTS));
-        effectThread.start();
+         new Thread( new Audio(path,AudioType.EFFECTS)).start();
     }
 
     public void playMusic(String path) {

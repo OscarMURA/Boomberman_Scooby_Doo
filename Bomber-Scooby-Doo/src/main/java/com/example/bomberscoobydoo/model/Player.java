@@ -1,5 +1,6 @@
 package com.example.bomberscoobydoo.model;
 
+import com.example.bomberscoobydoo.effects.AudioManager;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -302,6 +303,7 @@ public class Player extends Avatar {
             }
         }
         if(entityToDestroy != null  ){
+           AudioManager.getInstance().playEffect("/item.wav");
             PowersType type = ((Power) entityToDestroy).getType();
             if(type == PowersType.BOMB_PLUS) {
                 setPowerBombPlus(true);
