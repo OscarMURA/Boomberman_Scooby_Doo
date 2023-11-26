@@ -80,11 +80,10 @@ public class FileScreen {
     private void addLevelEntity(Canvas canvas, char c, int x, int y) {
         Vector position = new Vector(x, y);
         switch (c) {
-            case '#':
+            case '*':
                 entities.add(new Wall(canvas, position));
                 break;
-            case '*':
-
+            case '#':
                 entities.add(new Bricks(canvas, position));
                 break;
             case '$':

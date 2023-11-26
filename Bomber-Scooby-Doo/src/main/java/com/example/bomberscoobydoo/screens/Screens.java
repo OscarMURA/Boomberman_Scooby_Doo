@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import com.example.bomberscoobydoo.control.BomberGameControler;
 import com.example.bomberscoobydoo.model.Door;
+import com.example.bomberscoobydoo.model.Enemy;
 import com.example.bomberscoobydoo.model.Entity;
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.Power;
@@ -15,7 +16,7 @@ public class Screens extends BaseScreen {
 
     private FileScreen fileScreen;
     private int currentLevel;
-
+    private boolean doorTouched;
 
     public Screens(Canvas canvas) {
         super(canvas);
