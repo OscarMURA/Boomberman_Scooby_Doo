@@ -18,14 +18,17 @@ import com.example.bomberscoobydoo.model.Entity;
 
 public class FileScreen {
 
+
     private int height;
     private int width;
     private char[][] levelData;
+
     private ArrayList<Entity> entities;
 
     public FileScreen() {
         entities = new ArrayList<>();
     }
+
 
     public void loadLevel(int level) {
         System.out.println("Loading level " + level + "...");
@@ -55,6 +58,7 @@ public class FileScreen {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public void createEntities(Canvas canvas) {
@@ -75,6 +79,7 @@ public class FileScreen {
                 entities.add(new Wall(canvas, position));
                 break;
             case '*':
+
                 entities.add(new Bricks(canvas, position));
                 break;
         }

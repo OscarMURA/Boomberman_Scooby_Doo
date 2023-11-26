@@ -25,8 +25,8 @@ public class Audio implements Runnable {
         this.type = type;
     }
 
-    private  void playSound() {
-        if(musicPath.exists()) {
+    private void playSound() {
+        if (musicPath.exists()) {
             try {
                 clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(musicPath));
@@ -37,13 +37,14 @@ public class Audio implements Runnable {
             } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
-        }else
+        } else
             System.out.println("No existe el archivo");
     }
 
 
     public void playEffect(){
         if(musicPath!=null &&musicPath.exists()) {
+
             try {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(musicPath));
@@ -51,23 +52,24 @@ public class Audio implements Runnable {
                 clip.stop();
                 clip.loop(0);
 
-            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException  e) {
+            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void stop(){
+    public void stop() {
         if (clip != null) {
             clip.stop();
             clip.close();
         }
     }
+
     @Override
     public void run() {
-        if(type==AudioType.MUSIC){
+        if (type == AudioType.MUSIC) {
             playSound();
-        }else{
+        } else {
             playEffect();
         }
     }

@@ -28,6 +28,7 @@ public class Screens extends BaseScreen {
     }
 
     public void nextLevel() {
+
         currentLevel++;
         loadLevel();
         fileScreen.createEntities(canvas);
@@ -80,8 +81,5 @@ public class Screens extends BaseScreen {
         }
 
     }
-
-
-
 
 }

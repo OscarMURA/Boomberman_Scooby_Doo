@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class GameMapsController implements Initializable {
 
     @FXML
@@ -83,6 +82,7 @@ public class GameMapsController implements Initializable {
         bomber.getPlayer().setCanva(this.canvas);
         runScreens = new Screens(canvas);
         gameOverWindowShown = false;
+
         initFonts();
         new Thread(() -> {
             while (isRunning) {
@@ -97,7 +97,7 @@ public class GameMapsController implements Initializable {
         initEvents();
     }
 
-
+    
     public void initFonts() {
 
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
