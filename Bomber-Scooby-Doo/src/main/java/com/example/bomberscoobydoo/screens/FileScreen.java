@@ -25,6 +25,7 @@ public class FileScreen {
     private int height;
     private int width;
     private char[][] levelData;
+    private Player player;
 
     private ArrayList<Entity> entities;
 
