@@ -207,7 +207,7 @@ public class GameMapsController implements Initializable {
 
     }
 
-    
+
     private void gameOver() {
         Player player = bomber.getPlayer();
         if (player.getLife() <= 0 && !gameOverWindowShown) {
