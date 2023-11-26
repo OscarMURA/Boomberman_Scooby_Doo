@@ -12,7 +12,6 @@ public class BomberGameControler {
     private int level = 0;
     private long time = System.currentTimeMillis();
     private static BomberGameControler instance;
-
     public static BomberGameControler getInstance() {
         if (instance == null) {
             instance = new BomberGameControler();

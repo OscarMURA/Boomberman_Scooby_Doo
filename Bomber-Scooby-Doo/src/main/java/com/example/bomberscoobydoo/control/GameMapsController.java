@@ -1,12 +1,9 @@
 package com.example.bomberscoobydoo.control;
 
-
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.PlayerType;
 import com.example.bomberscoobydoo.screens.BaseScreen;
-import com.example.bomberscoobydoo.screens.ScreenA;
-import com.example.bomberscoobydoo.screens.ScreenB;
-import com.example.bomberscoobydoo.screens.ScreenC;
+import com.example.bomberscoobydoo.screens.Screens;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +15,6 @@ import javafx.scene.text.Font;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 public class GameMapsController implements Initializable {
 
@@ -76,7 +72,7 @@ public class GameMapsController implements Initializable {
         isRunning = true;
         bomber = BomberGameControler.getInstance();
         bomber.getPlayer().setCanva(this.canvas);
-        runScreens = new ScreenA(this.canvas);
+        runScreens = new Screens(canvas);
         initFonts();
         new Thread(() -> {
             while (isRunning) {
@@ -90,7 +86,7 @@ public class GameMapsController implements Initializable {
         initEvents();
     }
 
-
+    
     public void initFonts() {
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
         Font customFont = Font.loadFont(is1, 14);
