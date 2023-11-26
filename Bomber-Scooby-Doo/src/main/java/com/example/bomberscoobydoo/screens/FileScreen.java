@@ -21,19 +21,17 @@ import com.example.bomberscoobydoo.model.Entity;
 
 public class FileScreen {
 
-
     private int height;
     private int width;
     private char[][] levelData;
     private Player player;
-
     private ArrayList<Entity> entities;
+    private int level;
 
     public FileScreen() {
         this.player = BomberGameControler.getInstance().getPlayer();
         entities = new ArrayList<>();
     }
-
 
     public void loadLevel(int level) {
         System.out.println("Loading level " + level + "...");
@@ -46,7 +44,7 @@ public class FileScreen {
             String metaDataLine = in.readLine();
             System.out.println(metaDataLine);
             StringTokenizer metaDataTokens = new StringTokenizer(metaDataLine);
-            level = Integer.parseInt(metaDataTokens.nextToken());
+            this.level = Integer.parseInt(metaDataTokens.nextToken());
             height = Integer.parseInt(metaDataTokens.nextToken());
             width = Integer.parseInt(metaDataTokens.nextToken());
             levelData = new char[height][width];

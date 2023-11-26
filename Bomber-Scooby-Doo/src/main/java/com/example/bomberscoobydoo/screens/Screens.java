@@ -17,6 +17,7 @@ public class Screens extends BaseScreen {
     private FileScreen fileScreen;
     private int currentLevel;
     private boolean doorTouched;
+    private static final int MAX_EXPECTED_LEVEL = 3;
 
     public Screens(Canvas canvas) {
         super(canvas);
@@ -72,8 +73,11 @@ public class Screens extends BaseScreen {
 
         if (((Player) player).getLevel() > currentLevel) {
             entities.clear();
-            imageLevel = new Image(
-                    getClass().getResourceAsStream("/images/Banner/level" + (((Player) player).getLevel()) + ".png"));
+
+            String imagePath = "/images/Banner/level" + (((Player) player).getLevel()) + ".png";
+            System.out.println("Image Path: " + imagePath);
+            System.out.println("level: " + ((Player) player).getLevel());
+            imageLevel = new Image(getClass().getResourceAsStream(imagePath));
             BomberGameControler.getInstance().setTime(System.currentTimeMillis());
             if (System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000) {
                 graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
