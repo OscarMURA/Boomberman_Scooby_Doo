@@ -62,7 +62,7 @@
             </VBox>
             <VBox fx:id="vb3" alignment="CENTER" prefHeight="65.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="bombs" prefHeight="34.0" prefWidth="60.0" text="Bombs">
+                  <Label fx:id="bombs" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="147.0" text="Bombs">
                      <font>
                         <Font size="18.0" />
                      </font>

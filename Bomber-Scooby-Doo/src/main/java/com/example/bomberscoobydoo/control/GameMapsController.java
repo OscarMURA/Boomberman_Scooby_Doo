@@ -1,20 +1,25 @@
 package com.example.bomberscoobydoo.control;
 
-
+import com.example.bomberscoobydoo.PlayGame;
+import com.example.bomberscoobydoo.effects.AudioManager;
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.PlayerType;
 import com.example.bomberscoobydoo.screens.BaseScreen;
-import com.example.bomberscoobydoo.screens.ScreenA;
-import com.example.bomberscoobydoo.screens.ScreenB;
-import com.example.bomberscoobydoo.screens.ScreenC;
+import com.example.bomberscoobydoo.screens.Screens;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -67,7 +72,7 @@ public class GameMapsController implements Initializable {
     ImageView power4;
 
     private BaseScreen runScreens;
-
+    private boolean gameOverWindowShown;
     private boolean isRunning;
 
     @Override
@@ -76,13 +81,15 @@ public class GameMapsController implements Initializable {
         isRunning = true;
         bomber = BomberGameControler.getInstance();
         bomber.getPlayer().setCanva(this.canvas);
-        runScreens = new ScreenA(this.canvas);
+        runScreens = new Screens(canvas);
+        gameOverWindowShown = false;
         initFonts();
         new Thread(() -> {
             while (isRunning) {
                 Platform.runLater(() -> {
                     showResource();
                     runScreens.paint();
+                    gameOver();
                 });
                 pause(50);
             }
@@ -92,16 +99,15 @@ public class GameMapsController implements Initializable {
 
 
     public void initFonts() {
-        InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
-        Font customFont = Font.loadFont(is1, 14);
 
+        InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
+        Font customFont = Font.loadFont(is1, 26);
         player.setFont(customFont);
         name.setFont(customFont);
         name.setText(bomber.getPlayer().getName());
         life.setFont(customFont);
         bombs.setFont(customFont);
         power.setFont(customFont);
-
         if (bomber.getPlayer().getType() == PlayerType.SCOOBYDOO) {
             Image image = new Image(getClass().getResourceAsStream("/images/Banner/skin1.png"));
             skin.setImage(image);
@@ -199,6 +205,37 @@ public class GameMapsController implements Initializable {
         if (player.isPowerFireFriends())
             this.power4.setImage(power4);
 
+    }
+
+    
+    private void gameOver() {
+        Player player = bomber.getPlayer();
+        if (player.getLife() <= 0 && !gameOverWindowShown) {
+            Stage stage = (Stage) name.getScene().getWindow();
+            AudioManager.getInstance().stopMusic();
+            String videoPath = "/videos/Game_Over.mp4";
+            Media media = new Media(getClass().getResource(videoPath).toExternalForm());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            MediaView mediaView = new MediaView(mediaPlayer);
+            // Crear la escena y agregar el visor de medios
+            StackPane root = new StackPane();
+            root.getChildren().add(mediaView);
+            Scene scene = new Scene(root, 800, 600);
+            // Configurar el escenario
+            Stage gameOverStage = new Stage();
+            gameOverStage.setScene(scene);
+            gameOverStage.setTitle("Game Over");
+            gameOverStage.show();
+            //Play
+            mediaPlayer.play();
+            gameOverWindowShown = true;
+            // Manejar el cierre de la ventana del video
+            gameOverStage.setOnCloseRequest(windowEvent -> {
+                PlayGame.openWindow("hello-view.fxml");
+            });
+            stage.close();
+            isRunning = false;
+        }
     }
 
 }

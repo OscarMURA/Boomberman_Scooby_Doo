@@ -47,5 +47,9 @@ public class BomberGameControler {
         return time;
     }
 
+    public void setTime(long time) {
+        this.time = time;
+    }
+
 
 }

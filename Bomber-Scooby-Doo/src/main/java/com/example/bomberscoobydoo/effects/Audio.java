@@ -1,23 +1,28 @@
 package com.example.bomberscoobydoo.effects;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class Audio implements Runnable {
-
 
     private  File musicPath;
     private  Clip clip;
     private AudioType type;
 
-    public Audio(String path,AudioType type){
-        File efectPath = new File("src/main/resources/music" + path);
-        musicPath = efectPath;
-        this.type=type;
+    public Audio(String path, AudioType type) {
+        URL url = getClass().getResource("/music" + path);
+        if (url != null) {
+            try {
+                musicPath = new File(url.toURI());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        this.type = type;
     }
 
     private  void playSound() {
@@ -38,7 +43,7 @@ public class Audio implements Runnable {
 
 
     public void playEffect(){
-        if(musicPath.exists()) {
+        if(musicPath!=null &&musicPath.exists()) {
             try {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(musicPath));
