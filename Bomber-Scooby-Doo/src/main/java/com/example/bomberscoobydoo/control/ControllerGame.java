@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ControllerGame implements Initializable {
@@ -31,11 +32,10 @@ public class ControllerGame implements Initializable {
     @FXML
     private RadioButton radio2;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
-        Font customFont = Font.loadFont(is1, 14);
+        Font customFont = Font.loadFont(is1, 15);
         // Aplicar la fuente a todos los controles
         title.setFont(customFont);
         name.setFont(customFont);
@@ -43,8 +43,9 @@ public class ControllerGame implements Initializable {
         radio2.setFont(customFont);
         start.setFont(customFont);
         AudioManager.getInstance().playEffect("/scooby.wav");
-        AudioManager.getInstance().playMusic("/singScoobydoo.wav");
-
+        Random random = new Random();
+        int num = random.nextInt(2)+1;
+        AudioManager.getInstance().playMusic("/sing"+num+".wav");
     }
 
     public void onActionStart(){

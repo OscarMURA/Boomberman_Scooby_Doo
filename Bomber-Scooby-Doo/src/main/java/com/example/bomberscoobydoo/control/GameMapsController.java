@@ -33,10 +33,8 @@ public class GameMapsController implements Initializable {
     ImageView banner;
     @FXML
     Label player;
-
     @FXML
     Label name;
-
     @FXML
     Label life;
     @FXML
@@ -69,11 +67,9 @@ public class GameMapsController implements Initializable {
     ImageView power3;
     @FXML
     ImageView power4;
-
     private BaseScreen runScreens;
     private boolean gameOverWindowShown;
     private boolean isRunning;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         canvas.setFocusTraversable(true);
@@ -136,7 +132,6 @@ public class GameMapsController implements Initializable {
     }
 
     public void showResource() {
-
         Player player = bomber.getPlayer();
         Image life = new Image(getClass().getResourceAsStream("/images/Banner/life.png"));
         Image bomb = new Image(getClass().getResourceAsStream("/images/Banner/bombs.png"));
@@ -220,7 +215,7 @@ public class GameMapsController implements Initializable {
             // Crear la escena y agregar el visor de medios
             StackPane root = new StackPane();
             root.getChildren().add(mediaView);
-            Scene scene = new Scene(root, 800, 600);
+            Scene scene = new Scene(root, 800, 500);
             // Configurar el escenario
             Stage gameOverStage = new Stage();
             gameOverStage.setScene(scene);
@@ -230,11 +225,9 @@ public class GameMapsController implements Initializable {
             mediaPlayer.play();
             gameOverWindowShown = true;
             // Manejar el cierre de la ventana del video
-            gameOverStage.setOnCloseRequest(windowEvent -> {
-                PlayGame.openWindow("hello-view.fxml");
-            });
-            stage.close();
+            gameOverStage.setOnCloseRequest(windowEvent -> {PlayGame.openWindow("hello-view.fxml");});
             isRunning = false;
+            stage.close();
         }
     }
 

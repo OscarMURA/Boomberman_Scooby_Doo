@@ -79,7 +79,6 @@ public class FileScreen {
                 entities.add(new Wall(canvas, position));
                 break;
             case '*':
-
                 entities.add(new Bricks(canvas, position));
                 break;
         }

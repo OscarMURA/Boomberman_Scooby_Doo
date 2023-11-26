@@ -11,7 +11,6 @@ import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.Power;
 
 public class Screens extends BaseScreen {
-
     private FileScreen fileScreen;
     private int currentLevel;
 
@@ -28,7 +27,6 @@ public class Screens extends BaseScreen {
     }
 
     public void nextLevel() {
-
         currentLevel++;
         loadLevel();
         fileScreen.createEntities(canvas);

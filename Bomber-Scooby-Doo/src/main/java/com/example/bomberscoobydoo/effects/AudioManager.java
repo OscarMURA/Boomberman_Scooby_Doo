@@ -7,10 +7,8 @@ public class AudioManager {
     private Audio music;
     private static AudioManager instance;
 
-
     private AudioManager() {
     }
-
 
     public static AudioManager getInstance() {
         if (instance == null) {

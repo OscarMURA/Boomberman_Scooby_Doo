@@ -50,7 +50,7 @@ public class Player extends Avatar {
         walkDown = new ArrayList<>();
         this.name = name;
         this.type = type;
-        life = 3;
+        life =3;
         moveType = STOP;
         amountBombs = 1;
         speed = 10;
