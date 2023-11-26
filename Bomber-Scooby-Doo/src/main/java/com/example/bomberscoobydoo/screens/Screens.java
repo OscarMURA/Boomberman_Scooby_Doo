@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import com.example.bomberscoobydoo.control.BomberGameControler;
+import com.example.bomberscoobydoo.model.Door;
 import com.example.bomberscoobydoo.model.Entity;
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.Power;
@@ -21,13 +22,14 @@ public class Screens extends BaseScreen {
         player = BomberGameControler.getInstance().getPlayer();
         this.fileScreen = new FileScreen();
         this.currentLevel = 0;
-        imageLevel = new Image(getClass().getResourceAsStream("/images/Banner/level" + (currentLevel+1) + ".png"));
+        imageLevel = new Image(getClass().getResourceAsStream("/images/Banner/level" + (currentLevel + 1) + ".png"));
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
     public void nextLevel() {
         currentLevel++;
+        Player.resetPlayer();
         loadLevel();
         fileScreen.createEntities(canvas);
         entities = fileScreen.getEntities();
@@ -51,6 +53,7 @@ public class Screens extends BaseScreen {
         }
         checkExplosions();
         checkEnemyOverExplosion();
+
         if (!((Player) player).isPowerFireFriends())
             checkPlayerOverExplosion();
         for (Entity entity : entities) {
@@ -64,17 +67,19 @@ public class Screens extends BaseScreen {
             }
         }
         player.paint();
-        if(((Player)player).getLevel()>currentLevel){
+
+        if (((Player) player).getLevel() > currentLevel) {
             entities.clear();
-            imageLevel = new Image(getClass().getResourceAsStream("/images/Banner/level" + (((Player)player).getLevel()) + ".png"));
+            imageLevel = new Image(
+                    getClass().getResourceAsStream("/images/Banner/level" + (((Player) player).getLevel()) + ".png"));
             BomberGameControler.getInstance().setTime(System.currentTimeMillis());
-            if(System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000){
+            if (System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000) {
                 graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
             }
-            AudioManager.getInstance().playMusic("/level"+((Player) player).getLevel()+".wav");
+            AudioManager.getInstance().playMusic("/level" + ((Player) player).getLevel() + ".wav");
             nextLevel();
         }
-        if(System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000){
+        if (System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000) {
             graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
         }
 

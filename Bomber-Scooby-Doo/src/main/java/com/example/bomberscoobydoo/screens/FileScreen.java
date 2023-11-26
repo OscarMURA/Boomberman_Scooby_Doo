@@ -10,7 +10,10 @@ import java.util.StringTokenizer;
 import com.example.bomberscoobydoo.PlayGame;
 import com.example.bomberscoobydoo.control.BomberGameControler;
 import com.example.bomberscoobydoo.model.Bricks;
+import com.example.bomberscoobydoo.model.Door;
+import com.example.bomberscoobydoo.model.Enemy;
 import com.example.bomberscoobydoo.model.Player;
+import com.example.bomberscoobydoo.model.Power;
 import com.example.bomberscoobydoo.model.Wall;
 import com.example.bomberscoobydoo.model.Vector;
 import javafx.scene.canvas.Canvas;
@@ -22,10 +25,12 @@ public class FileScreen {
     private int height;
     private int width;
     private char[][] levelData;
+    private Player player;
 
     private ArrayList<Entity> entities;
 
     public FileScreen() {
+        this.player = BomberGameControler.getInstance().getPlayer();
         entities = new ArrayList<>();
     }
 
@@ -80,6 +85,43 @@ public class FileScreen {
                 break;
             case '*':
                 entities.add(new Bricks(canvas, position));
+                break;
+            case '$':
+                entities.add(new Door(canvas, position));
+                break;
+            case 'b':
+                entities.add(new Enemy(canvas, position, player, "BLINDY"));
+                break;
+            case 's':
+                entities.add(new Enemy(canvas, position, player, "SLENDY"));
+                break;
+            case 'p':
+                entities.add(new Enemy(canvas, position, player, "PINKY"));
+                break;
+            case 'o':
+                position.setX(position.getX() + 10);
+                position.setY(position.getY() + 10);
+                entities.add(new Power(canvas, position, "FIRE_PLUS"));
+                break;
+            case 'f':
+                position.setX(position.getX() + 10);
+                position.setY(position.getY() + 10);
+                entities.add(new Power(canvas, position, "FIRE_FRIEND"));
+                break;
+            case '%':
+                position.setX(position.getX() + 10);
+                position.setY(position.getY() + 10);
+                entities.add(new Power(canvas, position, "BOMB_PLUS"));
+                break;
+            case 'r':
+                position.setX(position.getX() + 10);
+                position.setY(position.getY() + 10);
+                entities.add(new Power(canvas, position, "SPEED"));
+                break;
+            case 'l':
+                position.setX(position.getX() + 10);
+                position.setY(position.getY() + 10);
+                entities.add(new Power(canvas, position, "LIFE_PLUS"));
                 break;
         }
     }
