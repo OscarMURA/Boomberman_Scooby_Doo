@@ -77,9 +77,10 @@ public abstract class Avatar extends Entity {
                     y + epsilon < other.position.getY() - 10 ||
                     y > other.position.getY() + epsilon);
 
-            if (this instanceof Player && other instanceof Enemy && collision) {
-                ((Player) this).setLife(((Player) this).getLife() - 1);
-                Vector vector = new Vector(0, 0);
+            if(this instanceof Player && other instanceof Enemy && collision){
+                ((Player)this).lowerByOneLife();
+                Vector vector = new Vector(0,0);
+
                 this.setPosition(vector);
             }
 

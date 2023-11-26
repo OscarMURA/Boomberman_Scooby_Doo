@@ -20,11 +20,12 @@ import javafx.scene.canvas.Canvas;
 import com.example.bomberscoobydoo.model.Entity;
 
 public class FileScreen {
-    private int level;
+
+
     private int height;
     private int width;
     private char[][] levelData;
-    private Player player;
+
     private ArrayList<Entity> entities;
 
     public FileScreen() {
@@ -32,9 +33,6 @@ public class FileScreen {
         entities = new ArrayList<>();
     }
 
-    public int getLevel() {
-        return level;
-    }
 
     public void loadLevel(int level) {
         System.out.println("Loading level " + level + "...");
@@ -79,13 +77,13 @@ public class FileScreen {
     }
 
     private void addLevelEntity(Canvas canvas, char c, int x, int y) {
-
         Vector position = new Vector(x, y);
         switch (c) {
-            case '*':
+            case '#':
                 entities.add(new Wall(canvas, position));
                 break;
-            case '#':
+            case '*':
+
                 entities.add(new Bricks(canvas, position));
                 break;
             case '$':

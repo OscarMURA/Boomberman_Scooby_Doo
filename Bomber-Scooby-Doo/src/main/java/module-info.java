@@ -7,6 +7,7 @@ module com.example.bomberscoobydoo {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires javafx.media;
 
     opens com.example.bomberscoobydoo to javafx.fxml;
     exports com.example.bomberscoobydoo;

@@ -1,5 +1,4 @@
 package com.example.bomberscoobydoo.effects;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
@@ -10,8 +9,8 @@ import java.net.URL;
 
 public class Audio implements Runnable {
 
-    private File musicPath;
-    private Clip clip;
+    private  File musicPath;
+    private  Clip clip;
     private AudioType type;
 
     public Audio(String path, AudioType type) {
@@ -42,8 +41,10 @@ public class Audio implements Runnable {
             System.out.println("No existe el archivo");
     }
 
-    public void playEffect() {
-        if (musicPath.exists()) {
+
+    public void playEffect(){
+        if(musicPath!=null &&musicPath.exists()) {
+
             try {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(musicPath));

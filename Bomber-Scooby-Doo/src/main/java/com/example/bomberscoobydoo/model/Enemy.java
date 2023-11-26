@@ -41,7 +41,7 @@ public class Enemy extends Avatar{
           collision = super.collidesWithOtherEntity(other,x,y);
         if(collision && other instanceof Player){
             Player player = (Player) other;
-            player.setLife(player.getLife()-1);
+            player.lowerByOneLife();
             Vector vector = new Vector(0,0);
             player.setPosition(vector);
         }

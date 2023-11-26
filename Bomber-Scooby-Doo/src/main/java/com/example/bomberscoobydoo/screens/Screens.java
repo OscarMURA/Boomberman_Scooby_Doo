@@ -16,6 +16,7 @@ public class Screens extends BaseScreen {
     private FileScreen fileScreen;
     private int currentLevel;
 
+
     public Screens(Canvas canvas) {
         super(canvas);
         background = new Image("floorClare.png");
@@ -82,6 +83,7 @@ public class Screens extends BaseScreen {
         if (System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000) {
             graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
         }
+
     }
 
 }

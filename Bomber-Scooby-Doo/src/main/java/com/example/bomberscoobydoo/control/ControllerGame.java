@@ -31,6 +31,7 @@ public class ControllerGame implements Initializable {
     @FXML
     private RadioButton radio2;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");

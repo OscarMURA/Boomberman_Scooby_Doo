@@ -47,7 +47,6 @@ public class Bomb extends Entity{
 
     }
 
-
     public long getStartTime() {
         return startTime;
     }

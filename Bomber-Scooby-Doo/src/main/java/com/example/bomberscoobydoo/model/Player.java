@@ -20,7 +20,7 @@ public class Player extends Avatar {
 
     private String name;
     private PlayerType type;
-    private static int life;
+    private  int life;
     private ArrayList<Image> runRightImages;
     private ArrayList<Image> runLeftImages;
     private ImageView idleImage;
@@ -39,6 +39,7 @@ public class Player extends Avatar {
     private static boolean powerFirePlus;
     private static boolean powerFireFriends;
     private int level;
+
 
     public Player(String name, PlayerType type) {
         super(null, new Vector(1, 1), Destructible.INDESTRUCTIBLE);
@@ -210,8 +211,7 @@ public class Player extends Avatar {
     public void setName(String name) {
         this.name = name;
     }
-
-    public static int getLife() {
+    public  int getLife() {
         return life;
     }
 
@@ -222,13 +222,8 @@ public class Player extends Avatar {
     public void setInvensibilityStartTime() {
         this.invensibilityStartTime = System.currentTimeMillis();
     }
-
     public void lowerByOneLife() {
-        life = life - 1;
-    }
-
-    public static void setLife(int life) {
-        Player.life = life;
+        this.life = life - 1;
     }
 
     public int getAmountBombs() {
@@ -239,9 +234,11 @@ public class Player extends Avatar {
         this.amountBombs = amountBombs;
     }
 
-    public void onKeyPressed(KeyEvent event) {
-        switch (event.getCode()) {
-            case W, UP -> {
+
+    public void onKeyPressed(KeyEvent event){
+        switch (event.getCode()){
+            case W, UP-> {
+
                 goUp = true;
                 moveType = UP;
             }
@@ -385,6 +382,11 @@ public class Player extends Avatar {
             amountBombs++;
         }
     }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
 
     public void nextLevel() {
         level++;
