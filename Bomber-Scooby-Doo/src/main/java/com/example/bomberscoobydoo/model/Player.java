@@ -30,7 +30,7 @@ public class Player extends Avatar {
     private ArrayList<Image> walkDown;
     private static int amountBombs;
     private long invensibilityStartTime;
-    private boolean doorTouched;
+    private Image imageLevel;
 
     private long reloadBombStartTime;
     private static boolean bomb;
@@ -303,7 +303,7 @@ public class Player extends Avatar {
 
     public void setPowerSpeed(boolean powerSpeed) {
         this.powerSpeed = powerSpeed;
-        if (speed >= 16) {
+        if (speed >= 10) {
             walkRight = runRightImages;
             walkLeft = runLeftImages;
         }
@@ -337,7 +337,11 @@ public class Player extends Avatar {
                     // collision = true;
                 }
                 if (entity instanceof Door) {
-                    nextLevel();
+                    if (enemiesPresent()) {
+                        return true;
+                    } else {
+                        nextLevel();
+                    }
                 }
             }
         }
@@ -371,6 +375,15 @@ public class Player extends Avatar {
         return collision;
     }
 
+    private boolean enemiesPresent() {
+        for (Entity entity : entities) {
+            if (entity instanceof Enemy) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void amountLifePlus() {
         if (life + 1 <= 3) {
             life++;
@@ -389,9 +402,16 @@ public class Player extends Avatar {
 
     public void nextLevel() {
         level++;
+        resetPlayer();
+        reloadBombStartTime = System.currentTimeMillis();
     }
 
     public int getLevel() {
         return level;
     }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
 }
