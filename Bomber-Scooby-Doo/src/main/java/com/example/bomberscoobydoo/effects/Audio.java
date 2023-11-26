@@ -6,22 +6,28 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class Audio implements Runnable {
 
-
-    private  File musicPath;
-    private  Clip clip;
+    private File musicPath;
+    private Clip clip;
     private AudioType type;
 
-    public Audio(String path,AudioType type){
-        File efectPath = new File("src/main/resources/music" + path);
-        musicPath = efectPath;
-        this.type=type;
+    public Audio(String path, AudioType type) {
+        URL url = getClass().getResource("/music" + path);
+        if (url != null) {
+            try {
+                musicPath = new File(url.toURI());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        this.type = type;
     }
 
-    private  void playSound() {
-        if(musicPath.exists()) {
+    private void playSound() {
+        if (musicPath.exists()) {
             try {
                 clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(musicPath));
@@ -32,13 +38,12 @@ public class Audio implements Runnable {
             } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
-        }else
+        } else
             System.out.println("No existe el archivo");
     }
 
-
-    public void playEffect(){
-        if(musicPath.exists()) {
+    public void playEffect() {
+        if (musicPath.exists()) {
             try {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(musicPath));
@@ -46,23 +51,24 @@ public class Audio implements Runnable {
                 clip.stop();
                 clip.loop(0);
 
-            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException  e) {
+            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void stop(){
+    public void stop() {
         if (clip != null) {
             clip.stop();
             clip.close();
         }
     }
+
     @Override
     public void run() {
-        if(type==AudioType.MUSIC){
+        if (type == AudioType.MUSIC) {
             playSound();
-        }else{
+        } else {
             playEffect();
         }
     }

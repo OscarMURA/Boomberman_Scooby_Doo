@@ -37,11 +37,10 @@ public class Player extends Avatar {
     private boolean powerSpeed;
     private boolean powerFirePlus;
     private boolean powerFireFriends;
+    private int level;
 
-
-
-    public Player( String name, PlayerType type) {
-        super(null, new Vector(1,1), Destructible.INDESTRUCTIBLE);
+    public Player(String name, PlayerType type) {
+        super(null, new Vector(1, 1), Destructible.INDESTRUCTIBLE);
         runRightImages = new ArrayList<>();
         runLeftImages = new ArrayList<>();
         walkRight = new ArrayList<>();
@@ -61,91 +60,97 @@ public class Player extends Avatar {
         powerSpeed = false;
         powerFirePlus = false;
         powerFireFriends = false;
-
+        level = 1;
         reloadBombStartTime = System.currentTimeMillis();
     }
 
-
-    public void setCanva(Canvas canva){
+    public void setCanva(Canvas canva) {
         this.canvas = canva;
         this.graphics = canvas.getGraphicsContext2D();
     }
 
-
-    public void initWalkRun(){
+    public void initWalkRun() {
         int weight = 60;
-        if(type==PlayerType.SHAGGY){
+        if (type == PlayerType.SHAGGY) {
             weight = 35;
         }
-        Image imageIdle = new Image(getClass().getResourceAsStream("/images/player/"+type+"/idle/idle-1.png"),weight,60,false,false);
+        Image imageIdle = new Image(getClass().getResourceAsStream("/images/player/" + type + "/idle/idle-1.png"),
+                weight, 60, false, false);
         idleImage = new ImageView(imageIdle);
-        for(int i = 1; i <= 9; i++) {
-            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/walk-0"+i+".png"),weight,60,false,false);
+        for (int i = 1; i <= 9; i++) {
+            Image image = new Image(
+                    getClass().getResourceAsStream("/images/player/" + type + "/walk/walk-0" + i + ".png"), weight, 60,
+                    false, false);
             walkRight.add(image);
-            image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/walk/left-0"+i+".png"),weight,60,false,false);
+            image = new Image(getClass().getResourceAsStream("/images/player/" + type + "/walk/left-0" + i + ".png"),
+                    weight, 60, false, false);
             walkLeft.add(image);
 
-            Image imageRun = new Image(getClass().getResourceAsStream("/images/player/"+type+"/run/run-"+i+".png"),60,60,false,false);
+            Image imageRun = new Image(
+                    getClass().getResourceAsStream("/images/player/" + type + "/run/run-" + i + ".png"), 60, 60, false,
+                    false);
             runRightImages.add(imageRun);
-            imageRun = rotarImagen(imageRun,180);
+            imageRun = rotateImage(imageRun, 180);
             runLeftImages.add(imageRun);
         }
     }
 
-    private void initUpDown(){
+    private void initUpDown() {
         int weight = 60;
-        if(type==PlayerType.SHAGGY){
+        if (type == PlayerType.SHAGGY) {
             weight = 35;
         }
-        for(int i = 1; i <= 6; i++) {
-            Image image = new Image(getClass().getResourceAsStream("/images/player/"+type+"/up/up-"+i+".png"),weight,55,false,false);
+        for (int i = 1; i <= 6; i++) {
+            Image image = new Image(getClass().getResourceAsStream("/images/player/" + type + "/up/up-" + i + ".png"),
+                    weight, 55, false, false);
             ImageView imageView = new ImageView(image);
             walkUp.add(image);
-            Image imageDown = new Image(getClass().getResourceAsStream("/images/player/"+type+"/down/down-"+i+".png"),weight,55,false,false);
+            Image imageDown = new Image(
+                    getClass().getResourceAsStream("/images/player/" + type + "/down/down-" + i + ".png"), weight, 55,
+                    false, false);
             ImageView imageViewDown = new ImageView(imageDown);
             walkDown.add(imageDown);
         }
     }
 
-    private void reloadBomb(){
+    private void reloadBomb() {
         int maxBombs = 1;
-        if(powerBomb){
+        if (powerBomb) {
             maxBombs = 5;
         }
-        if(System.currentTimeMillis() - reloadBombStartTime > 10000
-                && amountBombs < maxBombs){
+        if (System.currentTimeMillis() - reloadBombStartTime > 10000
+                && amountBombs < maxBombs) {
             amountBombs++;
             reloadBombStartTime = System.currentTimeMillis();
         }
     }
 
-    public void paint(){
+    public void paint() {
         onMove();
         reloadBomb();
 
-        if(!isMoving){
-            graphics.drawImage(idleImage.getImage(),position.getX(),position.getY());
+        if (!isMoving) {
+            graphics.drawImage(idleImage.getImage(), position.getX(), position.getY());
         }
-        if(moveType == UP){
-            graphics.drawImage(walkUp.get(frame%6),position.getX(),position.getY());
+        if (moveType == UP) {
+            graphics.drawImage(walkUp.get(frame % 6), position.getX(), position.getY());
             frame++;
         }
-        if(moveType == DOWN){
-            graphics.drawImage(walkDown.get(frame%6),position.getX(),position.getY());
+        if (moveType == DOWN) {
+            graphics.drawImage(walkDown.get(frame % 6), position.getX(), position.getY());
             frame++;
         }
-        if(moveType == LEFT){
-            graphics.drawImage(walkLeft.get(frame%9),position.getX(),position.getY());
+        if (moveType == LEFT) {
+            graphics.drawImage(walkLeft.get(frame % 9), position.getX(), position.getY());
             frame++;
         }
-        if(moveType == RIGHT){
-            graphics.drawImage(walkRight.get(frame%9),position.getX(),position.getY());
+        if (moveType == RIGHT) {
+            graphics.drawImage(walkRight.get(frame % 9), position.getX(), position.getY());
             frame++;
         }
     }
 
-
-    public static Image rotarImagen(Image image, double grados) {
+    public static Image rotateImage(Image image, double grados) {
         ImageView imageView = new ImageView(image);
 
         // Aplicar una transformación de escala para reflejar horizontalmente (espejo)
@@ -162,7 +167,8 @@ public class Player extends Avatar {
 
         PixelReader pixelReader = imagenReflejada.getPixelReader();
         javafx.scene.image.PixelWriter pixelWriter = writableImage.getPixelWriter();
-        // Definir el color de fondo que se considerará transparente (blanco en este caso)
+        // Definir el color de fondo que se considerará transparente (blanco en este
+        // caso)
         Color fondoTransparente = Color.WHITE;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -175,169 +181,199 @@ public class Player extends Avatar {
         return writableImage;
     }
 
-    public int getIntensityOfExplosions(){
+    public int getIntensityOfExplosions() {
         int intesity = 1;
-        if(powerFirePlus){
+        if (powerFirePlus) {
             intesity = 4;
         }
         return intesity;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public static int getLife() {
         return life;
     }
+
     public long getInvensibilityStartTime() {
         return invensibilityStartTime;
     }
+
     public void setInvensibilityStartTime() {
         this.invensibilityStartTime = System.currentTimeMillis();
     }
-    public void lowerByOneLife(){
+
+    public void lowerByOneLife() {
         life = life - 1;
     }
+
     public static void setLife(int life) {
         Player.life = life;
     }
+
     public int getAmountBombs() {
         return amountBombs;
     }
+
     public void setAmountBombs(int amountBombs) {
         this.amountBombs = amountBombs;
     }
 
-
-
-    public void onKeyPressed(KeyEvent event){
-        switch (event.getCode()){
-            case W, UP-> {
+    public void onKeyPressed(KeyEvent event) {
+        switch (event.getCode()) {
+            case W, UP -> {
                 goUp = true;
                 moveType = UP;
             }
-            case S, DOWN-> {
+            case S, DOWN -> {
                 goDown = true;
                 moveType = DOWN;
             }
-            case LEFT, A->{
+            case LEFT, A -> {
                 goLeft = true;
-                moveType = LEFT;}
-            case RIGHT, D->{
+                moveType = LEFT;
+            }
+            case RIGHT, D -> {
                 goRight = true;
-                moveType = RIGHT;}
-            case SPACE,X->{
-                bomb = true;}
+                moveType = RIGHT;
+            }
+            case SPACE, X -> {
+                bomb = true;
+            }
         }
-        if(goUp || goDown || goLeft || goRight) {
+        if (goUp || goDown || goLeft || goRight) {
             isMoving = true;
         }
     }
 
-    public void onKeyReleased(KeyEvent event){
-        switch(event.getCode()) {
+    public void onKeyReleased(KeyEvent event) {
+        switch (event.getCode()) {
             case W, UP -> goUp = false;
             case S, DOWN -> goDown = false;
             case LEFT, A -> goLeft = false;
             case RIGHT, D -> goRight = false;
-            case SPACE,X -> bomb = false;
+            case SPACE, X -> bomb = false;
         }
-        if(!goUp && !goDown && !goLeft && !goRight) {
+        if (!goUp && !goDown && !goLeft && !goRight) {
             isMoving = false;
             moveType = STOP;
         }
     }
+
     public boolean putBomb() {
         return bomb;
     }
+
     public void setBomb(boolean bomb) {
         this.bomb = bomb;
     }
+
     public PlayerType getType() {
         return type;
     }
 
-
     public boolean isPowerBombPlus() {
         return powerBomb;
     }
+
     public void setPowerBombPlus(boolean powerBomb) {
         this.powerBomb = powerBomb;
     }
+
     public boolean isPowerSpeed() {
         return powerSpeed;
     }
+
     public void setPowerSpeed(boolean powerSpeed) {
         this.powerSpeed = powerSpeed;
-        if(speed>=16){
-            walkRight=runRightImages;
-            walkLeft=runLeftImages;
+        if (speed >= 16) {
+            walkRight = runRightImages;
+            walkLeft = runLeftImages;
         }
 
     }
+
     public boolean isPowerFirePlus() {
         return powerFirePlus;
     }
+
     public void setPowerFirePlus(boolean powerFirePlus) {
         this.powerFirePlus = powerFirePlus;
     }
+
     public boolean isPowerFireFriends() {
         return powerFireFriends;
     }
+
     public void setPowerFireFriends(boolean powerFireFriends) {
         this.powerFireFriends = powerFireFriends;
     }
 
-    protected boolean checkCollisions(int x,int y) {
+    protected boolean checkCollisions(int x, int y) {
         Entity entityToDestroy = null;
         boolean collision = true;
         for (Entity entity : entities) {
-            if (this != entity && (collidesWithOtherEntity(entity,x,y))){
-                collision= false;
-                if(entity instanceof Power ){
+            if (this != entity && (collidesWithOtherEntity(entity, x, y))) {
+                collision = false;
+                if (entity instanceof Power) {
                     entityToDestroy = entity;
-                    //collision = true;
+                    // collision = true;
                 }
             }
         }
-        if(entityToDestroy != null  ){
-           AudioManager.getInstance().playEffect("/item.wav");
+        if (entityToDestroy != null) {
+            AudioManager.getInstance().playEffect("/item.wav");
             PowersType type = ((Power) entityToDestroy).getType();
-            if(type == PowersType.BOMB_PLUS) {
+            if (type == PowersType.BOMB_PLUS) {
                 setPowerBombPlus(true);
                 amountBombs = 5;
             }
-            if(type == PowersType.FIRE_FRIEND){
-               setPowerFireFriends(true);
+            if (type == PowersType.FIRE_FRIEND) {
+                setPowerFireFriends(true);
                 increaseBombAmountByOne();
             }
-            if(type == PowersType.FIRE_PLUS){
+            if (type == PowersType.FIRE_PLUS) {
                 setPowerFirePlus(true);
                 increaseBombAmountByOne();
             }
-            if(type == PowersType.SPEED){
-                setSpeed(speed+4);
+            if (type == PowersType.SPEED) {
+                setSpeed(speed + 4);
                 increaseBombAmountByOne();
                 setPowerSpeed(true);
-            }if(type == PowersType.LIFE_PLUS){
+            }
+            if (type == PowersType.LIFE_PLUS) {
                 amountLifePlus();
 
             }
-            collision=!collision;
+            collision = !collision;
             entities.remove(entityToDestroy);
         }
         return collision;
     }
-    public void amountLifePlus(){
-        if(life+1<=3){
+
+    public void amountLifePlus() {
+        if (life + 1 <= 3) {
             life++;
         }
     }
-    private void increaseBombAmountByOne(){
-        if(amountBombs+1<=5){
+
+    private void increaseBombAmountByOne() {
+        if (amountBombs + 1 <= 5) {
             amountBombs++;
         }
+    }
+
+    public void nextLevel() {
+        level++;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }
