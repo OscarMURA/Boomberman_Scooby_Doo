@@ -91,6 +91,11 @@ public class ScreenA extends BaseScreen {
                 entity.paint();
             }
         }
+
+        for (Entity entity : entities) {
+            entity.paint();
+        }
+    
         //Show level for 5 seconds
         if(level) {
             graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
