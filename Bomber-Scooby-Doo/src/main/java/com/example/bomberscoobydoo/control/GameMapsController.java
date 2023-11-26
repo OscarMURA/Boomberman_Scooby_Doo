@@ -69,6 +69,7 @@ public class GameMapsController implements Initializable {
     ImageView power4;
     private BaseScreen runScreens;
     private boolean gameOverWindowShown;
+    private boolean gameWinWindowShown;
     private boolean isRunning;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,14 +79,14 @@ public class GameMapsController implements Initializable {
         bomber.getPlayer().setCanva(this.canvas);
         runScreens = new Screens(canvas);
         gameOverWindowShown = false;
-
+        gameWinWindowShown = false;
         initFonts();
         new Thread(() -> {
             while (isRunning) {
                 Platform.runLater(() -> {
                     showResource();
                     runScreens.paint();
-                    gameOver();
+                    gameOverOrWin();
                 });
                 pause(50);
             }
@@ -202,14 +203,27 @@ public class GameMapsController implements Initializable {
 
     }
 
-
-    private void gameOver() {
+    private void gameOverOrWin(){
+        String path="";
         Player player = bomber.getPlayer();
-        if (player.getLife() <= 0 && !gameOverWindowShown) {
+        if((player.getLife() <= 0 && !gameOverWindowShown) || (player.getLevel() > 3 && !gameWinWindowShown)){
+            if(player.getLife() <= 0 && !gameOverWindowShown){
+                path = "Over";
+                gameOverWindowShown = true;
+            }else if(player.getLevel() == 3 && !gameWinWindowShown){
+                path = "Win";
+                gameWinWindowShown = true;
+            }
+            if(path != ""){
+                gameOverOrWin(path);
+            }
+        }
+    }
+
+    private void gameOverOrWin(String path) {
             Stage stage = (Stage) name.getScene().getWindow();
             AudioManager.getInstance().stopMusic();
-            String videoPath = "/videos/Game_Over.mp4";
-            Media media = new Media(getClass().getResource(videoPath).toExternalForm());
+            Media media = new Media(getClass().getResource("/videos/Game_"+path+".mp4").toExternalForm());
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             MediaView mediaView = new MediaView(mediaPlayer);
             // Crear la escena y agregar el visor de medios
@@ -217,18 +231,19 @@ public class GameMapsController implements Initializable {
             root.getChildren().add(mediaView);
             Scene scene = new Scene(root, 800, 500);
             // Configurar el escenario
-            Stage gameOverStage = new Stage();
-            gameOverStage.setScene(scene);
-            gameOverStage.setTitle("Game Over");
-            gameOverStage.show();
+            Image image = new Image(PlayGame.class.getResourceAsStream("/icon/iconBomber.png"));
+            Stage game = new Stage();
+            game.getIcons().add(image);
+            game.setScene(scene);
+            game.setTitle("Game "+path);
+            game.show();
             //Play
             mediaPlayer.play();
-            gameOverWindowShown = true;
             // Manejar el cierre de la ventana del video
-            gameOverStage.setOnCloseRequest(windowEvent -> {PlayGame.openWindow("hello-view.fxml");});
+            game.setOnCloseRequest(windowEvent -> {PlayGame.openWindow("hello-view.fxml");});
             isRunning = false;
             stage.close();
-        }
+
     }
 
 }

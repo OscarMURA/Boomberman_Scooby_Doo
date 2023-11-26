@@ -12,6 +12,7 @@ import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.Power;
 
 public class Screens extends BaseScreen {
+    
     private FileScreen fileScreen;
     private int currentLevel;
 
@@ -69,15 +70,18 @@ public class Screens extends BaseScreen {
         player.paint();
 
         if (((Player) player).getLevel() > currentLevel) {
+            //AudioManager.getInstance().playEffect()
             entities.clear();
-            imageLevel = new Image(
-                    getClass().getResourceAsStream("/images/Banner/level" + (((Player) player).getLevel()) + ".png"));
-            BomberGameControler.getInstance().setTime(System.currentTimeMillis());
-            if (System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000) {
+            //Solo se puede subir de nivel hasta el 3
+            if(((Player) player).getLevel()<4){
+                imageLevel = new Image(
+                        getClass().getResourceAsStream("/images/Banner/level" + (((Player) player).getLevel()) + ".png"));
+                BomberGameControler.getInstance().setTime(System.currentTimeMillis());
                 graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
+                AudioManager.getInstance().playEffect("/levelUp.wav");
+                AudioManager.getInstance().playMusic("/level" + ((Player) player).getLevel() + ".wav");
+                nextLevel();
             }
-            AudioManager.getInstance().playMusic("/level" + ((Player) player).getLevel() + ".wav");
-            nextLevel();
         }
         if (System.currentTimeMillis() - BomberGameControler.getInstance().getTime() < 5000) {
             graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());

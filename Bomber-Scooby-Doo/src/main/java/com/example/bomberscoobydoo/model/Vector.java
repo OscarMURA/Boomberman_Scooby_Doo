@@ -38,12 +38,6 @@ public class Vector {
                 ((Vector) o).getY() == y;
     }
 
-
-    public double normalize(){
-        double magnitude = Math.sqrt(x * x + y * y);
-        return magnitude;
-    }
-
     public int getTileX(){
         return (int) Math.floor(x/60.0);
     }
@@ -58,6 +52,10 @@ public class Vector {
     public void setSpeed(int speed){
         x*=speed;
         y*=speed;
+    }
+    public double normalize(){
+        double magnitude = Math.sqrt(x * x + y * y);
+        return magnitude;
     }
 
 }
