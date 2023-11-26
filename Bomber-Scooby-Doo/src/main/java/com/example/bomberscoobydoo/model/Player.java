@@ -28,15 +28,16 @@ public class Player extends Avatar {
     private ArrayList<Image> walkLeft;
     private ArrayList<Image> walkUp;
     private ArrayList<Image> walkDown;
-    private int amountBombs;
+    private static int amountBombs;
     private long invensibilityStartTime;
+    private boolean doorTouched;
 
     private long reloadBombStartTime;
-    private boolean bomb;
-    private boolean powerBomb;
-    private boolean powerSpeed;
-    private boolean powerFirePlus;
-    private boolean powerFireFriends;
+    private static boolean bomb;
+    private static boolean powerBomb;
+    private static boolean powerSpeed;
+    private static boolean powerFirePlus;
+    private static boolean powerFireFriends;
     private int level;
 
     public Player(String name, PlayerType type) {
@@ -67,6 +68,19 @@ public class Player extends Avatar {
     public void setCanva(Canvas canva) {
         this.canvas = canva;
         this.graphics = canvas.getGraphicsContext2D();
+    }
+
+    public static void resetLife() {
+        life = 3;
+    }
+
+    public static void resetPlayer() {
+        life = 3;
+        amountBombs = 1;
+        powerBomb = false;
+        powerSpeed = false;
+        powerFirePlus = false;
+        powerFireFriends = false;
     }
 
     public void initWalkRun() {
@@ -324,6 +338,9 @@ public class Player extends Avatar {
                 if (entity instanceof Power) {
                     entityToDestroy = entity;
                     // collision = true;
+                }
+                if (entity instanceof Door) {
+                    nextLevel();
                 }
             }
         }
