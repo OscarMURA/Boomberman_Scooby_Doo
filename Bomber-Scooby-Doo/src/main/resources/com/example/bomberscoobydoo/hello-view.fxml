@@ -23,13 +23,13 @@
                   <Image url="@../../../icon/iconBomber.png" />
                </image>
             </ImageView>
-            <Label fx:id="title" layoutX="336.0" layoutY="119.0" text="NICKNAME" textFill="WHITE">
+            <Label fx:id="title" layoutX="336.0" layoutY="118.0" text="NICKNAME" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Button fx:id="start" layoutX="330.0" layoutY="223.0" mnemonicParsing="false" onAction="#onActionStart" prefHeight="25.0" prefWidth="76.0" text="Start" />
-            <TextField fx:id="name" layoutX="292.0" layoutY="136.0" promptText="NickName" />
-            <AnchorPane layoutX="313.0" layoutY="168.0" prefHeight="48.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF;">
+            <Button fx:id="start" layoutX="330.0" layoutY="223.0" mnemonicParsing="false" onAction="#onActionStart" prefHeight="25.0" prefWidth="76.0" text="Start" textAlignment="CENTER" />
+            <TextField fx:id="name" layoutX="292.0" layoutY="137.0" promptText="NickName" />
+            <AnchorPane layoutX="314.0" layoutY="169.0" prefHeight="48.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF;">
                <children>
                   <RadioButton fx:id="radio1" layoutX="13.0" layoutY="6.0" mnemonicParsing="false" text="Scooby Doo" />
                   <RadioButton fx:id="radio2" layoutX="13.0" layoutY="26.0" mnemonicParsing="false" text="Shaggy" />
