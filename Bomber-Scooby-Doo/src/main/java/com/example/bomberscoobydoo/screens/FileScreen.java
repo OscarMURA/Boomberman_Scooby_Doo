@@ -135,6 +135,7 @@ public class FileScreen {
                 entities.add(new Enemy(canvas, position, player, "PINKY"));
                 break;
             case 'o':
+                entities.add(new Bricks(canvas,new Vector(x,y)));
                 position.setX(position.getX() + 10);
                 position.setY(position.getY() + 10);
                 entities.add(new Power(canvas, position, "FIRE_PLUS"));

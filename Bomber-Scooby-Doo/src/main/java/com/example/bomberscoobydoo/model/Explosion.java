@@ -11,8 +11,7 @@ public class Explosion extends Entity {
     private ArrayList<Image> frames;
     private int intensity;
     private long startTime;
-
-
+    
     public Explosion(Canvas canva, Vector position, int intensity) {
         super(canva, position, Destructible.DESTRUCTIBLE);
         frames = new ArrayList<>();
@@ -42,7 +41,7 @@ public class Explosion extends Entity {
 
     /**
      * The function returns the start time.
-     * 
+     *
      * @return The method is returning the value of the variable "startTime" which is of type long.
      */
     public long getStartTime() {

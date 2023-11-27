@@ -122,7 +122,6 @@ public abstract class BaseScreen {
                         case DOWN ->
                             explodeBomb(intensity - 1, getFollowingBlock(position, MoveType.DOWN), MoveType.DOWN);
                     }
-
                 }
             } else {
                 boolean foundBox = false;
@@ -214,15 +213,15 @@ public abstract class BaseScreen {
         for (int i = 0; i < entities.size() && !someThingAlreadyThere; i++) {
             Entity e = entities.get(i);
             if (e instanceof Explosion &&
-                    System.currentTimeMillis() - ((Player) (player)).getInvensibilityStartTime() > 600 &&
+                    System.currentTimeMillis() - ( (player)).getInvensibilityStartTime() > 600 &&
                     (e.getPosition().equals(edge1.getTilePosition()) ||
                             e.getPosition().equals(edge2.getTilePosition()) ||
                             e.getPosition().equals(edge3.getTilePosition()) ||
                             e.getPosition().equals(edge4.getTilePosition()))) {
 
                 someThingAlreadyThere = true;
-                ((Player) (player)).lowerByOneLife();
-                ((Player) (player)).setInvensibilityStartTime();
+                ( (player)).lowerByOneLife();
+                ( (player)).setInvensibilityStartTime();
                 entities.remove(e);
                 e.removeEntity(e);
             }
