@@ -10,7 +10,9 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 
-
+/**
+ * The BaseScreen class is an abstract class.
+ */
 public abstract class BaseScreen {
     protected long startTime;
     protected Image imageLevel;
@@ -22,6 +24,13 @@ public abstract class BaseScreen {
     protected GraphicsContext graphicsContext;
     protected AudioManager audio = AudioManager.getInstance();
 
+    // The `BaseScreen` constructor initializes the `startTime` variable with the
+    // current system time,
+    // sets the `level` variable to `true`, and assigns the `canvas` parameter to
+    // the `canvas` instance
+    // variable. It also initializes the `graphicsContext` variable with the 2D
+    // graphics context of the
+    // canvas.
     public BaseScreen(Canvas canvas) {
         startTime = System.currentTimeMillis();
         level = true;
@@ -31,8 +40,18 @@ public abstract class BaseScreen {
         this.entities = new ArrayList<>();
     }
 
+    /**
+     * The function "paint" is declared as an abstract method, meaning it does not
+     * have an implementation
+     * and must be overridden by any concrete subclass.
+     */
     public abstract void paint();
 
+    /**
+     * The function puts a bomb at a specific location if there is no entity already
+     * present at that
+     * location.
+     */
     public void putBomb() {
         boolean somethingAlreadyThere;
         Vector ubicationOfBomb = player.getPosition().clone();
@@ -46,6 +65,10 @@ public abstract class BaseScreen {
         }
     }
 
+    /**
+     * The function checks for expired bombs and explosions in a game and removes them from the list of
+     * entities.
+     */
     protected void checkExplosions() {
         ArrayList<Entity> toRemove = new ArrayList<>();
         for (Entity e : entities) {
@@ -69,6 +92,17 @@ public abstract class BaseScreen {
 
     }
 
+    /**
+     * The `explodeBomb` function creates explosions in a game based on the given intensity, position,
+     * and direction, destroying entities in its path.
+     * 
+     * @param intensity The intensity parameter represents the power or strength of the bomb explosion.
+     * It determines how far the explosion will reach and how much damage it will cause.
+     * @param position The position parameter represents the current position of the bomb. It is of
+     * type Vector, which likely contains the x and y coordinates of the position.
+     * @param direction The `direction` parameter is of type `MoveType` and represents the direction in
+     * which the explosion is propagating. It can have one of the following values:
+     */
     private void explodeBomb(int intensity, Vector position, MoveType direction) {
         if (intensity >= 0) {
             if (!checkIfEntityIsThere(position)) {
@@ -108,12 +142,25 @@ public abstract class BaseScreen {
         }
     }
 
+    /**
+     * The function eliminates an entity by removing it from a list and setting it to null.
+     * 
+     * @param e The parameter "e" is an instance of the Entity class that we want to eliminate.
+     */
     public void eliminateEntity(Entity e) {
         entities.remove(e);
         e.removeEntity(e);
         e = null;
     }
 
+    /**
+     * The function checks if there is an entity at a given position in a list of entities.
+     * 
+     * @param position The position parameter is a Vector object that represents the position of an
+     * entity.
+     * @return The method is returning a boolean value, which indicates whether there is an entity at
+     * the specified position.
+     */
     private boolean checkIfEntityIsThere(Vector position) {
         boolean someThingAlreadyThere = false;
         for (int i = 0; i < entities.size() && !someThingAlreadyThere; i++) {
@@ -125,6 +172,10 @@ public abstract class BaseScreen {
         return someThingAlreadyThere;
     }
 
+    /**
+     * The function checks if any enemy entities are overlapped by an explosion entity and removes them
+     * if they are.
+     */
     protected void checkEnemyOverExplosion() {
         ArrayList<Entity> toRemove = new ArrayList<Entity>();
         for (Entity e : entities) {
@@ -145,6 +196,10 @@ public abstract class BaseScreen {
 
     }
 
+   /**
+    * The function checks if the player is overlapping with an explosion entity and reduces the
+    * player's life if they are.
+    */
     protected void checkPlayerOverExplosion() {
 
         boolean someThingAlreadyThere = false;
@@ -175,6 +230,16 @@ public abstract class BaseScreen {
         }
     }
 
+    /**
+     * The function takes a position and a direction as input and returns a new position that is 60
+     * units away in the specified direction.
+     * 
+     * @param position The position parameter is a Vector object that represents the current position
+     * of an object in a 2D space.
+     * @param direction The direction parameter is of type MoveType, which is an enum representing the
+     * direction in which to move. The possible values for direction are UP, DOWN, LEFT, and RIGHT.
+     * @return The method is returning a Vector object.
+     */
     private Vector getFollowingBlock(Vector position, MoveType direction) {
         Vector newPosition = position.clone();
         switch (direction) {
@@ -186,10 +251,22 @@ public abstract class BaseScreen {
         return newPosition;
     }
 
+    /**
+     * The onKeyPressed function calls the onKeyPressed method of the Player class, passing in the
+     * KeyEvent event as a parameter.
+     * 
+     * @param event The parameter "event" is of type KeyEvent, which represents a key press event.
+     */
     public void onKeyPressed(KeyEvent event) {
         ((Player) player).onKeyPressed(event);
     }
 
+    /**
+     * The onKeyReleased function calls the onKeyReleased method of the Player class, passing in the
+     * KeyEvent event as a parameter.
+     * 
+     * @param event The parameter "event" is of type KeyEvent, which represents a key release event.
+     */
     public void onKeyReleased(KeyEvent event) {
         ((Player) player).onKeyReleased(event);
     }

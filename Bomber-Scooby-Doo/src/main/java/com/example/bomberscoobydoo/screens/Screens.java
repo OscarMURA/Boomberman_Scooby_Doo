@@ -6,19 +6,21 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import com.example.bomberscoobydoo.control.BomberGameControler;
-import com.example.bomberscoobydoo.model.Door;
-import com.example.bomberscoobydoo.model.Enemy;
 import com.example.bomberscoobydoo.model.Entity;
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.Power;
 
+/**
+ * The "Screens" class extends the "BaseScreen" class.
+ */
 public class Screens extends BaseScreen {
     
     private FileScreen fileScreen;
     private int currentLevel;
-    private boolean doorTouched;
-    private static final int MAX_EXPECTED_LEVEL = 3;
 
+    // The `public Screens(Canvas canvas)` constructor is initializing a new instance of the `Screens`
+    // class. It takes a `Canvas` object as a parameter and calls the constructor of the superclass
+    // `BaseScreen` with the same parameter.
     public Screens(Canvas canvas) {
         super(canvas);
         background = new Image("floorClare.png");
@@ -30,6 +32,11 @@ public class Screens extends BaseScreen {
         graphics.drawImage(imageLevel, 0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
+    /**
+     * The function "nextLevel" increases the current level, resets the player, loads the level,
+     * creates entities on the file screen, sets the player's position to (0, 0), and sets the player's
+     * entities.
+     */
     public void nextLevel() {
         currentLevel++;
         Player.resetPlayer();
@@ -40,11 +47,20 @@ public class Screens extends BaseScreen {
         player.setEntities(entities);
     }
 
+    /**
+     * The function "loadLevel" prints a message indicating the current level being loaded and then
+     * calls the "loadLevel" method of the "fileScreen" object, passing in the current level as a
+     * parameter.
+     */
     private void loadLevel() {
         System.out.println("Loading level " + currentLevel + "...");
         fileScreen.loadLevel(currentLevel);
     }
 
+    /**
+     * This function is responsible for painting the game screen, including the background, bombs,
+     * explosions, enemies, power-ups, and the player character.
+     */
     @Override
     public void paint() {
         GraphicsContext graphics = canvas.getGraphicsContext2D();

@@ -19,6 +19,9 @@ import com.example.bomberscoobydoo.model.Vector;
 import javafx.scene.canvas.Canvas;
 import com.example.bomberscoobydoo.model.Entity;
 
+/**
+ * The FileScreen class is used for file screening operations.
+ */
 public class FileScreen {
 
     private int height;
@@ -28,11 +31,20 @@ public class FileScreen {
     private ArrayList<Entity> entities;
     private int level;
 
+    // The `public FileScreen()` constructor is initializing a new instance of the
+    // `FileScreen` class.
     public FileScreen() {
         this.player = BomberGameControler.getInstance().getPlayer();
         entities = new ArrayList<>();
     }
 
+    /**
+     * The function loads a level from a text file and stores the level data in a 2D
+     * character array.
+     * 
+     * @param level The level parameter is an integer that represents the level
+     *              number to be loaded.
+     */
     public void loadLevel(int level) {
         System.out.println("Loading level " + level + "...");
         try {
@@ -64,6 +76,14 @@ public class FileScreen {
 
     }
 
+    /**
+     * The function creates entities on a canvas based on the level data provided.
+     * 
+     * @param canvas The `Canvas` parameter represents the canvas on which the
+     *               entities will be
+     *               created. It is likely an object that provides a drawing surface
+     *               for rendering graphics.
+     */
     public void createEntities(Canvas canvas) {
         for (int i = 0; i < height; i++) {
             char[] line = levelData[i];
@@ -75,6 +95,23 @@ public class FileScreen {
         }
     }
 
+    /**
+     * The function adds different types of entities to a canvas based on the given
+     * character.
+     * 
+     * @param canvas The `canvas` parameter is an object of type `Canvas`. It
+     *               represents the canvas on
+     *               which the entities will be drawn.
+     * @param c      The parameter 'c' represents the character that determines the
+     *               type of entity to be
+     *               added to the canvas.
+     * @param x      The x parameter represents the x-coordinate of the entity's
+     *               position on the canvas. It
+     *               determines the horizontal position of the entity.
+     * @param y      The parameter `y` represents the y-coordinate of the position
+     *               where the entity will be
+     *               added on the canvas.
+     */
     private void addLevelEntity(Canvas canvas, char c, int x, int y) {
         Vector position = new Vector(x, y);
         switch (c) {
@@ -125,6 +162,13 @@ public class FileScreen {
         }
     }
 
+    // The `getEntities()` method is a getter method that returns the list of
+    // entities. It returns an
+    // `ArrayList` of type `Entity`, which contains all the entities created based
+    // on the level data.
+    // This method allows other classes to access and retrieve the list of entities
+    // created in the
+    // `FileScreen` class.
     public ArrayList<Entity> getEntities() {
         return entities;
     }

@@ -2,9 +2,11 @@ package com.example.bomberscoobydoo.model;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-
 import java.util.ArrayList;
 
+/**
+ * The Entity class is an abstract class.
+ */
 public abstract class Entity {
 
     protected static ArrayList<Entity> entities = new ArrayList<>();
@@ -51,10 +53,20 @@ public abstract class Entity {
         return canvas;
     }
 
+    /**
+     * The function sets the canvas for the object.
+     * 
+     * @param canvas The "canvas" parameter is an object of the "Canvas" class.
+     */
     public void setCanvas(Canvas canvas) {
         this.canvas = canvas;
     }
 
+   /**
+    * The function returns the GraphicsContext object.
+    * 
+    * @return The method is returning a GraphicsContext object.
+    */
     public GraphicsContext getGraphics() {
         return graphics;
     }
