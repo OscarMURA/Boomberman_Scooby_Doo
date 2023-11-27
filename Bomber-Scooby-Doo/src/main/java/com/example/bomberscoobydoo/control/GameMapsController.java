@@ -210,7 +210,7 @@ public class GameMapsController implements Initializable {
             if(player.getLife() <= 0 && !gameOverWindowShown){
                 path = "Over";
                 gameOverWindowShown = true;
-            }else if(player.getLevel() == 3 && !gameWinWindowShown){
+            }else if(player.getLevel() >  3 && !gameWinWindowShown){
                 path = "Win";
                 gameWinWindowShown = true;
             }

@@ -30,7 +30,7 @@ public class Player extends Avatar {
     private ArrayList<Image> walkDown;
     private static int amountBombs;
     private long invensibilityStartTime;
-    private Image imageLevel;
+    private long time;
 
     private long reloadBombStartTime;
     private static boolean bomb;
@@ -50,6 +50,7 @@ public class Player extends Avatar {
         walkDown = new ArrayList<>();
         this.name = name;
         this.type = type;
+        time = System.currentTimeMillis();
         life =3;
         moveType = STOP;
         amountBombs = 1;
@@ -337,11 +338,14 @@ public class Player extends Avatar {
                     // collision = true;
                 }
                 if (entity instanceof Door) {
-                    if (enemiesPresent()) {
-                        return true;
-                    } else {
+                    System.out.println(System.currentTimeMillis());
+                    if(System.currentTimeMillis()!=time){
                         nextLevel();
+                        Vector position = new Vector(0, 0);
+                        this.setPosition(position);
+                        time = System.currentTimeMillis();
                     }
+
                 }
             }
         }
@@ -401,7 +405,9 @@ public class Player extends Avatar {
     }
 
     public void nextLevel() {
+        System.out.println("nivel actual: " + level);
         level++;
+        System.out.println("nivel siguiente: " + level);
         resetPlayer();
         reloadBombStartTime = System.currentTimeMillis();
     }
