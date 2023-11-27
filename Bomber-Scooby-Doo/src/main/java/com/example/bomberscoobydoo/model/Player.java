@@ -158,14 +158,17 @@ public class Player extends Avatar {
      * The function reloadBomb() checks if enough time has passed and if the maximum number of bombs
      * has not been reached, then it increments the amount of bombs and updates the reload bomb start
      * time.
+     *
+     * If the player has the power of bombs it reloads faster.
      */
     private void reloadBomb() {
         int maxBombs = 1;
         if (powerBomb) {
             maxBombs = 5;
         }
-        if (System.currentTimeMillis() - reloadBombStartTime > 10000
-                && amountBombs < maxBombs) {
+
+        if((powerBomb && System.currentTimeMillis() - reloadBombStartTime > 5000
+                && amountBombs < maxBombs) || System.currentTimeMillis() - reloadBombStartTime > 10000){
             amountBombs++;
             reloadBombStartTime = System.currentTimeMillis();
         }
