@@ -171,6 +171,8 @@ public class Player extends Avatar {
                 && amountBombs < maxBombs) || System.currentTimeMillis() - reloadBombStartTime > 10000){
             amountBombs++;
             reloadBombStartTime = System.currentTimeMillis();
+        }else if(amountBombs==maxBombs){
+            reloadBombStartTime = System.currentTimeMillis();
         }
     }
 
