@@ -3,6 +3,9 @@ package com.example.bomberscoobydoo.control;
 import com.example.bomberscoobydoo.model.Player;
 import com.example.bomberscoobydoo.model.PlayerType;
 
+/**
+ * The BomberGameControler class is used to control the gameplay of a bomber game.
+ */
 public class BomberGameControler {
 
     private Player player;

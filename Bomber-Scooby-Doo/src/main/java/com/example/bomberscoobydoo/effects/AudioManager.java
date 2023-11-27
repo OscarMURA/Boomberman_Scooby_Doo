@@ -1,6 +1,9 @@
 package com.example.bomberscoobydoo.effects;
 
 
+/**
+ * The AudioManager class is used for managing audio in a Java program.
+ */
 public class AudioManager {
 
     private Thread soundThread;

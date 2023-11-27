@@ -3,9 +3,11 @@ package com.example.bomberscoobydoo.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
 import java.util.Random;
 
+/**
+ * The Bricks class is a subclass of the Entity class.
+ */
 public class Bricks extends Entity {
     private Image box;
     /**

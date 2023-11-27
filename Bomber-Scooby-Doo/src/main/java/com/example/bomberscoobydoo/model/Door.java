@@ -4,6 +4,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * The Door class is a subclass of the Entity class.
+ */
 public class Door extends Entity {
 
     private Image doorImage;
