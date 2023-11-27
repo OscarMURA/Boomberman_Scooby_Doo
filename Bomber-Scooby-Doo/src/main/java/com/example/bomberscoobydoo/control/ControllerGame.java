@@ -5,16 +5,17 @@ import com.example.bomberscoobydoo.effects.AudioManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+/**
+ * The ControllerGame class is responsible for initializing the game.
+ */
 public class ControllerGame implements Initializable {
 
     @FXML

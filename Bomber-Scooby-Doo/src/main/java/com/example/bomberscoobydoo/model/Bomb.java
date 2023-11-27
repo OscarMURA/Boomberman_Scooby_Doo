@@ -7,6 +7,9 @@ import javafx.scene.image.ImageView;
 import com.example.bomberscoobydoo.effects.AudioManager;
 import java.util.ArrayList;
 
+/**
+ * The Bomb class is a subclass of the Entity class.
+ */
 public class Bomb extends Entity{
 
     private boolean playerOutSideBomb;

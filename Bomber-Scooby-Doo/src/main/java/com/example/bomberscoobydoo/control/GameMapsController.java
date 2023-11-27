@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The GameMapsController class is responsible for initializing game maps.
+ */
 public class GameMapsController implements Initializable {
 
     @FXML

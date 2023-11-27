@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * The Audio class implements the Runnable interface.
+ */
 public class Audio implements Runnable {
 
     private  File musicPath;
