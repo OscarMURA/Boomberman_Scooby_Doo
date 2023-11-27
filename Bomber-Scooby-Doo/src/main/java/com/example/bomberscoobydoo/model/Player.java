@@ -50,7 +50,7 @@ public class Player extends Avatar {
         walkDown = new ArrayList<>();
         this.name = name;
         this.type = type;
-        life =3;
+        life = 3;
         moveType = STOP;
         amountBombs = 1;
         speed = 10;
@@ -329,6 +329,7 @@ public class Player extends Avatar {
     protected boolean checkCollisions(int x, int y) {
         Entity entityToDestroy = null;
         boolean collision = true;
+        boolean doorCollision = false; 
         for (Entity entity : entities) {
             if (this != entity && (collidesWithOtherEntity(entity, x, y))) {
                 collision = false;
@@ -338,13 +339,17 @@ public class Player extends Avatar {
                 }
                 if (entity instanceof Door) {
                     if (enemiesPresent()) {
-                        return true;
+                        doorCollision = false;
                     } else {
                         nextLevel();
                     }
                 }
             }
         }
+        if (doorCollision) {
+            return true; 
+        }
+    
         if (entityToDestroy != null) {
             AudioManager.getInstance().playEffect("/item.wav");
             PowersType type = ((Power) entityToDestroy).getType();
