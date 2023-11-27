@@ -71,6 +71,13 @@ public class GameMapsController implements Initializable {
     private boolean gameOverWindowShown;
     private boolean gameWinWindowShown;
     private boolean isRunning;
+
+    /**
+     * This function initializes the JavaFX application by setting up the canvas, starting a new thread to continuously update the game state, and initializing event handlers.
+     * 
+     * @param location The location of the FXML file that defines the layout of the scene.
+     * @param resources The `resources` parameter is a `ResourceBundle` object that contains the resources for the current locale. It is used to retrieve localized strings, images, and other resources that are needed for the application.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         canvas.setFocusTraversable(true);
@@ -95,6 +102,9 @@ public class GameMapsController implements Initializable {
     }
 
     
+    /**
+     * The function initializes fonts and sets them for various elements in a Java application, including the player's name, life, bombs, power, and skin image.
+     */
     public void initFonts() {
 
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
@@ -115,6 +125,9 @@ public class GameMapsController implements Initializable {
 
     }
 
+    /**
+     * The function "initEvents" sets up event listeners for key presses and releases on a canvas, and calls corresponding methods in the "runScreens" object.
+     */
     public void initEvents() {
         canvas.setOnKeyPressed(event -> {
             runScreens.onKeyPressed(event);
@@ -124,6 +137,11 @@ public class GameMapsController implements Initializable {
         });
     }
 
+    /**
+     * The pause function pauses the execution of the program for a specified amount of time.
+     * 
+     * @param time The "time" parameter is an integer value representing the number of milliseconds to pause the execution of the current thread.
+     */
     private void pause(int time) {
         try {
             Thread.sleep(time);
@@ -132,6 +150,9 @@ public class GameMapsController implements Initializable {
         }
     }
 
+   /**
+    * The function `showResource()` sets the images of various resources (life, bombs, power-ups) based on the player's current state.
+    */
     public void showResource() {
         Player player = bomber.getPlayer();
         Image life = new Image(getClass().getResourceAsStream("/images/Banner/life.png"));
@@ -203,6 +224,9 @@ public class GameMapsController implements Initializable {
 
     }
 
+    /**
+     * The function checks if the player has either lost all their lives or reached level 4, and if so, it displays the corresponding game over or win window.
+     */
     private void gameOverOrWin(){
         String path="";
         Player player = bomber.getPlayer();
@@ -220,6 +244,11 @@ public class GameMapsController implements Initializable {
         }
     }
 
+    /**
+     * The function "gameOverOrWin" plays a video based on the given path and opens a new window with the video playing, while closing the current window.
+     * 
+     * @param path The "path" parameter is a string that represents the path to the video file that will be played in the game over or win screen. It is used to construct the URL of the video file using the getResource() method.
+     */
     private void gameOverOrWin(String path) {
             Stage stage = (Stage) name.getScene().getWindow();
             AudioManager.getInstance().stopMusic();

@@ -13,6 +13,10 @@ public class Audio implements Runnable {
     private  Clip clip;
     private AudioType type;
 
+
+    /** 
+     * The `public Audio(String path, AudioType type)` constructor is responsible for initializing an instance of the `Audio` class.
+     **/
     public Audio(String path, AudioType type) {
         URL url = getClass().getResource("/music" + path);
         if (url != null) {
@@ -25,6 +29,9 @@ public class Audio implements Runnable {
         this.type = type;
     }
 
+    /**
+     * The function plays a sound file located at the specified path, looping it indefinitely.
+     */
     private void playSound() {
         if (musicPath.exists()) {
             try {
@@ -42,6 +49,9 @@ public class Audio implements Runnable {
     }
 
 
+    /**
+     * The function plays an audio effect if the music file exists.
+     */
     public void playEffect(){
         if(musicPath!=null &&musicPath.exists()) {
 
@@ -58,6 +68,9 @@ public class Audio implements Runnable {
         }
     }
 
+    /**
+     * The function stops and closes the audio clip if it is not null.
+     */
     public void stop() {
         if (clip != null) {
             clip.stop();
@@ -65,6 +78,9 @@ public class Audio implements Runnable {
         }
     }
 
+    /**
+     * The run() function plays a sound based on the type of audio (music or effect).
+     */
     @Override
     public void run() {
         if (type == AudioType.MUSIC) {

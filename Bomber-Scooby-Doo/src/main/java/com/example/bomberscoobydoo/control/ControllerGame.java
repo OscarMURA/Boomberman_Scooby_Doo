@@ -32,6 +32,12 @@ public class ControllerGame implements Initializable {
     @FXML
     private RadioButton radio2;
 
+    /**
+     * The initialize function loads a custom font, applies it to various controls, plays sound effects, and plays random music.
+     * 
+     * @param location The location parameter i s the URL of the FXML file that is being initialized. It represents the location of the FXML file on the file system or in a JAR file.
+     * @param resources The `resources` parameter in the `initialize` method is a `ResourceBundle` object that contains the resources for the specified `location`. It is typically used to access localized resources such as strings, images, or other assets.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         InputStream is1 = getClass().getResourceAsStream("/fonts/scoobydoo.ttf");
@@ -48,6 +54,12 @@ public class ControllerGame implements Initializable {
         AudioManager.getInstance().playMusic("/sing"+num+".wav");
     }
 
+    /**
+     * The function "onActionStart" is used to handle the start of a game by creating a player with a specified name and character type, and then opening the game maps window.
+     */
+    /**
+     * The function "onActionStart" is used to handle the start of a game by creating a player with a specified name and character type, and then opening the game maps window.
+     */
     public void onActionStart(){
         Stage stage = (Stage) start.getScene().getWindow();
         BomberGameControler bomber = BomberGameControler.getInstance();

@@ -26,6 +26,9 @@ public class Explosion extends Entity {
     }
 
 
+    /**
+     * The paint() function uses a GraphicsContext object to draw different frames from a list onto a canvas based on the current time.
+     */
     public void paint() {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         if (System.currentTimeMillis() - startTime < 150) {
@@ -37,6 +40,11 @@ public class Explosion extends Entity {
         }
     }
 
+    /**
+     * The function returns the start time.
+     * 
+     * @return The method is returning the value of the variable "startTime" which is of type long.
+     */
     public long getStartTime() {
         return startTime;
     }

@@ -27,12 +27,20 @@ public class Power extends Entity{
 
     }
 
+    /**
+     * The paint() function in Java paints an image onto a canvas at a specified position.
+     */
     @Override
     public void paint() {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.drawImage(image, position.getX(), position.getY());
     }
 
+    /**
+     * The function returns the type of powers.
+     * 
+     * @return The method is returning an object of type PowersType.
+     */
     public PowersType getType() {
         return type;
     }
