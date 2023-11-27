@@ -48,6 +48,9 @@ public class Enemy extends Avatar{
         if(collision && other instanceof Enemy){
             collision= false;
         }
+        if(collision && other instanceof Power){
+            other.setPosition(new Vector(1300,800));
+        }
         return collision;
     }
 

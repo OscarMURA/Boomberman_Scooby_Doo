@@ -330,6 +330,7 @@ public class Player extends Avatar {
     protected boolean checkCollisions(int x, int y) {
         Entity entityToDestroy = null;
         boolean collision = true;
+        boolean doorCollision = false; 
         for (Entity entity : entities) {
             if (this != entity && (collidesWithOtherEntity(entity, x, y))) {
                 collision = false;
@@ -338,17 +339,20 @@ public class Player extends Avatar {
                     // collision = true;
                 }
                 if (entity instanceof Door) {
-                    System.out.println(System.currentTimeMillis());
-                    if(System.currentTimeMillis()!=time){
-                        nextLevel();
-                        Vector position = new Vector(0, 0);
-                        this.setPosition(position);
-                        time = System.currentTimeMillis();
+                    if(System.currentTimeMillis()!=time) {
+                        if (!enemiesPresent()){
+                            nextLevel();
+                            Vector position = new Vector(0, 0);
+                            this.setPosition(position);
+                            time = System.currentTimeMillis();
+                        }
                     }
 
                 }
             }
         }
+
+    
         if (entityToDestroy != null) {
             AudioManager.getInstance().playEffect("/item.wav");
             PowersType type = ((Power) entityToDestroy).getType();

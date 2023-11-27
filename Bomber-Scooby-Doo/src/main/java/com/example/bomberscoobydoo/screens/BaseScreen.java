@@ -15,7 +15,7 @@ public abstract class BaseScreen {
     protected long startTime;
     protected Image imageLevel;
     protected boolean level;
-    protected static Entity player;
+    protected static Player player;
     protected ArrayList<Entity> entities;
     protected Image background;
     protected Canvas canvas;
