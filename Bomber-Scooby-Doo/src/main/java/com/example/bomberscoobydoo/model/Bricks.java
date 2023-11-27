@@ -7,9 +7,7 @@ import javafx.scene.image.Image;
 import java.util.Random;
 
 public class Bricks extends Entity {
-
     private Image box;
-
     /**
      *  The `public Bricks(Canvas canva, Vector position)` constructor is creating a new instance of the `Bricks` class.
      */
@@ -19,7 +17,6 @@ public class Bricks extends Entity {
         int i = r.nextInt(3) + 1;
         box = new Image(getClass().getResourceAsStream("/blocks/bricks/box" + i + ".png"), 60, 60, false, false);
     }
-
     /**
      * The paint() function in Java draws an image onto a canvas at a specified position.
      */

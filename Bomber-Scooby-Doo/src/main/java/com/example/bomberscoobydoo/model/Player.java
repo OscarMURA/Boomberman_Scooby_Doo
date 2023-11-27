@@ -36,11 +36,11 @@ public class Player extends Avatar {
     private long time;
 
     private long reloadBombStartTime;
-    private static boolean bomb;
-    private static boolean powerBomb;
-    private static boolean powerSpeed;
-    private static boolean powerFirePlus;
-    private static boolean powerFireFriends;
+    private  boolean bomb;
+    private  boolean powerBomb;
+    private  boolean powerSpeed;
+    private  boolean powerFirePlus;
+    private  boolean powerFireFriends;
     private int level;
 
     // The above code is defining a constructor for a class called Player. The constructor takes in two
@@ -94,7 +94,7 @@ public class Player extends Avatar {
     /**
      * The function "resetPlayer" resets various player attributes to their default values.
      */
-    public static void resetPlayer() {
+    public  void resetPlayer() {
         life = 3;
         amountBombs = 1;
         powerBomb = false;
@@ -102,7 +102,6 @@ public class Player extends Avatar {
         powerFirePlus = false;
         powerFireFriends = false;
     }
-
     /**
      * The function initializes the images for the player's idle, walk, and run animations based on the
      * player's type and weight.

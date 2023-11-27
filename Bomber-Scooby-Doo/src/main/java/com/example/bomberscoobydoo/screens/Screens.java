@@ -39,7 +39,7 @@ public class Screens extends BaseScreen {
      */
     public void nextLevel() {
         currentLevel++;
-        Player.resetPlayer();
+        player.resetPlayer();
         loadLevel();
         fileScreen.createEntities(canvas);
         entities = fileScreen.getEntities();

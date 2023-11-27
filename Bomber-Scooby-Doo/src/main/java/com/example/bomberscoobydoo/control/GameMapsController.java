@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
@@ -215,12 +216,20 @@ public class GameMapsController implements Initializable {
         }
         if (player.isPowerFirePlus())
             this.power1.setImage(power1);
+        else
+            this.power1.setImage(null);
         if (player.isPowerBombPlus())
             this.power2.setImage(power2);
+        else
+            this.power2.setImage(null);
         if (player.isPowerSpeed())
             this.power3.setImage(power3);
+        else
+            this.power3.setImage(null);
         if (player.isPowerFireFriends())
             this.power4.setImage(power4);
+        else
+            this.power4.setImage(null);
 
     }
 
@@ -250,6 +259,7 @@ public class GameMapsController implements Initializable {
      * @param path The "path" parameter is a string that represents the path to the video file that will be played in the game over or win screen. It is used to construct the URL of the video file using the getResource() method.
      */
     private void gameOverOrWin(String path) {
+
             Stage stage = (Stage) name.getScene().getWindow();
             AudioManager.getInstance().stopMusic();
             Media media = new Media(getClass().getResource("/videos/Game_"+path+".mp4").toExternalForm());
@@ -272,6 +282,12 @@ public class GameMapsController implements Initializable {
             game.setOnCloseRequest(windowEvent -> {PlayGame.openWindow("hello-view.fxml");});
             isRunning = false;
             stage.close();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game "+path);
+        alert.setHeaderText("Game "+path+" finished "+name.getText());
+        alert.setContentText("Game "+path+" finished "+name.getText());
+        alert.showAndWait();
 
     }
 
