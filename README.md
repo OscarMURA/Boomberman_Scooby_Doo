@@ -18,7 +18,7 @@ Diego Armando Polanco Lozano
 In this exciting game, you take control of Scooby, a fearless adventurer navigating mazes filled with challenges and enemies. Use the **W** key to move up, **S** to move down, **A** to move left, and **D** to move right. Drop bombs with the **space** key to eliminate your enemies.
 
 ## Menu
-![alt text](assets\image.png)
+![alt text](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image.png)
 - A game with two playable characters such as “Scooby Doo” and “Shaggy”.
 
 <div style="display: flex; justify-content: space-between;">
@@ -44,9 +44,9 @@ In this exciting game, you take control of Scooby, a fearless adventurer navigat
 
 
 ## Levels
-![Level 1](assets\image-1.png)
-![alt text](assets\image-2.png)
-![alt text](assets\image-3.png)
+![Level 1](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-1.png)
+![alt text]([assets\image-2.png](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-2.png))
+![alt text]([assets\image-3.png](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-3.png))
 
 ## Scooby-Doo Bomberman Game
 
