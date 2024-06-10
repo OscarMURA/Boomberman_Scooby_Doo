@@ -45,8 +45,8 @@ In this exciting game, you take control of Scooby, a fearless adventurer navigat
 
 ## Levels
 ![Level 1](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-1.png)
-![alt text]([assets\image-2.png](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-2.png))
-![alt text]([assets\image-3.png](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-3.png))
+![alt text](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-2.png)
+![alt text](https://github.com/OscarMURA/Boomberman_Scooby_Doo/blob/main/assets/image-3.png)
 
 ## Scooby-Doo Bomberman Game
 
