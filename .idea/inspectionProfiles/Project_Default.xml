@@ -1,0 +1,22 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="customHeaders">
+        <set>
+          <option value="X-AliBroker" />
+          <option value="X-ServiceName" />
+          <option value="X-InstanceName" />
+          <option value="X-MajorVersion" />
+          <option value="X-ClusterName" />
+          <option value="X-Endpoint-UUID" />
+          <option value="X-Endpoint-Ip" />
+          <option value="Setup-Metadata" />
+          <option value="Setup-Data" />
+          <option value="Metadata-Type" />
+          <option value="Metadata" />
+        </set>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
